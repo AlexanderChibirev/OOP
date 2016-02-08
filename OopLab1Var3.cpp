@@ -1,13 +1,20 @@
-// OopLab1Var3.cpp: определяет точку входа для консольного приложения.
-//
-#include "FunctionDefinition.h"
 #include "stdafx.h"
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <sys\stat.h>
 
 
 using namespace std;
+const int QUANTITY_ARGUMENTS = 5;
+
+size_t getFilesize(const std::string& filename) {
+	struct stat st;
+	if (stat(filename.c_str(), &st) != 0) {
+		return 0;
+	}
+	return st.st_size;
+}
 
 struct DataProgram 
 {
@@ -35,7 +42,10 @@ void ErrorCheckingAndInitData(int argc, char** argv, DataProgram& dataProgram)
 	//cout << argv[2] << endl; // название выходного файла
 	//cout << argv[3] << endl; // какое слово найти и заменить
 	//cout << argv[4] << endl; // на какое слово меняем
-
+	if (argc != 5) {
+		cout << "Wrong amount of arguments was proposed" << endl;
+		ErrorExitProgram();
+	}
 	dataProgram.nameImputFile = argv[1];
 	dataProgram.nameOutputFile = argv[2];
 	dataProgram.searchStr = argv[3];
@@ -109,7 +119,6 @@ void BeginProgramm(DataProgram& dataProgram)
 
 int main(int argc, char** argv)
 {
-	setlocale(0, "Russian");
 	DataProgram dataProgram;
 	ErrorCheckingAndInitData(argc, argv, dataProgram);
 	BeginProgramm(dataProgram);
