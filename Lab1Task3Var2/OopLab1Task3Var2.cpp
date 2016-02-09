@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-
+#include <iomanip>
 
 using namespace std;
 
@@ -14,7 +14,6 @@ const int sizeOfMatrix = 3;
 struct DataProgram
 {
 	string nameImputFile;
-
 	ifstream fileImput;
 
 };
@@ -35,9 +34,9 @@ void ErrorCheckingAndInitData(int argc, char** argv, DataProgram& dataProgram)
 	dataProgram.nameImputFile = argv[1];
 
 	stat(argv[1], &fileSize);
-	if (fileSize.st_size > (2e+9))
+	if (fileSize.st_size > 0 && fileSize.st_size < 2147483648)
 	{
-		cout << "file size larger than 1.6 GB" << endl;
+		cout << "file size larger than 2 GB" << endl;
 		ErrorExitProgram();
 	}
 
@@ -49,11 +48,11 @@ void ErrorCheckingAndInitData(int argc, char** argv, DataProgram& dataProgram)
 	}
 }
 
-double determ(double** matrixInt, int sizeOfMatrix)
+float Determ(float** matrixInt, int sizeOfMatrix)
 {
 	int i, j;
-	double det = 0;
-	double** matr;
+	float det = 0;
+	float** matr;
 	if (sizeOfMatrix == 1)
 	{
 		det = matrixInt[0][0];
@@ -64,7 +63,7 @@ double determ(double** matrixInt, int sizeOfMatrix)
 	}
 	else
 	{
-		matr = new double*[sizeOfMatrix - 1];
+		matr = new float*[sizeOfMatrix - 1];
 		for (i = 0; i<sizeOfMatrix; ++i)
 		{
 			for (j = 0; j<sizeOfMatrix - 1; ++j)
@@ -74,11 +73,75 @@ double determ(double** matrixInt, int sizeOfMatrix)
 				else
 					matr[j] = matrixInt[j + 1];
 			}
-			det += pow((double)-1, (i + j))*determ(matr, sizeOfMatrix - 1)*matrixInt[i][sizeOfMatrix - 1];
+			det += pow((float)-1, (i + j))*Determ(matr, sizeOfMatrix - 1)*matrixInt[i][sizeOfMatrix - 1];
 		}
 		delete[] matr;
 	}
 	return det;
+}
+
+void InverseMatrix(float** matrixInt, int sizeOfMatrix)
+{
+	float resultOfDivision;
+
+	float **identityMatrix = new float *[sizeOfMatrix];
+
+	for (int i = 0; i < sizeOfMatrix; i++)
+		identityMatrix[i] = new float[sizeOfMatrix];
+
+	for (int i = 0; i < sizeOfMatrix; i++)
+		for (int j = 0; j < sizeOfMatrix; j++)
+		{
+			identityMatrix[i][j] = 0.0;
+
+			if (i == j)
+				identityMatrix[i][j] = 1.0;
+		}
+
+	for (int k = 0; k < sizeOfMatrix; k++)
+	{
+		resultOfDivision = matrixInt[k][k];
+
+		for (int j = 0; j < sizeOfMatrix; j++)
+		{
+			matrixInt[k][j] /= resultOfDivision;
+			identityMatrix[k][j] /= resultOfDivision;
+		}
+
+		for (int i = k + 1; i < sizeOfMatrix; i++)
+		{
+			resultOfDivision = matrixInt[i][k];
+
+			for (int j = 0; j < sizeOfMatrix; j++)
+			{
+				matrixInt[i][j] -= matrixInt[k][j] * resultOfDivision;
+				identityMatrix[i][j] -= identityMatrix[k][j] * resultOfDivision;
+			}
+		}
+	}
+
+	for (int k = sizeOfMatrix - 1; k > 0; k--)
+	{
+		for (int i = k - 1; i >= 0; i--)
+		{
+			resultOfDivision = matrixInt[i][k];
+
+			for (int j = 0; j < sizeOfMatrix; j++)
+			{
+				matrixInt[i][j] -= matrixInt[k][j] * resultOfDivision;
+				identityMatrix[i][j] -= identityMatrix[k][j] * resultOfDivision;
+			}
+		}
+	}
+
+	for (int i = 0; i < sizeOfMatrix; i++)
+		for (int j = 0; j < sizeOfMatrix; j++)
+			matrixInt[i][j] = identityMatrix[i][j];
+
+	for (int i = 0; i < sizeOfMatrix; i++)
+		delete[] identityMatrix[i];
+
+	delete[] identityMatrix;
 }
 
 void BeginProgramm(DataProgram& dataProgram)
@@ -86,23 +149,35 @@ void BeginProgramm(DataProgram& dataProgram)
 	string outPut;
 	string lineStr;
 	string matrixStr[sizeOfMatrix][sizeOfMatrix];
-	double **matrixInt;
-	matrixInt = new double*[sizeOfMatrix];
+	float **matrixInt;
+	matrixInt = new float*[sizeOfMatrix];
 	for (int i = 0; i<sizeOfMatrix; ++i)
-		matrixInt[i] = new double[sizeOfMatrix];
+		matrixInt[i] = new float[sizeOfMatrix];
 	for (int i = 0; i < sizeOfMatrix; i++)
 	{
 		for (int j = 0; j < sizeOfMatrix; j++)
 		{
 			dataProgram.fileImput >> matrixStr[i][j];
-			matrixInt[i][j] = atof((matrixStr[i][j]).c_str());
-			cout << matrixInt[i][j] << "  ";
+			if (matrixStr[i][j] == "" ) {
+				cout << "Your file empty" << endl;
+				ErrorExitProgram();
+			}
+			matrixInt[i][j] = float(atof((matrixStr[i][j]).c_str()));
+			//cout << matrixInt[i][j] << "  ";
 		}
-		cout << endl;
+		//cout << endl;
 	}
-	if (determ(matrixInt, sizeOfMatrix) > 0)
+	if (Determ(matrixInt, sizeOfMatrix) > 0)
 	{
-
+		InverseMatrix(matrixInt, sizeOfMatrix);
+		for (int i = 0; i < sizeOfMatrix; i++)
+		{
+			for (int j = 0; j < sizeOfMatrix; j++)
+			{
+				cout << setprecision(3) << matrixInt[i][j] << "  ";
+			}
+			cout << endl;
+		}
 	}
 	else
 	{
@@ -121,6 +196,5 @@ int main(int argc, char** argv)
 	ErrorCheckingAndInitData(argc, argv, dataProgram);
 	BeginProgramm(dataProgram);
 	system("pause");
-	cout << "test passed successfully" << endl;
 	return 0;
 }
