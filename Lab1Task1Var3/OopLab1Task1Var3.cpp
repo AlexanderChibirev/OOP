@@ -17,9 +17,6 @@ struct DataProgram
 
 	ifstream fileImput;
 	ofstream fileOutput;
-
-	int flag = 0;
-	int k = 0;
 };
 
 int ErrorExitProgram()
