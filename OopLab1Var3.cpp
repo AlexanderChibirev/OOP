@@ -8,14 +8,6 @@
 using namespace std;
 const int QUANTITY_ARGUMENTS = 5;
 
-size_t getFilesize(const std::string& filename) {
-	struct stat st;
-	if (stat(filename.c_str(), &st) != 0) {
-		return 0;
-	}
-	return st.st_size;
-}
-
 struct DataProgram
 {
 	string nameImputFile;
@@ -37,11 +29,8 @@ int ErrorExitProgram()
 
 void ErrorCheckingAndInitData(int argc, char** argv, DataProgram& dataProgram)
 {
-	//cout << argv[0] << endl; // наша программа (.exe)
-	//cout << argv[1] << endl; // название входного файла
-	//cout << argv[2] << endl; // название выходного файла
-	//cout << argv[3] << endl; // какое слово найти и заменить
-	//cout << argv[4] << endl; // на какое слово меняем
+	struct stat fileSize;
+
 	if (argc != 5) {
 		cout << "Wrong amount of arguments was proposed" << endl;
 		ErrorExitProgram();
@@ -50,7 +39,13 @@ void ErrorCheckingAndInitData(int argc, char** argv, DataProgram& dataProgram)
 	dataProgram.nameOutputFile = argv[2];
 	dataProgram.searchStr = argv[3];
 	dataProgram.replaceStr = argv[4];
-	
+
+	stat(argv[1], &fileSize);
+	if (fileSize.st_size > (2e+9))
+	{
+		cout << "file size larger than 2 GB" << endl;
+		ErrorExitProgram();
+	}
 	if (dataProgram.searchStr == "")
 	{
 		cout << "you are looking for an empty string" << endl;
@@ -129,6 +124,5 @@ int main(int argc, char** argv)
 	DataProgram dataProgram;
 	ErrorCheckingAndInitData(argc, argv, dataProgram);
 	BeginProgramm(dataProgram);
-	//system("pause");
 	return 0;
 }
