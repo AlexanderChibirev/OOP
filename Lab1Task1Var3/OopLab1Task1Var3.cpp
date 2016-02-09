@@ -38,7 +38,7 @@ void ErrorCheckingAndInitData(int argc, char** argv, DataProgram& dataProgram)
 	dataProgram.replaceStr = argv[4];
 
 	stat(argv[1], &fileSize);
-	if (fileSize.st_size > (2e+9))
+	if (fileSize.st_size > 0 && fileSize.st_size < 2147483648)
 	{
 		cout << "file size larger than 2 GB" << endl;
 		ErrorExitProgram();
