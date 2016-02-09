@@ -16,9 +16,9 @@ size_t getFilesize(const std::string& filename) {
 	return st.st_size;
 }
 
-struct DataProgram 
+struct DataProgram
 {
-	string nameImputFile ;
+	string nameImputFile;
 	string nameOutputFile;
 	string searchStr;
 	string replaceStr;
@@ -50,11 +50,17 @@ void ErrorCheckingAndInitData(int argc, char** argv, DataProgram& dataProgram)
 	dataProgram.nameOutputFile = argv[2];
 	dataProgram.searchStr = argv[3];
 	dataProgram.replaceStr = argv[4];
+	
+	if (dataProgram.searchStr == "")
+	{
+		cout << "you are looking for an empty string" << endl;
+		ErrorExitProgram();
+	}
 
 	dataProgram.fileImput.open(dataProgram.nameImputFile);
 	if (!dataProgram.fileImput.is_open())
 	{
-		cout << "Failed to open " << dataProgram.nameImputFile << " for reading" << endl; 
+		cout << "Failed to open " << dataProgram.nameImputFile << " for reading" << endl;
 		ErrorExitProgram();
 	}
 	dataProgram.fileOutput.open(dataProgram.nameOutputFile);
@@ -74,24 +80,24 @@ void BeginProgramm(DataProgram& dataProgram)
 	size_t lenReplaceStr = dataProgram.replaceStr.length();
 
 	int countLettersInStr = 0;
-	
+
 	while (!dataProgram.fileImput.eof())
-	{	
+	{
 		getline(dataProgram.fileImput, lineStr);
 
 		for (size_t i = 0; i <= lineStr.length(); i++)
 		{
 			for (int j = 0; j < lenSearchStr; j++)
 			{
-				if (i+j < lineStr.length())
+				if (i + j < lineStr.length())
 				{
-					if (lineStr[i+j] == dataProgram.searchStr[j]) 
+					if (lineStr[i + j] == dataProgram.searchStr[j])
 					{
 						countLettersInStr++;
 					}
 				}
-			}	
-			
+			}
+
 			if (countLettersInStr == lenSearchStr)
 			{
 				dataProgram.fileOutput << dataProgram.replaceStr;// << lineStr[i];
@@ -105,7 +111,7 @@ void BeginProgramm(DataProgram& dataProgram)
 					dataProgram.fileOutput << '\n';
 				}
 				else
-				{ 
+				{
 					dataProgram.fileOutput << lineStr[i];
 				}
 				countLettersInStr = 0;
@@ -115,6 +121,7 @@ void BeginProgramm(DataProgram& dataProgram)
 	}
 	dataProgram.fileImput.close();
 	dataProgram.fileOutput.close();
+	cout << "test passed successfully" << endl;
 }
 
 int main(int argc, char** argv)
@@ -122,6 +129,6 @@ int main(int argc, char** argv)
 	DataProgram dataProgram;
 	ErrorCheckingAndInitData(argc, argv, dataProgram);
 	BeginProgramm(dataProgram);
-	system("pause");
-    return 0;
+	//system("pause");
+	return 0;
 }
