@@ -21,7 +21,7 @@ struct DataProgram
 	ofstream fileOutput;
 };
 
-int ErrorExitProgram()
+void ErrorExitProgram()
 {
 	exit(1);
 }
@@ -40,14 +40,9 @@ void ErrorCheckingAndInitData(int argc, char** argv, DataProgram& dataProgram)
 	dataProgram.replaceStr = argv[4];
 
 	stat(argv[1], &fileSize);
-	if (fileSize.st_size > 0 && fileSize.st_size < 2147483648)
+	if (fileSize.st_size > 2147483648)
 	{
 		cout << "file size larger than 1.6 GB" << endl;
-		ErrorExitProgram();
-	}
-	if (dataProgram.searchStr == "")
-	{
-		cout << "you are looking for an empty string" << endl;
 		ErrorExitProgram();
 	}
 
@@ -85,11 +80,11 @@ void BeginProgramm(DataProgram& dataProgram)
 			{
 				if ((i + j < lineStr.length()) && (lineStr[i + j] == dataProgram.searchStr[j]))
 				{
-						countLettersInStr++;
+					countLettersInStr++;
 				}
 			}
 
-			if (countLettersInStr == lenSearchStr)
+			if (countLettersInStr == lenSearchStr && dataProgram.searchStr != "")
 			{
 				dataProgram.fileOutput << dataProgram.replaceStr;// << lineStr[i];
 				countLettersInStr = 0;
