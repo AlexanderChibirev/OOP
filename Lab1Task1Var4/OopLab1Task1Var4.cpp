@@ -32,6 +32,8 @@ void ErrorCheckingAndInitData(int argc, char** argv, DataProgram& dataProgram)
 
 	if (argc != 5) {
 		cout << "Wrong amount of arguments was proposed" << endl;
+		cout << "Enter a correct arguments amount please, for example:" << end;
+		cout << "'programm.exe <input file> <output file> <search string> <replace string>'" << endl;
 		ErrorExitProgram();
 	}
 	dataProgram.nameImputFile = argv[1];
@@ -43,6 +45,7 @@ void ErrorCheckingAndInitData(int argc, char** argv, DataProgram& dataProgram)
 	if (fileSize.st_size > 2147483648)
 	{
 		cout << "file size larger than 2GB" << endl;
+		cout << "Use a file size less then 2gb please" << endl;
 		ErrorExitProgram();
 	}
 
@@ -50,12 +53,14 @@ void ErrorCheckingAndInitData(int argc, char** argv, DataProgram& dataProgram)
 	if (!dataProgram.fileImput.is_open())
 	{
 		cout << "Failed to open " << dataProgram.nameImputFile << " for reading" << endl;
+		cout << "Enter a correct name of an input.txt file please" << endl;
 		ErrorExitProgram();
 	}
 	dataProgram.fileOutput.open(dataProgram.nameOutputFile);
 	if (!dataProgram.fileOutput.is_open())
 	{
 		cout << "Failed to open " << dataProgram.nameOutputFile << " for writing" << endl;
+		cout << "Enter a correct name of an input.txt file please" << endl;
 		ErrorExitProgram();
 	}
 }
