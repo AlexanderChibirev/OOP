@@ -3,122 +3,101 @@
 #include <iostream>
 #include <fstream>
 #include <sys\stat.h>
-
+#include <algorithm>
 
 using namespace std;
 
 
 const int QUANTITY_ARGUMENTS = 5;
 
-struct DataProgram
+void ErrorProgram(string text, bool & error)
 {
-	string inputFileName;
-	string outputFileName;
-	string searchStr;
-	string replaceStr;
-
-	ifstream inputFile;
-	ofstream outputFile;
-};
-
-void ErrorExitProgram()
-{
-	exit(1);
+	cout << text << endl;
+	error = true;
 }
 
-void ErrorCheckingAndInitData(int argc, char** argv, DataProgram& dataProgram)
+void BeginProgramm(char const *inputFileName, string const &outputFileName, string const &searchStr, string const &replaceStr, bool & error)
 {
 	struct stat fileSize;
+	stat(inputFileName, &fileSize);
 
-	if (argc != 5) {
-		cout << "Wrong amount of arguments was proposed" << endl;
-		cout << "Enter a correct arguments amount please, for example:" << endl;
-		cout << "'programm.exe <input file> <output file> <search string> <replace string>'" << endl;
-		ErrorExitProgram();
-	}
-	dataProgram.inputFileName = argv[1];
-	dataProgram.outputFileName = argv[2];
-	dataProgram.searchStr = argv[3];
-	dataProgram.replaceStr = argv[4];
-
-	stat(argv[1], &fileSize);
 	if (fileSize.st_size > 2147483648)
 	{
-		cout << "file size larger than 2 GB" << endl;
-		cout << "Use a file size less then 2gb please" << endl;
-		ErrorExitProgram();
+		ErrorProgram("file size larger than 2 GB\nUse a file size less then 2gb please\n", error);
 	}
+	ifstream inputFile;
+	ofstream outputFile;
 
-	dataProgram.inputFile.open(dataProgram.inputFileName);
-	if (!dataProgram.inputFile.is_open())
-	{
-		cout << "Failed to open " << dataProgram.inputFileName << " for reading" << endl;
-		cout << "Enter a correct name of an input.txt file please" << endl;
-		ErrorExitProgram();
-	}
-	dataProgram.outputFile.open(dataProgram.inputFileName);
-	if (!dataProgram.outputFile.is_open())
-	{
-		cout << "Failed to open " << dataProgram.inputFileName << " for writing" << endl;
-		cout << "Enter a correct name of an output.txt file please" << endl;
-		ErrorExitProgram();
-	}
-}
-
-void BeginProgramm(DataProgram& dataProgram)
-{
 	string lineStr;
 	string outPut;
 
-	size_t lenSearchStr = dataProgram.searchStr.length();
-	size_t lenReplaceStr = dataProgram.replaceStr.length();
+	size_t lenSearchStr = searchStr.length();
+	size_t lenReplaceStr = replaceStr.length();
+
+	size_t position = 0;
+	size_t oldPosition = 0;
 
 	int countLettersInStr = 0;
-
-	while (!dataProgram.inputFile.eof())
+	inputFile.open(inputFileName);
+	if (!inputFile.is_open())
 	{
-		getline(dataProgram.inputFile, lineStr);
-
-		for (size_t i = 0; i <= lineStr.length(); i++)
+		inputFile.close();
+		outputFile.close();
+		ErrorProgram("Failed to open input file for reading\n", error);
+	}
+	if (error == false)
+	{
+		outputFile.open(outputFileName);
+		while (!inputFile.eof())
 		{
-			for (int j = 0; j < lenSearchStr; j++)
+			getline(inputFile, lineStr);
+			if (searchStr.empty() || replaceStr.empty() || lineStr.empty())
 			{
-				if ((i + j < lineStr.length()) && (lineStr[i + j] == dataProgram.searchStr[j]))
-				{
-					countLettersInStr++;
-				}
-			}
-
-			if (countLettersInStr == lenSearchStr && dataProgram.searchStr != "")
-			{
-				dataProgram.outputFile << dataProgram.replaceStr;// << lineStr[i];
-				countLettersInStr = 0;
-				i = i + lenSearchStr - 1;
+				outputFile << lineStr << endl;;
 			}
 			else
 			{
-				if (i == lineStr.length())
-				{
-					dataProgram.outputFile << '\n';
+				oldPosition = 0;
+				position = 0;
+				while ((position = lineStr.find(searchStr, position)) != std::string::npos) {
+					outputFile << lineStr.substr(oldPosition, position - oldPosition) + replaceStr;
+					position += searchStr.length();
+					oldPosition = position;
 				}
-				else
+				if (lineStr != "")
 				{
-					dataProgram.outputFile << lineStr[i];
+					outputFile << lineStr.substr(oldPosition) << endl;
 				}
-				countLettersInStr = 0;
 			}
-
 		}
+		cout << "test passed successfully" << endl;
 	}
-	dataProgram.inputFile.close();
-	dataProgram.outputFile.close();
-	cout << "test passed successfully" << endl;
+	inputFile.close();
+	outputFile.close();
+
+
 }
 
 int main(int argc, char** argv)
 {
-	DataProgram dataProgram;
-	ErrorCheckingAndInitData(argc, argv, dataProgram);
-	BeginProgramm(dataProgram);
+	bool error = false;
+	if (argc != 5)
+	{
+		ErrorProgram("Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n'programm.exe <input file> <output file> <search string> <replace string>'", error);
+		return 1;
+	}
+	char* inputFileName = argv[1];
+	string outputFileName = argv[2];
+	string searchStr = argv[3];
+	string replaceStr = argv[4];
+
+	if (error == false)
+	{
+		BeginProgramm(inputFileName, outputFileName, searchStr, replaceStr, error);
+	}
+	else
+	{
+		cout << "This program is completed with an error" << endl;
+	}
 	return 0;
 }
