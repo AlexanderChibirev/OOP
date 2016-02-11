@@ -1,18 +1,18 @@
-#include "stdafx.h"
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <sys\stat.h>
-#include <algorithm>
+#include "stdafx.h" 
+#include <string> 
+#include <iostream> 
+#include <fstream> 
+#include <sys\stat.h> 
+#include <algorithm> 
 
 using namespace std;
 
 
 const int QUANTITY_ARGUMENTS = 5;
 
-void ErrorProgram(string text, bool & error)
+void ErrorProgram(string const &textError, bool & error)
 {
-	cout << text << endl;
+	cout << textError << endl;
 	error = true;
 }
 
@@ -25,57 +25,67 @@ void BeginProgramm(char const *inputFileName, string const &outputFileName, stri
 	{
 		ErrorProgram("file size larger than 2 GB\nUse a file size less then 2gb please\n", error);
 	}
-	ifstream inputFile;
-	ofstream outputFile;
-
-	string lineStr;
-	string outPut;
-
-	size_t lenSearchStr = searchStr.length();
-	size_t lenReplaceStr = replaceStr.length();
-
-	size_t position = 0;
-	size_t oldPosition = 0;
-
-	int countLettersInStr = 0;
-	inputFile.open(inputFileName);
-	if (!inputFile.is_open())
+	if (!error)
 	{
-		inputFile.close();
-		outputFile.close();
-		ErrorProgram("Failed to open input file for reading\n", error);
-	}
-	if (error == false)
-	{
-		outputFile.open(outputFileName);
-		while (!inputFile.eof())
+		ifstream inputFile;
+		ofstream outputFile;
+
+		string lineStr;
+		string outPut;
+
+		size_t lenSearchStr = searchStr.length();
+		size_t lenReplaceStr = replaceStr.length();
+
+		size_t position = 0;
+		size_t afterChangingPosition = 0;
+
+		int countLettersInStr = 0;
+		inputFile.open(inputFileName);
+		if (!inputFile.is_open())
 		{
-			getline(inputFile, lineStr);
-			if (searchStr.empty() || replaceStr.empty() || lineStr.empty())
+			inputFile.close();
+			ErrorProgram("Failed to open input file for reading\n", error);
+		}
+		if (!error)
+		{
+			outputFile.open(outputFileName);
+			if (!outputFile.is_open())
 			{
-				outputFile << lineStr << endl;;
+				inputFile.close();
+				outputFile.close();
+				ErrorProgram("Failed to open input file for reading\n", error);
 			}
-			else
+			if (!error)
 			{
-				oldPosition = 0;
-				position = 0;
-				while ((position = lineStr.find(searchStr, position)) != std::string::npos) {
-					outputFile << lineStr.substr(oldPosition, position - oldPosition) + replaceStr;
-					position += searchStr.length();
-					oldPosition = position;
-				}
-				if (lineStr != "")
+				while (!inputFile.eof())
 				{
-					outputFile << lineStr.substr(oldPosition) << endl;
+					getline(inputFile, lineStr);
+					if (searchStr.empty() || replaceStr.empty() || lineStr.empty())
+					{
+						outputFile << lineStr << endl;;
+					}
+					else
+					{
+						afterChangingPosition = 0;
+						position = 0;
+						while ((position = lineStr.find(searchStr, position)) != std::string::npos)
+						{
+							outputFile << lineStr.substr(afterChangingPosition, position - afterChangingPosition) + replaceStr;
+							position += searchStr.length();
+							afterChangingPosition = position;
+						}
+						if (lineStr != "")
+						{
+							outputFile << lineStr.substr(afterChangingPosition) << endl;
+						}
+					}
 				}
+				cout << "test passed successfully" << endl;
 			}
 		}
-		cout << "test passed successfully" << endl;
+		inputFile.close();
+		outputFile.close();
 	}
-	inputFile.close();
-	outputFile.close();
-
-
 }
 
 int main(int argc, char** argv)
@@ -91,13 +101,14 @@ int main(int argc, char** argv)
 	string searchStr = argv[3];
 	string replaceStr = argv[4];
 
-	if (error == false)
+	if (!error)
 	{
 		BeginProgramm(inputFileName, outputFileName, searchStr, replaceStr, error);
 	}
-	else
+	if (error)
 	{
 		cout << "This program is completed with an error" << endl;
+		return 1;
 	}
 	return 0;
 }
