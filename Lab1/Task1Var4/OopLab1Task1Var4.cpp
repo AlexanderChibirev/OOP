@@ -10,22 +10,22 @@ using namespace std;
 
 const int QUANTITY_ARGUMENTS = 5;
 
-void ErrorProgram(string const &textError, bool & error)
+void ErrorProgram(string const &textError, bool & wasError)
 {
 	cout << textError << endl;
-	error = true;
+	wasError = true;
 }
 
-void BeginProgramm(char const *inputFileName, string const &outputFileName, string const &searchStr, string const &replaceStr, bool & error)
+void BeginProgramm(char const *inputFileName, string const &outputFileName, string const &searchStr, string const &replaceStr, bool & wasError)
 {
 	struct stat fileSize;
 	stat(inputFileName, &fileSize);
 
 	if (fileSize.st_size > 2147483648)
 	{
-		ErrorProgram("file size larger than 2 GB\nUse a file size less then 2gb please\n", error);
+		ErrorProgram("file size larger than 2 GB\nUse a file size less then 2gb please\n", wasError);
 	}
-	if (!error)
+	if (!wasError)
 	{
 		ifstream inputFile;
 		ofstream outputFile;
@@ -44,18 +44,18 @@ void BeginProgramm(char const *inputFileName, string const &outputFileName, stri
 		if (!inputFile.is_open())
 		{
 			inputFile.close();
-			ErrorProgram("Failed to open input file for reading\n", error);
+			ErrorProgram("Failed to open input file for reading\n", wasError);
 		}
-		if (!error)
+		if (!wasError)
 		{
 			outputFile.open(outputFileName);
 			if (!outputFile.is_open())
 			{
 				inputFile.close();
 				outputFile.close();
-				ErrorProgram("Failed to open input file for reading\n", error);
+				ErrorProgram("Failed to open input file for reading\n", wasError);
 			}
-			if (!error)
+			if (!wasError)
 			{
 				while (!inputFile.eof())
 				{
@@ -90,10 +90,10 @@ void BeginProgramm(char const *inputFileName, string const &outputFileName, stri
 
 int main(int argc, char** argv)
 {
-	bool error = false;
+	bool wasError = false;
 	if (argc != 5)
 	{
-		ErrorProgram("Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n'programm.exe <input file> <output file> <search string> <replace string>'", error);
+		ErrorProgram("Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n'programm.exe <input file> <output file> <search string> <replace string>'", wasError);
 		return 1;
 	}
 	char* inputFileName = argv[1];
@@ -101,13 +101,13 @@ int main(int argc, char** argv)
 	string searchStr = argv[3];
 	string replaceStr = argv[4];
 
-	if (!error)
+	if (!wasError)
 	{
-		BeginProgramm(inputFileName, outputFileName, searchStr, replaceStr, error);
+		BeginProgramm(inputFileName, outputFileName, searchStr, replaceStr, wasError);
 	}
-	if (error)
+	if (wasError)
 	{
-		cout << "This program is completed with an error" << endl;
+		cout << "This program is completed with an wasError" << endl;
 		return 1;
 	}
 	return 0;

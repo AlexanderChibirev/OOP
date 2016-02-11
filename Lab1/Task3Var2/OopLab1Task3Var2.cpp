@@ -13,10 +13,10 @@ using namespace std;
 const int sizeOfMatrix = 3;
 
 
-void ErrorExitProgram(string const &textError, bool &error)
+void ErrorExitProgram(string const &textError, bool &wasError)
 {
 	cout << textError << endl;
-	error = true;
+	wasError = true;
 }
 
 
@@ -97,16 +97,16 @@ void InverseMatrix(float** matrixInt, int sizeOfMatrix)
 	delete[] identityMatrix;
 }
 
-void BeginProgramm(const string &nameImputFile, bool &error)
+void BeginProgramm(const string &nameImputFile, bool &wasError)
 {
 	ifstream fileImput;
 
 	fileImput.open(nameImputFile);
 	if (!fileImput.is_open())
 	{
-		ErrorExitProgram("Failed to open input.txt for reading\n", error);
+		ErrorExitProgram("Failed to open input.txt for reading\n", wasError);
 	}
-	if (!error)
+	if (!wasError)
 	{
 		string outPut;
 		string lineStr;
@@ -122,14 +122,14 @@ void BeginProgramm(const string &nameImputFile, bool &error)
 			for (int j = 0; j < sizeOfMatrix; j++)
 			{
 				fileImput >> matrixStr[i][j];
-				if (matrixStr[i][j] == ""  && !error)
+				if (matrixStr[i][j] == ""  && !wasError)
 				{
-					ErrorExitProgram("Your file empty", error);
+					ErrorExitProgram("Your file empty", wasError);
 				}
 				matrixInt[i][j] = float(atof((matrixStr[i][j]).c_str()));
 			}
 		}
-		if(!error)
+		if(!wasError)
 		{
 			if (Determ(matrixInt, sizeOfMatrix) == 0)
 			{
@@ -145,7 +145,7 @@ void BeginProgramm(const string &nameImputFile, bool &error)
 			}
 			else
 			{
-				ErrorExitProgram("The inverse matrix can not be found, since the determinant is equal to zero", error);
+				ErrorExitProgram("The inverse matrix can not be found, since the determinant is equal to zero", wasError);
 			}
 		}
 		for (int i = 0; i < sizeOfMatrix; ++i)
@@ -157,18 +157,18 @@ void BeginProgramm(const string &nameImputFile, bool &error)
 
 int main(int argc, char** argv)
 {
-	bool error = false;
+	bool wasError = false;
 	string nameImputFile = argv[1];
 	if (argc != 2)
 	{
-		ErrorExitProgram("Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n'OopLab1Task3Var7.exe <input.txt> ", error);
+		ErrorExitProgram("Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n'OopLab1Task3Var7.exe <input.txt> ", wasError);
 		return 1;
 	}
-	if (!error) 
+	if (!wasError) 
 	{
-		BeginProgramm(nameImputFile, error);
+		BeginProgramm(nameImputFile, wasError);
 	}
-	if (error)
+	if (wasError)
 	{
 		return 1;
 	}
