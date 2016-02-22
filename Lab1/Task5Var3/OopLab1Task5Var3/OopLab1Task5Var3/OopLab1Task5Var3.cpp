@@ -16,58 +16,50 @@ const char FILL_TO_CHAR = '.';
 using namespace std;
 
 
-void FillArea(vector<string> & area, vector<pair<int, int>> startDots, int row, int col)
+void FillArea(vector<string> & area, vector<pair<int, int>> startDots)
 {
-	//if (row > 0 && col > 1 && row < area.size() && area[row][col] == FILL_CHAR)
-	//{
-	//	area[row][col] = FILL_TO_CHAR;
-	//	if (area[row + 1][col] != '#')
-	//		FillArea(area, startDots, row + 1, col);
-	//	if (area[row - 1][col] != '#')
-	//		FillArea(area, startDots, row - 1, col);
-	//	if (area[row][col - 1] != '#')
-	//		FillArea(area, startDots, row, col - 1);
-	//	if (area[row][col + 1] != '#')
-	//		FillArea(area, startDots, row, col + 1);
-	//}
 	while (startDots.size() > 0)
 	{
 		int row = startDots[0].first;
 		int col = startDots[0].second;
-		if (area[col][row] != '.' && area[col][row] != '#')
+		if (area[row][col] != '.' && area[row][col] != '#')
 		{
-			area[col][row] = '.';
+			area[row][col] = '.';
 			if (row > 0)
 			{
-				startDots.push_back(make_pair(row, col - 1));
+				startDots.push_back(make_pair(row - 1, col));
 			}
 			if (row < 101)
 			{
-				startDots.push_back(make_pair(row, col + 1));
+				startDots.push_back(make_pair(row + 1, col));
 			}
 			if (col > 0)
 			{
-				startDots.push_back(make_pair(row-1, col));
+				startDots.push_back(make_pair(row, col - 1));
 			}
 			if (col < 101)
 			{
-				startDots.push_back(make_pair(row+1, col));
+				startDots.push_back(make_pair(row, col + 1));
 			}
 		}
-		//else area[col][row] = '.';
-
 		startDots.erase(startDots.begin());
+	}
+}
+
+void FoundBegin(string str, vector< pair<int, int> > & startDots, int numLine, int lenStr)
+{
+	if (str.find(BEGIN_CHAR) < lenStr)
+	{
+		startDots.push_back(pair<int, int>(numLine, lenStr - str.length() + str.find(BEGIN_CHAR)));
+		str = str.substr(str.find(BEGIN_CHAR) + 1);
+		FoundBegin(str, startDots, numLine, lenStr);
 	}
 }
 vector<pair<int, int>> GetPositionDots(vector<string> area, vector< pair<int, int> > startDots)
 {
 	for (int numLine = 0; numLine < area.size(); numLine++)
 	{
-		int positionStartDots = int(area[numLine].find(BEGIN_CHAR));
-		if (positionStartDots != string::npos)
-		{
-			startDots.push_back(pair<int, int>(numLine, positionStartDots));
-		}
+		FoundBegin(area[numLine], startDots, numLine, area[numLine].length());
 	}
 	return startDots;
 }
@@ -141,13 +133,9 @@ void WriteInOutputFile(vector<string> area, const string outputFileName)
 }
 vector<string> GetAreaFinish(vector<pair<int, int>> startDots, vector<string> area)
 {
+	FillArea(area, startDots);
 	for (unsigned i = 0; i < startDots.size(); ++i)
 	{
-	/*const char BEGIN_CHAR = '0';
-	 const char FILL_CHAR = ' ';
-	 const char FILL_TO_CHAR = '.';*/
-		area[startDots[i].first][startDots[i].second] = FILL_CHAR;
-		FillArea(area, startDots, startDots[i].first, startDots[i].second);
 		area[startDots[i].first][startDots[i].second] = BEGIN_CHAR;
 	}
 	return area;
