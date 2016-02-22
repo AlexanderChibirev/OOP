@@ -1,0 +1,10 @@
+vector<string> GetAreaFinish(vector<pair<int, int>> startDots, vector<string> area)
+{
+	for (unsigned i = 0; i < startDots.size(); ++i)
+	{
+		area[startDots[i].first][startDots[i].second] = FILL_CHAR;
+		FillArea(area, startDots, startDots[i].first, startDots[i].second);
+		area[startDots[i].first][startDots[i].second] = BEGIN_CHAR;
+	}
+	return area;
+}
