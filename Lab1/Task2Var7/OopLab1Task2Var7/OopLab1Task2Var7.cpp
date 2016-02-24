@@ -7,18 +7,11 @@
 #include <fstream> 
 #include <sys\stat.h> 
 #include <algorithm> 
+#include <vector>
 
 
 using namespace std;
 
-const int QUANTITY_ADMISSIBLE_NUMBER = 37;
-const int QUANTITY_ARGUMENTS = 4;
-
-void ErrorProgram(string const &textError, bool &wasError)
-{
-	cout << textError << endl;
-	wasError = true;
-}
 string IsNegativeNumber(string const &initialNumber)
 {
 	string whithoutMinusSign;
@@ -36,14 +29,15 @@ string IsNegativeNumber(string const &initialNumber)
 		return initialNumber;
 	}
 }
-void CheckAdmissibleNumber(string const &initialNumber, bool &wasError, char const (&admissibleNumber)[QUANTITY_ADMISSIBLE_NUMBER])
+bool CheckAdmissibleNumber(string const &initialNumber, vector<char> admissibleNumber)
 {
+	bool wasError = false;
 	size_t numberOfDigits = initialNumber.length();
 	int checkNumberOfDigits = 0;
 	int k = 0;
 	for (int i = 0; i < initialNumber.length(); i++)
 	{
-		for (int j = 0; j < QUANTITY_ADMISSIBLE_NUMBER; j++)
+		for (int j = 0; j < admissibleNumber.size(); j++)
 		{
 			if (initialNumber[i] == admissibleNumber[j])
 			{
@@ -55,13 +49,14 @@ void CheckAdmissibleNumber(string const &initialNumber, bool &wasError, char con
 	{
 		wasError = true;
 	}
+	return wasError;
 }
 
-int HexToInt(string const &initialNumber)
+int StringToInt(string const &initialNumber)
 {
 	unsigned char byte;
 	char checkChar;
-	unsigned int result = 0;
+	unsigned long long int result = 0;
 	for (byte = 0; byte < initialNumber.length();byte++)
 	{
 		result *= 16;
@@ -78,8 +73,9 @@ int HexToInt(string const &initialNumber)
 	return result;
 }
 
-void CheckNumberSystem(string const &baseIn, string const &baseOut, string const &initialNumber, bool &wasError)
+bool CheckNumberSystem(string const &baseIn, string const &baseOut, string const &initialNumber)
 {
+	bool wasError = false;
 	string symbolOne;
 	if ((atoi(baseIn.c_str()) < 2 || atoi(baseIn.c_str()) > 36) || (atoi(baseOut.c_str()) < 2 || atoi(baseOut.c_str()) > 36))
 	{
@@ -91,27 +87,27 @@ void CheckNumberSystem(string const &baseIn, string const &baseOut, string const
 		for (int i = 0; i < initialNumber.length(); i++)
 		{
 			symbolOne = initialNumber[i];
-			if ((HexToInt(symbolOne)) >= atoi(baseIn.c_str()))
+			if ((StringToInt(symbolOne)) >= atoi(baseIn.c_str()))
 			{
 				cout << "Incorrect number system or number for this number system\n";
 				wasError = true;
 			}
 		}
 	}
-	
+	return wasError;
 }
-void IntConverter(string const &baseIn, string const &baseOut, string const &initialNumber, bool &wasError)
+void IntConverter(string const &baseIn, string const &baseOut, string const &initialNumber)
 {
 	size_t lenInitialNumber = initialNumber.length();
-	int number = 0;
-	int count;
-	int buff[255];
+	unsigned long long int number = 0;
+	long long int count;
+	long long int buff[255];
 	int symbolOneForInt;
 	string symbolOneForStr;
 	for (int i = 0; i < lenInitialNumber; i++)
 	{
 		symbolOneForStr = initialNumber[i];
-		number = number * (atoi(baseIn.c_str())) + (HexToInt(symbolOneForStr));
+		number = number * (atoi(baseIn.c_str())) + (StringToInt(symbolOneForStr));
 	}
 	if (number == 0)
 	{
@@ -143,40 +139,31 @@ void IntConverter(string const &baseIn, string const &baseOut, string const &ini
 
 int main(int argc, char** argv)
 {
-	bool wasError = false;
-
-	if (argc != QUANTITY_ARGUMENTS)
+	if (argc != 4)
 	{
-		ErrorProgram("Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n'OopLab1Task2Var7.exe <source notation> <destination notation> <value>'\n", wasError);
+		cout << "Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n' <source notation> <destination notation> <value>'\n";
 		return 1;
 	}
-	char admissibleNumber[QUANTITY_ADMISSIBLE_NUMBER] = { '-','0','1','2','3','4','5','6','7','8','9',
+	vector<char> admissibleNumber = { '-','0','1','2','3','4','5','6','7','8','9',
 		'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P',
 		'Q','R','S','T','U','V','W','X','Y','Z' };
+
 	string baseIn = argv[1];
 	string baseOut = argv[2];
 	string initialNumber = argv[3];
-	CheckAdmissibleNumber(initialNumber, wasError, admissibleNumber);
-	if(!wasError)
-	{
-		CheckNumberSystem(baseIn, baseOut, initialNumber, wasError);
-	}
-	if (!wasError)
-	{
-		initialNumber = IsNegativeNumber(initialNumber);
-	}
-	if (!wasError)
-	{
-		IntConverter(baseIn, baseOut, initialNumber, wasError);
-	}
-	if (!wasError)
-	{
-	cout << "\ntest passed successfully\n" << endl;
-	}
-	if (wasError)
+
+	if (CheckAdmissibleNumber(initialNumber, admissibleNumber))
 	{
 		cout << "The program is completed with an error" << endl;
+		return 1;
 	}
-	system("pause");
+	if (CheckNumberSystem(baseIn, baseOut, initialNumber))
+	{
+		cout << "The program is completed with an error" << endl;
+		return 1;
+	}
+	initialNumber = IsNegativeNumber(initialNumber);
+	IntConverter(baseIn, baseOut, initialNumber);
+	cout << "\ntest passed successfully\n" << endl;
 	return 0;
 }

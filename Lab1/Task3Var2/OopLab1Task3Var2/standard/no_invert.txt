@@ -1,0 +1,1 @@
+The inverse matrix can not be found, since the determinant is equal to zero

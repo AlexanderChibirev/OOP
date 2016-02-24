@@ -6,43 +6,50 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-
+#include <array>
 
 using namespace std;
 
 const int sizeOfMatrix = 3;
 
-
-void ErrorExitProgram(string const &textError, bool &wasError)
+void PrintMatrix(double (&matrixInt)[sizeOfMatrix][sizeOfMatrix])
 {
-	cout << textError << endl;
-	wasError = true;
+	for (int i = 0; i < sizeOfMatrix; i++)
+	{
+		for (int j = 0; j < sizeOfMatrix; j++)
+		{
+			if (j!=2)
+			{
+				cout << setprecision(3) << matrixInt[i][j] << " ";
+			}
+			else
+			{
+				cout << setprecision(3) << matrixInt[i][j];
+			}
+		}
+		if (i != 2)
+		{
+		cout << endl;
+		}
+	}
 }
 
-
-float Determ(float** matrixInt, int sizeOfMatrix)
+double Determ(double (&matrixInt)[sizeOfMatrix][sizeOfMatrix])
 {
-	float det = 0;
-	float result1;
-	float result2;
-	float result3;
+	double det = 0;
+	double result1;
+	double result2;
+	double result3;
 	result1 = matrixInt[0][0] * ((matrixInt[1][1] * matrixInt[2][2]) - (matrixInt[1][2] * matrixInt[2][1]));
 	result2 = matrixInt[0][1] * ((matrixInt[1][0] * matrixInt[2][2]) - (matrixInt[1][2] * matrixInt[2][0]));
 	result3 = matrixInt[0][2] * ((matrixInt[1][0] * matrixInt[2][1]) - (matrixInt[1][1] * matrixInt[2][0]));
 	det = result1 - result2 + result3;
-	cout << det;
 	return det;
 }
 
-void InverseMatrix(float** matrixInt, int sizeOfMatrix)
+array<array<double, 3>, 3> GetIdentityMatrix()
 {
-	float resultOfDivision;
-
-	float **identityMatrix = new float *[sizeOfMatrix];
-
-	for (int i = 0; i < sizeOfMatrix; i++)
-		identityMatrix[i] = new float[sizeOfMatrix];
-	//делаем еденичную матрицу////////////////////
+	std::array<std::array<double, 3>, 3> identityMatrix;
 	for (int i = 0; i < sizeOfMatrix; i++)
 		for (int j = 0; j < sizeOfMatrix; j++)
 		{
@@ -50,11 +57,15 @@ void InverseMatrix(float** matrixInt, int sizeOfMatrix)
 			if (i == j)
 				identityMatrix[i][j] = 1.0;
 		}
-	/////////////////////////////////////////////
+	return identityMatrix;
+}
+void InverseMatrix(double (&matrixInt)[sizeOfMatrix][sizeOfMatrix])
+{
+	double resultOfDivision;
+	array<array<double, 3>, 3> identityMatrix = GetIdentityMatrix();
 	for (int k = 0; k < sizeOfMatrix; k++)
 	{
 		resultOfDivision = matrixInt[k][k];
-
 		for (int j = 0; j < sizeOfMatrix; j++)
 		{
 			matrixInt[k][j] /= resultOfDivision;
@@ -64,7 +75,6 @@ void InverseMatrix(float** matrixInt, int sizeOfMatrix)
 		for (int i = k + 1; i < sizeOfMatrix; i++)
 		{
 			resultOfDivision = matrixInt[i][k];
-
 			for (int j = 0; j < sizeOfMatrix; j++)
 			{
 				matrixInt[i][j] -= matrixInt[k][j] * resultOfDivision;
@@ -72,13 +82,11 @@ void InverseMatrix(float** matrixInt, int sizeOfMatrix)
 			}
 		}
 	}
-
 	for (int k = sizeOfMatrix - 1; k > 0; k--)
 	{
 		for (int i = k - 1; i >= 0; i--)
 		{
 			resultOfDivision = matrixInt[i][k];
-
 			for (int j = 0; j < sizeOfMatrix; j++)
 			{
 				matrixInt[i][j] -= matrixInt[k][j] * resultOfDivision;
@@ -86,89 +94,88 @@ void InverseMatrix(float** matrixInt, int sizeOfMatrix)
 			}
 		}
 	}
-
+	//result | 1 0 0| = |1, -2 ,3 |;
 	for (int i = 0; i < sizeOfMatrix; i++)
+	{
 		for (int j = 0; j < sizeOfMatrix; j++)
+		{
 			matrixInt[i][j] = identityMatrix[i][j];
-
-	for (int i = 0; i < sizeOfMatrix; i++)
-		delete[] identityMatrix[i];
-
-	delete[] identityMatrix;
+		}
+	}
 }
 
-void BeginProgramm(const string &nameImputFile, bool &wasError)
+bool BeginProgramm(const string &nameInputFile)
 {
 	ifstream fileImput;
-
-	fileImput.open(nameImputFile);
+	fileImput.seekg(0, std::ios::end);
+	int length = fileImput.tellg();
+	bool wasError = false;
+	fileImput.open(nameInputFile);
 	if (!fileImput.is_open())
 	{
-		ErrorExitProgram("Failed to open input.txt for reading\n", wasError);
+		cout << "Failed to open input.txt for reading\n";
+		wasError = true;
 	}
 	if (!wasError)
 	{
-		string outPut;
-		string lineStr;
+		string check;
 		string matrixStr[sizeOfMatrix][sizeOfMatrix];
-		float **matrixInt;
-		matrixInt = new float*[sizeOfMatrix];
-		for (int i = 0; i<sizeOfMatrix; ++i)
-		{
-			matrixInt[i] = new float[sizeOfMatrix];
-		}
+		double matrixInt[sizeOfMatrix][sizeOfMatrix];
 		for (int i = 0; i < sizeOfMatrix; i++)
 		{
 			for (int j = 0; j < sizeOfMatrix; j++)
-			{
+			{ 
 				fileImput >> matrixStr[i][j];
-				if (matrixStr[i][j] == ""  && !wasError)
+				if (matrixStr[i][j] == "" && !wasError)
 				{
-					ErrorExitProgram("Your file empty", wasError);
+					cout << "Your file empty";
+					wasError = true;
 				}
-				matrixInt[i][j] = float(atof((matrixStr[i][j]).c_str()));
+				if (matrixStr[i][j] == "0" )
+				{
+					matrixInt[i][j] = double(atof((matrixStr[i][j]).c_str()));
+				}
+				else if (atoi((matrixStr[i][j]).c_str()) == 0 && !wasError)
+				{
+					cout << "File contains an invalid character";
+					wasError = true;
+				}
+				matrixInt[i][j] = double(atof((matrixStr[i][j]).c_str()));
 			}
+		}
+		fileImput >> check;
+		if (check != "")
+		{
+			cout << "Matrix is the wrong size, matrix must be 3x3 size";
+			wasError = true;
 		}
 		if(!wasError)
 		{
-			if (Determ(matrixInt, sizeOfMatrix) == 0)
+			if (Determ(matrixInt) != 0)
 			{
-				InverseMatrix(matrixInt, sizeOfMatrix);
-				for (int i = 0; i < sizeOfMatrix; i++)
-				{
-					for (int j = 0; j < sizeOfMatrix; j++)
-					{
-						cout << setprecision(3) << matrixInt[i][j] << "  ";
-					}
-					cout << endl;
-				}
+				InverseMatrix(matrixInt);
+				PrintMatrix(matrixInt);
 			}
 			else
 			{
-				ErrorExitProgram("The inverse matrix can not be found, since the determinant is equal to zero", wasError);
+				cout << "The inverse matrix can not be found, since the determinant is equal to zero";
+				wasError = true;
 			}
 		}
-		for (int i = 0; i < sizeOfMatrix; ++i)
-			delete[] matrixInt[i];
-		delete[] matrixInt;
 	}
 	fileImput.close();
+	return wasError;
 }
 
 int main(int argc, char** argv)
 {
-	bool wasError = false;
-	string nameImputFile = argv[1];
 	if (argc != 2)
 	{
-		ErrorExitProgram("Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n'OopLab1Task3Var7.exe <input.txt> ", wasError);
+		cout << "Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n' <input.txt> ";
 		return 1;
 	}
-	if (!wasError) 
-	{
-		BeginProgramm(nameImputFile, wasError);
-	}
-	if (wasError)
+	string nameInputFile = argv[1];
+	if (BeginProgramm(nameInputFile))
 	{
 		return 1;
 	}
