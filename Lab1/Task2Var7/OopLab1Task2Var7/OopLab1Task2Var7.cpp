@@ -61,7 +61,7 @@ int StringToInt(string const &initialNumber)
 	{
 		result *= 16;
 		checkChar = initialNumber[byte];
-		if (checkChar >= 0 && checkChar <= 9)
+		if (isdigit(static_cast<int>(checkChar)))
 		{
 			result = int(checkChar) - int('0');
 		}
@@ -79,7 +79,7 @@ bool CheckNumberSystem(string const &baseIn, string const &baseOut, string const
 	string symbolOne;
 	if ((atoi(baseIn.c_str()) < 2 || atoi(baseIn.c_str()) > 36) || (atoi(baseOut.c_str()) < 2 || atoi(baseOut.c_str()) > 36))
 	{
-		cout << "Incorrect number system\n";
+		cout << "Incorrect inputFile\n";
 		wasError = true;
 	}
 	if(!wasError)
@@ -87,9 +87,9 @@ bool CheckNumberSystem(string const &baseIn, string const &baseOut, string const
 		for (int i = 0; i < initialNumber.length(); i++)
 		{
 			symbolOne = initialNumber[i];
-			if ((StringToInt(symbolOne)) >= atoi(baseIn.c_str()))
+			if ((StringToInt(symbolOne)) >= atoi(baseIn.c_str()) && !wasError)
 			{
-				cout << "Incorrect number system or number for this number system\n";
+				cout << "Incorrect inputFile\n";
 				wasError = true;
 			}
 		}
@@ -154,16 +154,13 @@ int main(int argc, char** argv)
 
 	if (CheckAdmissibleNumber(initialNumber, admissibleNumber))
 	{
-		cout << "The program is completed with an error" << endl;
 		return 1;
 	}
 	if (CheckNumberSystem(baseIn, baseOut, initialNumber))
 	{
-		cout << "The program is completed with an error" << endl;
 		return 1;
 	}
 	initialNumber = IsNegativeNumber(initialNumber);
 	IntConverter(baseIn, baseOut, initialNumber);
-	cout << "\ntest passed successfully\n" << endl;
 	return 0;
 }
