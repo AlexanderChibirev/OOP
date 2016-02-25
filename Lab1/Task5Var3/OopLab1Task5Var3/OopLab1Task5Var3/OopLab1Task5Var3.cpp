@@ -8,10 +8,6 @@
 #include <string>
 #include <vector>
 
-const char BEGIN_CHAR = '0';
-const char FILL_CHAR = ' ';
-const char FILL_TO_CHAR = '.';
-
 
 using namespace std;
 
@@ -22,49 +18,51 @@ void FillArea(vector<string> & area, vector<pair<int, int>> startDots)
 	{
 		int row = startDots[0].first;
 		int col = startDots[0].second;
-		if (area[row][col] != '.' && area[row][col] != '#')
+		if (area[row][col] != '.' && area[row][col] != '#' && row < 101 && col < 101)
 		{
 			area[row][col] = '.';
-			if (row > 0)
-			{
-				startDots.push_back(make_pair(row - 1, col));
-			}
-			if (row < 101)
-			{
-				startDots.push_back(make_pair(row + 1, col));
-			}
-			if (col > 0)
-			{
-				startDots.push_back(make_pair(row, col - 1));
-			}
-			if (col < 101)
-			{
-				startDots.push_back(make_pair(row, col + 1));
-			}
+			startDots.push_back(make_pair(row - 1, col));
+			startDots.push_back(make_pair(row + 1, col));
+			startDots.push_back(make_pair(row, col - 1));
+			startDots.push_back(make_pair(row, col + 1));
 		}
 		startDots.erase(startDots.begin());
 	}
 }
 
-void FoundBegin(string str, vector< pair<int, int> > & startDots, int numLine, int lenStr)
+void FoundBeginDots(string str, vector< pair<int, int> > & startDots, int numLine, int lenStr)
 {
-	if (str.find(BEGIN_CHAR) < lenStr)
+	if (str.find('0') < lenStr)
 	{
-		startDots.push_back(pair<int, int>(numLine, lenStr - str.length() + str.find(BEGIN_CHAR)));
-		str = str.substr(str.find(BEGIN_CHAR) + 1);
-		FoundBegin(str, startDots, numLine, lenStr);
+		startDots.push_back(pair<int, int>(numLine, lenStr - str.length() + str.find('0')));
+		str = str.substr(str.find('0') + 1);
+		FoundBeginDots(str, startDots, numLine, lenStr);
 	}
 }
 vector<pair<int, int>> GetPositionDots(vector<string> area, vector< pair<int, int> > startDots)
 {
-	for (int numLine = 0; numLine < area.size(); numLine++)
+	for (size_t numLine = 0; numLine < area.size(); numLine++)
 	{
-		FoundBegin(area[numLine], startDots, numLine, area[numLine].length());
+		FoundBeginDots(area[numLine], startDots, numLine, area[numLine].length());
 	}
 	return startDots;
 }
+
+bool IsCorrectSymbol(const string & line)
+{
+	bool wasError = false;
+	for (auto symbol : line)
+	{
+		if ((symbol != ' ' && symbol != '0' && symbol != '#' && symbol != '\n' && symbol != '\0'))
+		{
+			wasError = true;
+		}
+	}
+	return wasError;
+}
 vector<string> GetArea(const string & fileName)
 {
+	bool wasError = false;
 	string latticeSet;
 	string sizeArea;
 	vector<string> area;
@@ -84,6 +82,13 @@ vector<string> GetArea(const string & fileName)
 		string line;
 		while (getline(areaFileInput, line))
 		{
+			if (IsCorrectSymbol(line) && (!wasError))
+			{
+				cout << "File contains an invalid character";
+				area.clear();
+				area.push_back("File contains an invalid character");
+				wasError = true;
+			}
 			line = "#" + line;
 			if (line.length() < 100)
 			{
@@ -95,36 +100,45 @@ vector<string> GetArea(const string & fileName)
 						line += "#";
 					}
 				}
-
 			}
 			area.push_back(line + "\n");
 		}
-		while (area.size() < 102)
+		if (area.size() == 1 && !wasError)
 		{
-			area.push_back("#" + sizeArea + "#" + "\n");
-			if (area.size() == 101)
+			area.clear();
+			area.push_back("emptyFile");
+			wasError = true;
+		}
+		if (!wasError)
+		{
+			while (area.size() < 102)
 			{
-				area.push_back(latticeSet);
+				area.push_back("#" + sizeArea + "#" + "\n");
+				if (area.size() == 101)
+				{
+					area.push_back(latticeSet);
+				}
 			}
 		}
 	}
 	else
 	{
 		cout << "error with opening input file";
+		wasError = true;
+		area.clear();
 		area.push_back("error");
 	}
-
 	areaFileInput.close();
 	return area;
 }
 void WriteInOutputFile(vector<string> area, const string outputFileName)
 {
 	ofstream outFile(outputFileName);
-	for (int i = 1; i < area.size() - 1; i++)
+	for (int i = 1; i < 101; i++)
 	{
 		string rowString;
 		rowString = area[i];
-		for (int g = 1; g < area.size() - 1; g++)
+		for (int g = 1; g < 101; g++)
 		{
 			outFile << rowString[g];
 			if (g == 100) outFile << "\n";
@@ -136,7 +150,7 @@ vector<string> GetAreaFinish(vector<pair<int, int>> startDots, vector<string> ar
 	FillArea(area, startDots);
 	for (unsigned i = 0; i < startDots.size(); ++i)
 	{
-		area[startDots[i].first][startDots[i].second] = BEGIN_CHAR;
+		area[startDots[i].first][startDots[i].second] = '0';
 	}
 	return area;
 }
@@ -148,26 +162,28 @@ int main(int argc, char* argv[])
 		cout << "Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n'programm.exe <input file> <output file>";
 		return 1;
 	}
-
 	string inputFileName = argv[1];
 	string outputFileName = argv[2];
 	vector< pair<int, int> > startDots;
 	vector<string> area;
 	area = GetArea(inputFileName);
-	WriteInOutputFile(area, outputFileName);
 	if (area[0] == "error")
 	{
 		return 1;
 	}
-	if (area.empty())
+	if (area[0] == "emptyFile")
 	{
 		cout << "your input file empty";
-		return 0;
+		return 1;
 	}
 	if (GetPositionDots(area, startDots).empty())
 	{
 		WriteInOutputFile(area, outputFileName);
 		return 0;
+	}
+	if (area[0] == "File contains an invalid character")
+	{
+		return 1;
 	}
 	startDots = GetPositionDots(area, startDots);
 	area = GetAreaFinish(startDots, area);
