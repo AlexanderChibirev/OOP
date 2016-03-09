@@ -29,7 +29,7 @@ string IsNegativeNumber(string const &initialNumber)
 		return initialNumber;
 	}
 }
-bool CheckAdmissibleNumber(string const &initialNumber, vector<char> admissibleNumber)
+bool CheckAdmissibleNumber(string const &initialNumber,const vector<char> &admissibleNumber)
 {
 	bool wasError = false;
 	size_t numberOfDigits = initialNumber.length();
@@ -99,7 +99,7 @@ bool CheckNumberSystem(string const &baseIn, string const &baseOut, string const
 void IntConverter(string const &baseIn, string const &baseOut, string const &initialNumber)
 {
 	size_t lenInitialNumber = initialNumber.length();
-	unsigned long long int number = 0;
+	long long int number = 0;
 	long long int count;
 	long long int buff[255];
 	int symbolOneForInt;
@@ -122,7 +122,7 @@ void IntConverter(string const &baseIn, string const &baseOut, string const &ini
 			number = number / (atoi(baseOut.c_str()));
 			count++;
 		}
-		for (int i = count - 1; i >= 0; i--)
+		for (long long int i = count - 1; i >= 0; i--)
 		{
 			symbolOneForInt = buff[i];
 			symbolOneForStr = buff[i];
@@ -152,6 +152,10 @@ int main(int argc, char** argv)
 	string baseOut = argv[2];
 	string initialNumber = argv[3];
 
+	if (initialNumber.length() > 10) 
+	{
+		cout << "a large number";
+	}
 	if (CheckAdmissibleNumber(initialNumber, admissibleNumber))
 	{
 		return 1;

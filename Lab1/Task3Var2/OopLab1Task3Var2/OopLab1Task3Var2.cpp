@@ -12,6 +12,8 @@ using namespace std;
 
 const int sizeOfMatrix = 3;
 
+typedef array<array<double, 3>, 3> Matrix;
+
 void PrintMatrix(double (&matrixInt)[sizeOfMatrix][sizeOfMatrix])
 {
 	for (int i = 0; i < sizeOfMatrix; i++)
@@ -34,7 +36,7 @@ void PrintMatrix(double (&matrixInt)[sizeOfMatrix][sizeOfMatrix])
 	}
 }
 
-double Determ(double (&matrixInt)[sizeOfMatrix][sizeOfMatrix])
+double CalculateDeterminant(double (&matrixInt)[sizeOfMatrix][sizeOfMatrix])
 {
 	double det = 0;
 	double result1;
@@ -47,22 +49,24 @@ double Determ(double (&matrixInt)[sizeOfMatrix][sizeOfMatrix])
 	return det;
 }
 
-array<array<double, 3>, 3> GetIdentityMatrix()
+Matrix GetIdentityMatrix()
 {
-	std::array<std::array<double, 3>, 3> identityMatrix;
-	for (int i = 0; i < sizeOfMatrix; i++)
-		for (int j = 0; j < sizeOfMatrix; j++)
+	Matrix identityMatrix;
+	for (int i = 0; i < sizeOfMatrix; ++i)
+	{
+		for (int j = 0; j < sizeOfMatrix; ++j)
 		{
 			identityMatrix[i][j] = 0.0;
 			if (i == j)
 				identityMatrix[i][j] = 1.0;
 		}
+	}
 	return identityMatrix;
 }
 void InverseMatrix(double (&matrixInt)[sizeOfMatrix][sizeOfMatrix])
 {
 	double resultOfDivision;
-	array<array<double, 3>, 3> identityMatrix = GetIdentityMatrix();
+	Matrix identityMatrix = GetIdentityMatrix();
 	for (int k = 0; k < sizeOfMatrix; k++)
 	{
 		resultOfDivision = matrixInt[k][k];
@@ -104,67 +108,57 @@ void InverseMatrix(double (&matrixInt)[sizeOfMatrix][sizeOfMatrix])
 	}
 }
 
-bool BeginProgramm(const string &nameInputFile)
+enum ERROR_CODE { ALL_IS_OK ,CANT_OPEN_FILE, EMPTY_FILE, INVALID_CHARACTER, WRONG_SIZE, MATRIX_CAN_NOT_BE_FOUND};
+
+ERROR_CODE ProcessMatrix(const string &nameInputFile)
 {
-	ifstream fileImput;
-	fileImput.seekg(0, std::ios::end);
-	int length = fileImput.tellg();
-	bool wasError = false;
-	fileImput.open(nameInputFile);
-	if (!fileImput.is_open())
+	ifstream inputFile;
+	inputFile.seekg(0, std::ios::end);
+	inputFile.open(nameInputFile);
+	if (!inputFile.is_open())
 	{
-		cout << "Failed to open input.txt for reading\n";
-		wasError = true;
+		return ERROR_CODE::CANT_OPEN_FILE;
 	}
-	if (!wasError)
+	string check;
+	string matrixStr[sizeOfMatrix][sizeOfMatrix];
+	double matrixInt[sizeOfMatrix][sizeOfMatrix];
+	for (int i = 0; i < sizeOfMatrix; i++)
 	{
-		string check;
-		string matrixStr[sizeOfMatrix][sizeOfMatrix];
-		double matrixInt[sizeOfMatrix][sizeOfMatrix];
-		for (int i = 0; i < sizeOfMatrix; i++)
-		{
-			for (int j = 0; j < sizeOfMatrix; j++)
-			{ 
-				fileImput >> matrixStr[i][j];
-				if (matrixStr[i][j] == "" && !wasError)
-				{
-					cout << "Your file empty";
-					wasError = true;
-				}
-				if (matrixStr[i][j] == "0" )
-				{
-					matrixInt[i][j] = double(atof((matrixStr[i][j]).c_str()));
-				}
-				else if (atoi((matrixStr[i][j]).c_str()) == 0 && !wasError)
-				{
-					cout << "File contains an invalid character";
-					wasError = true;
-				}
+		for (int j = 0; j < sizeOfMatrix; j++)
+		{ 
+			inputFile >> matrixStr[i][j];
+			if (matrixStr[i][j] == "")
+			{
+				return ERROR_CODE::EMPTY_FILE;
+			}
+			if (matrixStr[i][j] == "0" )
+			{
 				matrixInt[i][j] = double(atof((matrixStr[i][j]).c_str()));
 			}
-		}
-		fileImput >> check;
-		if (check != "")
-		{
-			cout << "Matrix is the wrong size, matrix must be 3x3 size";
-			wasError = true;
-		}
-		if(!wasError)
-		{
-			if (Determ(matrixInt) != 0)
+			else if (atoi((matrixStr[i][j]).c_str()) == 0)
 			{
-				InverseMatrix(matrixInt);
-				PrintMatrix(matrixInt);
+				return ERROR_CODE::INVALID_CHARACTER;
 			}
-			else
-			{
-				cout << "The inverse matrix can not be found, since the determinant is equal to zero";
-				wasError = true;
-			}
+			matrixInt[i][j] = double(atof((matrixStr[i][j]).c_str()));
 		}
 	}
-	fileImput.close();
-	return wasError;
+	inputFile >> check;
+	if (check != "")
+	{
+		return ERROR_CODE::WRONG_SIZE;
+	}
+	if (CalculateDeterminant(matrixInt) != 0)
+	{
+		InverseMatrix(matrixInt);
+		PrintMatrix(matrixInt);
+	}
+	else
+	{
+		return ERROR_CODE::MATRIX_CAN_NOT_BE_FOUND;
+	}
+
+inputFile.close();
+return ERROR_CODE::ALL_IS_OK;
 }
 
 int main(int argc, char** argv)
@@ -175,9 +169,25 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	string nameInputFile = argv[1];
-	if (BeginProgramm(nameInputFile))
+	switch (ProcessMatrix(nameInputFile))
 	{
-		return 1;
+		case 0:
+			return 0;
+		case 1:
+			cout << "Failed to open input.txt for reading\n";
+			return 1;
+		case 2:
+			cout << "Your file empty";
+			return 1;
+		case 3:
+			cout << "File contains an invalid character";
+			return 1;
+		case 4:
+			cout << "Matrix is the wrong size, matrix must be 3x3 size";
+			return 1;
+		case 5:
+			cout << "The inverse matrix can not be found, since the determinant is equal to zero";
+			return 1;
 	}
-	return 0;
+
 }

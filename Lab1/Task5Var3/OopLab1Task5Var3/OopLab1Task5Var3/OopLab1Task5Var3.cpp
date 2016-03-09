@@ -34,16 +34,16 @@ void FoundBeginDots(string str, vector< pair<int, int> > & startDots, int numLin
 {
 	if (str.find('0') < lenStr)
 	{
-		startDots.push_back(pair<int, int>(numLine, lenStr - str.length() + str.find('0')));
+		startDots.push_back(pair<int, int>(numLine, static_cast<int>(lenStr - str.length() + str.find('0'))));
 		str = str.substr(str.find('0') + 1);
 		FoundBeginDots(str, startDots, numLine, lenStr);
 	}
 }
-vector<pair<int, int>> GetPositionDots(vector<string> area, vector< pair<int, int> > startDots)
+vector<pair<int, int>> GetPositionDots(vector<string> const &area, vector< pair<int, int> > startDots)
 {
-	for (size_t numLine = 0; numLine < area.size(); numLine++)
+	for (size_t numLine = 0; numLine < area.size(); numLine++)// range-based
 	{
-		FoundBeginDots(area[numLine], startDots, numLine, area[numLine].length());
+		FoundBeginDots(area.at(numLine), startDots, numLine, area.at(numLine).length());
 	}
 	return startDots;
 }
@@ -73,7 +73,6 @@ vector<string> GetArea(const string & fileName)
 	for (int i = 0; i < 102; i++)
 	{
 		latticeSet += "#";
-
 	}
 	area.push_back(latticeSet + "\n");
 	ifstream areaFileInput(fileName);
@@ -131,6 +130,7 @@ vector<string> GetArea(const string & fileName)
 	areaFileInput.close();
 	return area;
 }
+
 void WriteInOutputFile(vector<string> area, const string outputFileName)
 {
 	ofstream outFile(outputFileName);
