@@ -12,24 +12,35 @@
 
 using namespace std;
 
-string IsNegativeNumber(string const &initialNumber)
+string CheckSign(string const &initialNumber, string &sign, bool &wasSign)
 {
-	string whithoutMinusSign;
+	string withoutSign;
 	if (initialNumber[0] == '-')
 	{
 		for (int i = 1; i < initialNumber.length(); i++)
 		{
-			whithoutMinusSign += initialNumber[i];
+			withoutSign += initialNumber[i];
 		}
-		cout << '-';
-		return whithoutMinusSign;
+		sign = "-";
+		wasSign = true;
+		return withoutSign;
+	}
+	else if (initialNumber[0] == '+')
+	{
+		for (int i = 1; i < initialNumber.length(); i++)
+		{
+			withoutSign += initialNumber[i];
+		}
+		sign = "+";
+		wasSign = true;
+		return withoutSign;
 	}
 	else
 	{
 		return initialNumber;
 	}
 }
-bool CheckAdmissibleNumber(string const &initialNumber,const vector<char> &admissibleNumber)
+bool CheckAdmissibleNumber(string const &initialNumber, const vector<char> &admissibleNumber)
 {
 	bool wasError = false;
 	size_t numberOfDigits = initialNumber.length();
@@ -45,7 +56,7 @@ bool CheckAdmissibleNumber(string const &initialNumber,const vector<char> &admis
 			}
 		}
 	}
-	if (checkNumberOfDigits != numberOfDigits) 
+	if (checkNumberOfDigits != numberOfDigits)
 	{
 		wasError = true;
 	}
@@ -79,17 +90,17 @@ bool CheckNumberSystem(string const &baseIn, string const &baseOut, string const
 	string symbolOne;
 	if ((atoi(baseIn.c_str()) < 2 || atoi(baseIn.c_str()) > 36) || (atoi(baseOut.c_str()) < 2 || atoi(baseOut.c_str()) > 36))
 	{
-		cout << "Incorrect inputFile\n";
+		cout << "Incorrect data enter\n";
 		wasError = true;
 	}
-	if(!wasError)
+	if (!wasError)
 	{
 		for (int i = 0; i < initialNumber.length(); i++)
 		{
 			symbolOne = initialNumber[i];
 			if ((StringToInt(symbolOne)) >= atoi(baseIn.c_str()) && !wasError)
 			{
-				cout << "Incorrect inputFile\n";
+				cout << "Incorrect data enter\n";
 				wasError = true;
 			}
 		}
@@ -132,7 +143,7 @@ void IntConverter(string const &baseIn, string const &baseOut, string const &ini
 			else
 			{
 				cout << (atoi(symbolOneForStr.c_str()));
-			}	
+			}
 		}
 	}
 }
@@ -144,7 +155,7 @@ int main(int argc, char** argv)
 		cout << "Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n' <source notation> <destination notation> <value>'\n";
 		return 1;
 	}
-	vector<char> admissibleNumber = { '-','0','1','2','3','4','5','6','7','8','9',
+	vector<char> admissibleNumber = { '+', '-','0','1','2','3','4','5','6','7','8','9',
 		'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P',
 		'Q','R','S','T','U','V','W','X','Y','Z' };
 
@@ -152,7 +163,7 @@ int main(int argc, char** argv)
 	string baseOut = argv[2];
 	string initialNumber = argv[3];
 
-	if (initialNumber.length() > 10) 
+	if (initialNumber.length() > 10)
 	{
 		cout << "a large number";
 	}
@@ -164,7 +175,13 @@ int main(int argc, char** argv)
 	{
 		return 1;
 	}
-	initialNumber = IsNegativeNumber(initialNumber);
+	string sign;
+	bool wasSign = false;
+	initialNumber = CheckSign(initialNumber, sign, wasSign);
+	if (wasSign)
+	{
+		cout << sign;
+	}
 	IntConverter(baseIn, baseOut, initialNumber);
 	return 0;
 }

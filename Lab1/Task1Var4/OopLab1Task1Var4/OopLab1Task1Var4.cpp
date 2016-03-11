@@ -75,11 +75,6 @@ bool BeginProgramm(char const *inputFileName, string const &outputFileName, stri
 		if (!wasError)
 		{
 			outputFile.open(outputFileName);
-			if (!outputFile.is_open())
-			{
-				cout << "Failed to open input file for reading\n";
-				wasError = true;
-			}
 			if (!wasError)
 			{
 				while (!inputFile.eof())
