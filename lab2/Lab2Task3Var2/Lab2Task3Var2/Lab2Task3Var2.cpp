@@ -20,7 +20,8 @@ int _tmain()
 	string searchString;
 	string searchStringToLower;
 	string wordTranslate;
-	if (WorkWithUser(searchString, wordTranslate, dictionaryMap, searchStringToLower))
+	string dictionaryName = "dictionary.txt";
+	if (WorkWithUser(dictionaryName, searchString, wordTranslate, dictionaryMap, searchStringToLower))
 	{
 		return 1;
 	}

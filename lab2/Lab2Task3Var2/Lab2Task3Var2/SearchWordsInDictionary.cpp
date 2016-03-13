@@ -5,11 +5,11 @@ using namespace std;
 
 enum ERROR_CODE { ALL_IS_OK, CANT_OPEN_FILE, WORD_CAN_NOT_BE_FOUND };
 
-ERROR_CODE SearchWordsInDictionary(const string &searchString, string &wordTranslate, map <string, string> &dictionaryMap, string &searchStringToLower)
+ERROR_CODE SearchWordsInDictionary(const string &dictionaryName, const string &searchString, string &wordTranslate, map <string, string> &dictionaryMap, string &searchStringToLower)
 {	
 	string lineStr;
 	string lineStrToLower;
-	ifstream dictionary("dictionary.txt");
+	ifstream dictionary(dictionaryName);
 	if (dictionary.is_open()) // если файл не открыт
 	{
 		bool wasWord = false;
@@ -26,7 +26,6 @@ ERROR_CODE SearchWordsInDictionary(const string &searchString, string &wordTrans
 					i++;
 				}
 				wasWord = true;
-				dictionaryMap.insert(pair<string, string>(searchString, wordTranslate));
 				break;
 			}
 		}

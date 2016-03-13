@@ -4,7 +4,7 @@
 #include "AddInformationIntoDictionaryFileTxt.h"
 
 
-bool WorkWithUser(std::string &searchString, std::string &wordTranslate, std::map <std::string, std::string> &dictionaryMap, std::string &searchStringToLower)
+bool WorkWithUser(const std::string &dictionaryName, std::string &searchString, std::string &wordTranslate, std::map <std::string, std::string> &dictionaryMap, std::string &searchStringToLower)
 {
 	bool wasError = false;
 	std::cout << ">";
@@ -18,13 +18,13 @@ bool WorkWithUser(std::string &searchString, std::string &wordTranslate, std::ma
 	}
 	else if(searchString != "" && searchString != "...")
 	{
-		switch (SearchWordsInDictionary(searchString, wordTranslate, dictionaryMap,searchStringToLower))
+		switch (SearchWordsInDictionary(dictionaryName,searchString, wordTranslate, dictionaryMap,searchStringToLower))
 		{
 			case ALL_IS_OK: 
 			{
 				std::cout << wordTranslate << std::endl;
 				wordTranslate.clear();
-				WorkWithUser(searchString, wordTranslate, dictionaryMap, searchStringToLower);
+				WorkWithUser(dictionaryName, searchString, wordTranslate, dictionaryMap, searchStringToLower);
 				break;
 			}
 			case CANT_OPEN_FILE:
@@ -42,12 +42,12 @@ bool WorkWithUser(std::string &searchString, std::string &wordTranslate, std::ma
 					dictionaryMap.insert(std::pair<std::string, std::string>(searchString, wordTranslate));
 					std::cout << "Слово " << searchString << " сохранено в словаре как " << wordTranslate << std::endl;
 					wordTranslate.clear();
-					WorkWithUser(searchString, wordTranslate, dictionaryMap, searchStringToLower);
+					WorkWithUser(dictionaryName, searchString, wordTranslate, dictionaryMap, searchStringToLower);
 				}
 				else
 				{
 					wordTranslate.clear();
-					WorkWithUser(searchString, wordTranslate, dictionaryMap, searchStringToLower);
+					WorkWithUser(dictionaryName, searchString, wordTranslate, dictionaryMap, searchStringToLower);
 				}	
 				break;
 			}
