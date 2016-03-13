@@ -34,9 +34,9 @@ bool WorkWithUser(const std::string &dictionaryName, std::string &searchString, 
 			}
 			case WORD_CAN_NOT_BE_FOUND:
 			{
-				std::cout << "Неизвестное слово " << searchString << ". Введите перевод или точку для отказа.\n>";
+				std::cout << "Неизвестное слово " << searchString << ". Введите перевод или пустую строку для отказа.\n>";
 				std::getline(std::cin, wordTranslate);
-				if (wordTranslate != "." && wordTranslate != "...")
+				if (wordTranslate != "")
 				{
 					dictionaryMap.insert(std::pair<std::string, std::string>(searchString, wordTranslate));
 					std::cout << "Слово " << searchString << " сохранено в словаре как " << wordTranslate << std::endl;

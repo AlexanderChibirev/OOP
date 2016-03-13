@@ -12,3 +12,4 @@ Cats коты
 Step шаг
 ghost приведение
 supeR супер
+jump прыжок
