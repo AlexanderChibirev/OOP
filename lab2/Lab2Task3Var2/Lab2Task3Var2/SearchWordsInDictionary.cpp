@@ -10,7 +10,7 @@ ERROR_CODE SearchWordsInDictionary(const string &dictionaryName, const string &s
 	string lineStr;
 	string lineStrToLower;
 	ifstream dictionary(dictionaryName);
-	if (dictionary.is_open()) // если файл не открыт
+	if (dictionary.is_open()) // если файл открыт
 	{
 		bool wasWord = false;
 		while (getline(dictionary, lineStr))
