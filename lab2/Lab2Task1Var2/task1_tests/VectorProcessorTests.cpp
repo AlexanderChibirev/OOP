@@ -6,7 +6,7 @@ using namespace std;
 
 // Функция ProcessVector
 BOOST_AUTO_TEST_SUITE(ProcessVector_function)
-
+	
 	// Создает пустой вектор из пустого вектора
 	BOOST_AUTO_TEST_CASE(makes_empty_vector_from_empty_vector)
 	{
