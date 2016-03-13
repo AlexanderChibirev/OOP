@@ -13,7 +13,7 @@ bool WorkWithUser(const std::string &dictionaryName, std::string &searchString, 
 	std::transform(searchStringToLower.begin(), searchStringToLower.end(), searchStringToLower.begin(), tolower);
 	if (searchString == "..." && (!dictionaryMap.empty()))
 	{
-		AddInformationIntoDictionaryFileTxt(dictionaryMap);
+		AddInformationIntoDictionaryFileTxt(dictionaryName, dictionaryMap);
 		searchString = "...";
 	}
 	else if(searchString != "" && searchString != "...")
@@ -29,7 +29,6 @@ bool WorkWithUser(const std::string &dictionaryName, std::string &searchString, 
 			}
 			case CANT_OPEN_FILE:
 			{
-				std::cout << "CANT_OPEN_FILE\n";
 				wasError = true;
 				break;
 			}

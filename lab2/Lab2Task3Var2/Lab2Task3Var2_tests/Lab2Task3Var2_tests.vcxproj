@@ -179,6 +179,7 @@
     <ClCompile Include="..\Lab2Task3Var2\AddInformationIntoDictionaryFileTxt.cpp" />
     <ClCompile Include="..\Lab2Task3Var2\SearchWordsInDictionary.cpp" />
     <ClCompile Include="..\Lab2Task3Var2\WorkWithUser.cpp" />
+    <ClCompile Include="AddInformationIntoDictionaryFileTxtTests.cpp" />
     <ClCompile Include="Lab2Task3Var2_tests.cpp" />
     <ClCompile Include="SearchWordsInDictionaryTests.cpp" />
     <ClCompile Include="stdafx.cpp">

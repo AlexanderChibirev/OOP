@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "..\Lab2Task3Var2\SearchWordsInDictionary.h"
-
+#include "..\Lab2Task3Var2\AddInformationIntoDictionaryFileTxt.h"
 
 using namespace std;
 

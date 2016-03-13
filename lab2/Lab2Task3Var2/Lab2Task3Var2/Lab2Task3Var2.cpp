@@ -23,6 +23,7 @@ int _tmain()
 	string dictionaryName = "dictionary.txt";
 	if (WorkWithUser(dictionaryName, searchString, wordTranslate, dictionaryMap, searchStringToLower))
 	{
+		cout << "CANT_OPEN_FILE\n";
 		return 1;
 	}
 	return 0;

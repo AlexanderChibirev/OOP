@@ -53,5 +53,8 @@
     <ClCompile Include="..\Lab2Task3Var2\WorkWithUser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AddInformationIntoDictionaryFileTxtTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

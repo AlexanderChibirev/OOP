@@ -1,2 +1,2 @@
 #pragma once
-void AddInformationIntoDictionaryFileTxt(std::map <std::string, std::string> &dictionaryMap);
+bool AddInformationIntoDictionaryFileTxt(const std::string &dictionaryName, std::map <std::string, std::string> &dictionaryMap);
