@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "FindAndReplace.h"
 
 using namespace std;
 

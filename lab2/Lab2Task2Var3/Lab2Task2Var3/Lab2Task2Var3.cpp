@@ -2,25 +2,29 @@
 //
 
 #include "stdafx.h"
+#include "FindAndReplace.h"
 
 using namespace std;
 
 
 int _tmain(int argc, char** argv)
 {
-	//if (argc != 3)
-	//{
-	//	cout << "Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n' <search string> <replace string>'";
-	//	return 1;
-	//}
-	////string subject;
-	//cout << "text enter: ";
-	//cin >> subject;
-	////string search = argv[1];
-	////string replace = argv[2];
+	if (argc != 3)
+	{
+		cout << "Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n' <search string> <replace string>'";
+		return 1;
+	}
+	string subject;
+	cout << "text enter: ";
+	getline(std::cin, subject);
 
-	////subject = (FindAndReplace(subject, search, replace));
-	//cout << subject;
+	string search = "world";
+	string replace = "hello";
+	/*string search = argv[1];
+	string replace = argv[2];*/
+
+	subject = (FindAndReplace(subject, search, replace));
+	cout << subject;
     return 0;
 }
 

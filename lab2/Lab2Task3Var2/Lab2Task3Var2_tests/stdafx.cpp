@@ -12,3 +12,4 @@
 #define BOOST_TEST_NO_MAIN 
 // подключаем реализацию boost test
 #include <boost/test/included/unit_test.hpp>
+

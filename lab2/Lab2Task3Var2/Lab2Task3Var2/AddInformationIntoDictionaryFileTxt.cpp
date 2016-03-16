@@ -6,13 +6,12 @@
 bool AddInformationIntoDictionaryFileTxt(const std::string &dictionaryName, std::map <std::string, std::string> &dictionaryMap)
 {
 	bool wasError = false;
-	std::cout << "В словарь были внесены изменения.Введите Y или y для сохранения перед выходом.\n" << ">";
-	std::string wasExit;
-	std::getline(std::cin, wasExit);
+	std::string wasSave;
+	std::getline(std::cin, wasSave);
 	std::ofstream dictionary(dictionaryName, std::ios_base::app);
 	if (dictionary.is_open())
 	{
-		if (wasExit == "y" || wasExit == "Y")
+		if (wasSave == "y" || wasSave == "Y")
 		{
 			for (auto it = dictionaryMap.begin(); it != dictionaryMap.end(); ++it)///вывод на экран
 			{

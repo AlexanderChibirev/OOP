@@ -1,9 +1,9 @@
-#include "SearchWordsInDictionary.h"
 #include "stdafx.h"
+#include "SearchWordsInDictionary.h"
 
 using namespace std;
 
-enum ERROR_CODE { ALL_IS_OK, CANT_OPEN_FILE, WORD_CAN_NOT_BE_FOUND };
+//enum ERROR_CODE { ALL_IS_OK, CANT_OPEN_FILE, WORD_CAN_NOT_BE_FOUND };
 
 ERROR_CODE SearchWordsInDictionary(const string &dictionaryName, const string &searchString, string &wordTranslate, map <string, string> &dictionaryMap, string &searchStringToLower)
 {	

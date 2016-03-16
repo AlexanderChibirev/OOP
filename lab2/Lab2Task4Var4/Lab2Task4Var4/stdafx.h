@@ -11,6 +11,7 @@
 #include <tchar.h>
 
 #include <vector>
+#include <set>
 #include <iostream>
 #include "GeneratePrimeNumbersSet.h"
 

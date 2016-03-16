@@ -4,7 +4,6 @@
 #include "stdafx.h"
 #include "GeneratePrimeNumbersSet.h"
 
-
 int main(int argc, char** argv)
 {
 	if (argc != 2)
@@ -12,7 +11,9 @@ int main(int argc, char** argv)
 		std::cout << "Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n'upperBound < 0 or upperBound > 10000000'";
 		return 1;
 	}
-	int upperBound = atoi(argv[1]);
+	int upperBound = atoi("asasddd");
+	//auto upperBound = boost::lexical_cast<int>(argv[1]);
+
 	if (upperBound < 0 || upperBound > 100000000)
 	{
 		std::cout << "Wrong number\n";

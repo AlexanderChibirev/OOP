@@ -4,7 +4,6 @@
 using namespace std;
 
 string FindAndReplace(const string & text, const string & searchString, const string & replaceString);
-//??????? ProcessVector
 BOOST_AUTO_TEST_SUITE(Replace_function)
 
 //

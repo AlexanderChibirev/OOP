@@ -19,14 +19,9 @@ void ProcessVector(std::vector<double> & numbers)
 	if (!numbers.empty())
 	{
 		double minNum = numbers[0];
-		for (unsigned i = 0; i < numbers.size(); ++i)
-		{
-			if (minNum > numbers[i])
-			{
-				minNum = numbers[i];
-			}
-		}
-		boost::transform(numbers, numbers.begin(), arg1 * minNum);
+	
+		double minNum2 = *(std::min_element(numbers.begin(), numbers.end()));
+		boost::transform(numbers, numbers.begin(), arg1 * minNum2);
 		sort(numbers.begin(), numbers.end());
 	}
 }
