@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6B680FB2-5C8C-4072-AE52-87B6D07B05CC}</ProjectGuid>
+    <ProjectGuid>{47ADCFF7-29BC-4258-A823-B2B442AA1A49}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Lav2Task6Var1</RootNamespace>
+    <RootNamespace>Lav2Task6Var1_tests</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -93,6 +93,12 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>"$(TargetPath)" --log_level=test_suite</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Running unit tests</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -106,6 +112,12 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>"$(TargetPath)" --log_level=test_suite</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Running unit tests</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -142,28 +154,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ExpandTemplate.h" />
-    <ClInclude Include="FindAndReplace.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="WriteInOutputFile.h" />
-    <ClInclude Include="WriteInString.h" />
+    <Text Include="..\Lav2Task6Var1\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ExpandTemplate.cpp" />
-    <ClCompile Include="FindAndReplace.cpp" />
-    <ClCompile Include="Lav2Task6Var1.cpp" />
+    <ClInclude Include="..\Lav2Task6Var1\ExpandTemplate.h" />
+    <ClInclude Include="..\Lav2Task6Var1\FindAndReplace.h" />
+    <ClInclude Include="..\Lav2Task6Var1\WriteInOutputFile.h" />
+    <ClInclude Include="..\Lav2Task6Var1\WriteInString.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Lav2Task6Var1\ExpandTemplate.cpp" />
+    <ClCompile Include="..\Lav2Task6Var1\FindAndReplace.cpp" />
+    <ClCompile Include="ExpandTemplateTests.cpp" />
+    <ClCompile Include="Lav2Task6Var1_tests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="WriteInOutputFile.cpp" />
-    <ClCompile Include="WriteInString.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\Lav2Task6Var1_tests\ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

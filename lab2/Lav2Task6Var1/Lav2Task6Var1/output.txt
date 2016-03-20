@@ -1,1 +1,1 @@
--[aa][bb][cc][cc][c][a][b][c]+
+Hello, Super %USER_NAME% Friday. {WEEK_DAY}. Today is Friday. {WEEK_DAY}.
