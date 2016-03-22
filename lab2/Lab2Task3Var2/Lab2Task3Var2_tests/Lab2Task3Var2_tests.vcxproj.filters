@@ -33,6 +33,9 @@
     <ClInclude Include="..\Lab2Task3Var2\WorkWithUser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Lab2Task3Var2\WriteInDictionaryMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -51,6 +54,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Lab2Task3Var2\WorkWithUser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lab2Task3Var2\WriteInDictionaryMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

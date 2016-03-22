@@ -18,7 +18,8 @@ std::string FindAndReplace(const std::string & tpl, const std::string & searchSt
 		newTpl.append(tpl, afterChangingPosition, position - afterChangingPosition).append(replaceString);
 		position += searchString.length();
 		afterChangingPosition = position;
+		newTpl.append(tpl, afterChangingPosition);
+		return newTpl;
 	}
-	newTpl.append(tpl, afterChangingPosition);
-	return newTpl;
+	return "";
 }

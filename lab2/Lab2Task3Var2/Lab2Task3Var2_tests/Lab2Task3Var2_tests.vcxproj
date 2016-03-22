@@ -172,6 +172,7 @@
     <ClInclude Include="..\Lab2Task3Var2\AddInformationIntoDictionaryFileTxt.h" />
     <ClInclude Include="..\Lab2Task3Var2\SearchWordsInDictionary.h" />
     <ClInclude Include="..\Lab2Task3Var2\WorkWithUser.h" />
+    <ClInclude Include="..\Lab2Task3Var2\WriteInDictionaryMap.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -179,6 +180,7 @@
     <ClCompile Include="..\Lab2Task3Var2\AddInformationIntoDictionaryFileTxt.cpp" />
     <ClCompile Include="..\Lab2Task3Var2\SearchWordsInDictionary.cpp" />
     <ClCompile Include="..\Lab2Task3Var2\WorkWithUser.cpp" />
+    <ClCompile Include="..\Lab2Task3Var2\WriteInDictionaryMap.cpp" />
     <ClCompile Include="Lab2Task3Var2_tests.cpp" />
     <ClCompile Include="SearchWordsInDictionaryTests.cpp" />
     <ClCompile Include="stdafx.cpp">

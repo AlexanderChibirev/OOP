@@ -33,6 +33,9 @@
     <ClInclude Include="WorkWithUser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WriteInDictionaryMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -48,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WorkWithUser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WriteInDictionaryMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
