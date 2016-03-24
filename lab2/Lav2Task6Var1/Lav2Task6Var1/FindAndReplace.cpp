@@ -1,25 +1,59 @@
 #include "stdafx.h"
 
 #include "FindAndReplace.h"
-
-std::string FindAndReplace(const std::string & tpl, const std::string & searchString, const std::string & replaceString)
+std::string FindAndReplace(const std::string & tpl, const std::string & searchString, const std::string & replaceString, std::map < int, int > & positionUsedParams)
 {
 	if (searchString.empty())
 	{
 		return tpl;
 	}
-	std::string newTpl;
-
+	std::string newText = tpl;
 	size_t position = 0;
-	size_t afterChangingPosition = 0;
-
-	while ((position = tpl.find(searchString, position)) != std::string::npos)
+	bool wasSet = false;
+	int count = 0;
+	while ((position = newText.find(searchString, position)) != std::string::npos)
 	{
-		newTpl.append(tpl, afterChangingPosition, position - afterChangingPosition).append(replaceString);
-		position += searchString.length();
-		afterChangingPosition = position;
-		newTpl.append(tpl, afterChangingPosition);
-		return newTpl;
+		std::string leftPart;
+		std::string rightPart;
+		for (size_t i = 0; i < position; i++)
+		{
+			leftPart += newText[i];
+		}
+		if(count == 0)
+		{
+			for (size_t i = leftPart.length() + searchString.length(); i < newText.length(); ++i)
+			{
+				rightPart += tpl[i];
+			}
+		}
+		else
+		{
+			for (size_t i = leftPart.size() + searchString.size(); i < newText.size(); ++i)
+			{
+				rightPart += newText[i];
+			}
+		}
+		for (auto it = positionUsedParams.begin(); it != positionUsedParams.end(); ++it)
+		{
+			if ((size_t(it->first) <= position) && (size_t(it->second) >= (position + searchString.length() - 1)))
+			{
+				wasSet = true;
+				break;
+			}
+		}
+		if(!wasSet)
+		{
+			newText.clear();
+			newText.append(leftPart).append(replaceString).append(rightPart);
+			positionUsedParams[position] = position + replaceString.length() - 1;
+			position = position + replaceString.length();
+		}
+		else
+		{
+			position = position + replaceString.length();
+		}
+		wasSet = false;
+		count++;
 	}
-	return "";
+	return newText;
 }

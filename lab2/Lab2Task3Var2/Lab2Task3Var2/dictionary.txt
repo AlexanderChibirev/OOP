@@ -8,3 +8,5 @@ jump||прыжок
 bye||пока
 пес||dog
 доброе утро||good morning
+car||машина
+пёс||dog

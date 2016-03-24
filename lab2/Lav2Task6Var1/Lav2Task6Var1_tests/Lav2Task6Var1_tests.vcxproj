@@ -157,6 +157,7 @@
     <Text Include="..\Lav2Task6Var1\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Lav2Task6Var1\ExpandTemplate.h" />
     <ClInclude Include="..\Lav2Task6Var1\FindAndReplace.h" />
     <ClInclude Include="..\Lav2Task6Var1\WriteInOutputFile.h" />
     <ClInclude Include="..\Lav2Task6Var1\WriteInString.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Lav2Task6Var1\ExpandTemplate.cpp" />
     <ClCompile Include="..\Lav2Task6Var1\FindAndReplace.cpp" />
     <ClCompile Include="ExpandTemplateTests.cpp" />
     <ClCompile Include="Lav2Task6Var1_tests.cpp" />

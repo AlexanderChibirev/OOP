@@ -1,5 +1,8 @@
+
+
 #include "stdafx.h"
 #include <boost/test/output/compiler_log_formatter.hpp>
+
 
 /*
 Данный класс управляет формаитрованием журнала запуска тестов

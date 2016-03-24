@@ -41,9 +41,11 @@ void FoundBeginDots(string str, vector< pair<int, int> > & startDots, int numLin
 }
 vector<pair<int, int>> GetPositionDots(vector<string> const &area, vector< pair<int, int> > startDots)
 {
-	for (size_t numLine = 0; numLine < area.size(); numLine++)// range-based
+	int numLine = 0;
+	for (auto &it : area)
 	{
-		FoundBeginDots(area.at(numLine), startDots, numLine, area.at(numLine).length());
+		numLine++;
+		FoundBeginDots(it, startDots, numLine, int(it.length()));
 	}
 	return startDots;
 }
@@ -60,12 +62,10 @@ bool IsCorrectSymbol(const string & line)
 	}
 	return wasError;
 }
-vector<string> GetArea(const string & fileName)
+
+
+void StartInitialArea(string &latticeSet, string &sizeArea, vector<string> &area)
 {
-	bool wasError = false;
-	string latticeSet;
-	string sizeArea;
-	vector<string> area;
 	for (int i = 0; i < 100; i++)
 	{
 		sizeArea += " ";
@@ -75,60 +75,70 @@ vector<string> GetArea(const string & fileName)
 		latticeSet += "#";
 	}
 	area.push_back(latticeSet + "\n");
+}
+
+void EndInitialArea(string &latticeSet, string &sizeArea, vector<string> &area)
+{
+	while (area.size() < 102)
+	{
+		area.push_back("#" + sizeArea + "#" + "\n");
+		if (area.size() == 101)
+		{
+			area.push_back(latticeSet);
+		}
+	}
+}
+
+void BaseInitialArea(vector<string> &area, string &line)
+{
+	line = "#" + line;
+	if (line.length() < 100)
+	{
+		for (size_t i = line.length(); i < 101; i++)
+		{
+			line += " ";
+			if (i == 100)
+			{
+				line += "#";
+			}
+		}
+	}
+	area.push_back(line + "\n");
+}
+
+
+enum ERROR_CODE { ALL_IS_OK, CANT_OPEN_FILE, INVALID_CHARACTER, EMPTY_FILE};
+
+ERROR_CODE GetArea(const string & fileName,	vector<string> &area)
+{
+	string sizeArea;
+	string latticeSet;
+	StartInitialArea(latticeSet, sizeArea, area);
+
 	ifstream areaFileInput(fileName);
 	if (areaFileInput.is_open())
 	{
 		string line;
 		while (getline(areaFileInput, line))
 		{
-			if (IsCorrectSymbol(line) && (!wasError))
+			if (IsCorrectSymbol(line))
 			{
-				cout << "File contains an invalid character";
-				area.clear();
-				area.push_back("File contains an invalid character");
-				wasError = true;
+				return ERROR_CODE::INVALID_CHARACTER;
 			}
-			line = "#" + line;
-			if (line.length() < 100)
-			{
-				for (size_t i = line.length(); i < 101; i++)
-				{
-					line += " ";
-					if (i == 100)
-					{
-						line += "#";
-					}
-				}
-			}
-			area.push_back(line + "\n");
+			BaseInitialArea(area, line);
 		}
-		if (area.size() == 1 && !wasError)
+		if (area.size() == 1)
 		{
-			area.clear();
-			area.push_back("emptyFile");
-			wasError = true;
+			return ERROR_CODE::EMPTY_FILE;
 		}
-		if (!wasError)
-		{
-			while (area.size() < 102)
-			{
-				area.push_back("#" + sizeArea + "#" + "\n");
-				if (area.size() == 101)
-				{
-					area.push_back(latticeSet);
-				}
-			}
-		}
+		EndInitialArea(latticeSet, sizeArea, area);
 	}
 	else
 	{
-		cout << "error with opening input file";
-		wasError = true;
-		area.clear();
-		area.push_back("error");
+		return ERROR_CODE::CANT_OPEN_FILE;
 	}
 	areaFileInput.close();
-	return area;
+	return ERROR_CODE::ALL_IS_OK;
 }
 
 void WriteInOutputFile(vector<string> area, const string outputFileName)
@@ -162,28 +172,32 @@ int main(int argc, char* argv[])
 		cout << "Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n'programm.exe <input file> <output file>";
 		return 1;
 	}
+
 	string inputFileName = argv[1];
-	string outputFileName = argv[2];
-	vector< pair<int, int> > startDots;
 	vector<string> area;
-	area = GetArea(inputFileName);
-	if (area[0] == "error")
+
+	switch (GetArea(inputFileName, area))
 	{
-		return 1;
+		case ERROR_CODE::CANT_OPEN_FILE:
+			cout << "cant open file";
+			return 1;
+		case ERROR_CODE::INVALID_CHARACTER:
+			cout << "invalid character";
+			return 1;
+		case ERROR_CODE::EMPTY_FILE:
+			cout << "your input file empty";
+			return 1;
+		default:
+			break;
 	}
-	if (area[0] == "emptyFile")
-	{
-		cout << "your input file empty";
-		return 1;
-	}
+
+	vector< pair<int, int> > startDots;
+	string outputFileName = argv[2];
+
 	if (GetPositionDots(area, startDots).empty())
 	{
 		WriteInOutputFile(area, outputFileName);
 		return 0;
-	}
-	if (area[0] == "File contains an invalid character")
-	{
-		return 1;
 	}
 	startDots = GetPositionDots(area, startDots);
 	area = GetAreaFinish(startDots, area);

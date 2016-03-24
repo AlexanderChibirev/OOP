@@ -24,6 +24,9 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Lav2Task6Var1\ExpandTemplate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\Lav2Task6Var1\FindAndReplace.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ExpandTemplateTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lav2Task6Var1\ExpandTemplate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Lav2Task6Var1\FindAndReplace.cpp">

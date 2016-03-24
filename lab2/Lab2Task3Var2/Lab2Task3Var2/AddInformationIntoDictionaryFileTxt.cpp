@@ -3,13 +3,13 @@
 #include "SearchWordsInDictionary.h"
 #include "AddInformationIntoDictionaryFileTxt.h"
 
-bool AddInformationIntoDictionaryFileTxt(const std::string &dictionaryName, std::map <std::string, std::string> &dictionaryMap)
+bool AddInformationIntoDictionaryFileTxt(const std::string &dictionaryName, std::map <std::string, std::string> &newDictionary)
 {
 	bool wasError = false;
 	std::ofstream dictionary(dictionaryName, std::ios_base::app);
 	if (dictionary.is_open())
 	{
-		for (auto it = dictionaryMap.begin(); it != dictionaryMap.end(); ++it)///вывод на экран
+		for (auto it = newDictionary.begin(); it != newDictionary.end(); ++it)///вывод на экран
 		{
 			dictionary << it->first << "||" << it->second << std::endl;
 		}
