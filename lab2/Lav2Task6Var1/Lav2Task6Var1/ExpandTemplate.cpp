@@ -8,7 +8,7 @@ std::string ExpandTemplate(std::string const& tpl, std::map< std::string, std::s
 	std::vector <std::string> paramsFirstKey;
 	std::map < int, int > positionUsedParams;
 	positionUsedParams[0] = 0;
-	for (auto it = params.begin(); it != params.end(); ++it)///вывод на экран
+	for (auto it = params.begin(); it != params.end(); ++it)
 	{
 		paramsFirstKey.push_back(it->first);
 	}
@@ -22,7 +22,7 @@ std::string ExpandTemplate(std::string const& tpl, std::map< std::string, std::s
 	std::string newTpl = tpl;
 	for (size_t i = 0; i < paramsFirstKey.size(); ++i)
 	{
-		for (auto it = params.begin(); it != params.end(); ++it)///вывод на экран
+		for (auto it = params.begin(); it != params.end(); ++it)
 		{
 			if (it->first == paramsFirstKey[i])
 			{

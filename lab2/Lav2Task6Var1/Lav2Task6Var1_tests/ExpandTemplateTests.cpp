@@ -34,6 +34,16 @@ BOOST_AUTO_TEST_SUITE(ProcessVector_function)
 		params["CC"] = "[cc]";
 		BOOST_CHECK(ExpandTemplate(tpl, params) == "-[aa][bb][cc][cc][c][a][b][c]+");
 	}
+
+	BOOST_AUTO_TEST_CASE(MalovsTest)
+	{
+		std::map< std::string, std::string> params;
+		std::string const tpl = "-AABBCCCCCABC+";
+		params["CC"] = "[cc]";
+		params["B"] = "[b]";
+		params["A"] = "[a]";
+		BOOST_CHECK(ExpandTemplate(tpl, params) == "-[a][a][b][b][cc][cc]C[a][b]C+" );
+	}
 BOOST_AUTO_TEST_SUITE_END()
 
 

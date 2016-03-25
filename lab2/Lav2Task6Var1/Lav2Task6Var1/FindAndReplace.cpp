@@ -10,37 +10,33 @@ std::string FindAndReplace(const std::string & tpl, const std::string & searchSt
 	std::string newText = tpl;
 	size_t position = 0;
 	bool wasSet = false;
-	int count = 0;
 	while ((position = newText.find(searchString, position)) != std::string::npos)
 	{
 		std::string leftPart;
 		std::string rightPart;
+		
 		for (size_t i = 0; i < position; i++)
 		{
 			leftPart += newText[i];
 		}
-		if(count == 0)
+		for (size_t i = leftPart.size() + searchString.size(); i < newText.size(); ++i)
 		{
-			for (size_t i = leftPart.length() + searchString.length(); i < newText.length(); ++i)
-			{
-				rightPart += tpl[i];
-			}
+			rightPart += newText[i];
 		}
-		else
+		bool wasShift = false;
+		for (auto &it : positionUsedParams)
 		{
-			for (size_t i = leftPart.size() + searchString.size(); i < newText.size(); ++i)
+		/*	if (size_t(it.first) > position)
 			{
-				rightPart += newText[i];
-			}
-		}
-		for (auto it = positionUsedParams.begin(); it != positionUsedParams.end(); ++it)
-		{
-			if ((size_t(it->first) <= position) && (size_t(it->second) >= (position + searchString.length() - 1)))
-			{
+				it.first += 
+			}*/
+			if ((size_t(it.first) <= position) && (size_t(it.second) >= (position + searchString.length() - 1)))
+			{	
 				wasSet = true;
 				break;
 			}
 		}
+		
 		if(!wasSet)
 		{
 			newText.clear();
@@ -53,7 +49,6 @@ std::string FindAndReplace(const std::string & tpl, const std::string & searchSt
 			position = position + replaceString.length();
 		}
 		wasSet = false;
-		count++;
 	}
 	return newText;
 }
