@@ -24,36 +24,12 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SearchWordsInDictionary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AddInformationIntoDictionaryFileTxt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WorkWithUser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WriteInDictionaryMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Lab2Task3Var2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SearchWordsInDictionary.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AddInformationIntoDictionaryFileTxt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WorkWithUser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WriteInDictionaryMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

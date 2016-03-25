@@ -1,12 +1,30 @@
-cat||кошка
-cats||кошки
-hello||привет
-job||работа
-кот||cat
-dog||собака
-jump||прыжок
-bye||пока
-пес||dog
-доброе утро||good morning
-car||машина
-пёс||dog
+cat
+кошка
+cats
+кошки
+hello
+привет
+job
+работа
+кот
+cat
+dog
+собака
+jump
+прыжок
+bye
+пока
+пес
+dog
+доброе утро
+good morning
+car
+машина
+пёс
+dog
+world
+мир
+error
+ошибка
+red
+красный
