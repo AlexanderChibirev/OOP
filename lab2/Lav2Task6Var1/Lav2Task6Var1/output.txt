@@ -1,1 +1,1 @@
--[a][a]BB[cc][cc]C[a][b]C+
+-[a][a][b][b][cc]+

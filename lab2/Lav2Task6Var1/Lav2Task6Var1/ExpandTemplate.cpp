@@ -6,8 +6,9 @@
 std::string ExpandTemplate(std::string const& tpl, std::map< std::string, std::string> const& params)
 {
 	std::vector <std::string> paramsFirstKey;
-	std::map < int, int > positionUsedParams;
-	positionUsedParams[0] = 0;
+	std::vector<std::pair<int, int>> positionUsedParamsP;
+	positionUsedParamsP.push_back(std::make_pair(0, 0));
+
 	for (auto it = params.begin(); it != params.end(); ++it)
 	{
 		paramsFirstKey.push_back(it->first);
@@ -26,7 +27,7 @@ std::string ExpandTemplate(std::string const& tpl, std::map< std::string, std::s
 		{
 			if (it->first == paramsFirstKey[i])
 			{
-				newTpl = FindAndReplace(newTpl, it->first, it->second, positionUsedParams);
+				newTpl = FindAndReplace(newTpl, it->first, it->second, positionUsedParamsP);
 			}
 		}
 	}

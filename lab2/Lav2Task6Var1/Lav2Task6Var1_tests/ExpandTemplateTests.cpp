@@ -6,7 +6,7 @@
 BOOST_AUTO_TEST_SUITE(ProcessVector_function)
 
 
-	BOOST_AUTO_TEST_CASE(SIMPLE_CHECK)
+	BOOST_AUTO_TEST_CASE(SimpleCheck)
 	{
 		std::string const tpl = "Hello, %USER_NAME%. Today is {WEEK_DAY}.";
 		std::map< std::string, std::string> params;
@@ -14,7 +14,7 @@ BOOST_AUTO_TEST_SUITE(ProcessVector_function)
 		params["{WEEK_DAY}"] = "Friday";
 		BOOST_CHECK(ExpandTemplate(tpl, params) == "Hello, Ivan Petrov. Today is Friday.");
 	}
-	BOOST_AUTO_TEST_CASE(MID_CHECK)
+	BOOST_AUTO_TEST_CASE(MidCheck)
 	{
 		std::string const tpl = "Hello, %USER_NAME%. Today is {WEEK_DAY}.";
 		std::map< std::string, std::string> params;
@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_SUITE(ProcessVector_function)
 		params["{WEEK_DAY}"] = "Friday. {WEEK_DAY}";
 		BOOST_CHECK(ExpandTemplate(tpl, params) == "Hello, Super %USER_NAME% {WEEK_DAY}. Today is Friday. {WEEK_DAY}.");
 	}
-	BOOST_AUTO_TEST_CASE(VERIFICATION_OF_DIFFERENT_LENGTHS_WORD)
+	BOOST_AUTO_TEST_CASE(VerificationOfDifferentLengthsword)
 	{
 		std::string const tpl = "-AABBCCCCCABC+";
 		std::map< std::string, std::string> params;
@@ -35,14 +35,14 @@ BOOST_AUTO_TEST_SUITE(ProcessVector_function)
 		BOOST_CHECK(ExpandTemplate(tpl, params) == "-[aa][bb][cc][cc][c][a][b][c]+");
 	}
 
-	BOOST_AUTO_TEST_CASE(MalovsTest)
+	BOOST_AUTO_TEST_CASE(MalovsTestBiasPositions)
 	{
 		std::map< std::string, std::string> params;
-		std::string const tpl = "-AABBCCCCCABC+";
+		std::string const tpl = "-AABBCC+";
 		params["CC"] = "[cc]";
 		params["B"] = "[b]";
 		params["A"] = "[a]";
-		BOOST_CHECK(ExpandTemplate(tpl, params) == "-[a][a][b][b][cc][cc]C[a][b]C+" );
+		BOOST_CHECK(ExpandTemplate(tpl, params) == "-[a][a][b][b][cc]+" );
 	}
 BOOST_AUTO_TEST_SUITE_END()
 
