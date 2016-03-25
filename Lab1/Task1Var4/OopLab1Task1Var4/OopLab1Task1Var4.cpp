@@ -24,7 +24,6 @@ void WriteInOutputFile(ofstream & outputFile, const string & lineStr, bool &meth
 }
 bool FindAndReplace(const string & lineStr, string const &searchStr,  string const &replaceStr, bool &methodFind, ofstream & outputFile)
 {
-	bool wasError = false;
 	size_t position = 0;
 	size_t afterChangingPosition = 0;
 	while ((position = lineStr.find(searchStr, position)) != std::string::npos)
@@ -41,59 +40,56 @@ bool FindAndReplace(const string & lineStr, string const &searchStr,  string con
 	}
 	if (!outputFile.flush())
 	{
-		cout << "is not enough space on the disc\nFree up disk space, please";
-		wasError = true;
+		
+		return false;
 	};
-	return wasError;
+	return true;
 }
-
-bool BeginProgramm(char const *inputFileName, string const &outputFileName, string const &searchStr, string const &replaceStr)
+enum class ErrorCode 
+{	
+	FILE_SIZE_LARGER_THAN_2GB,
+	CANT_OPEN_INPUT_FILE, 
+	IS_NOT_ENOUGH_SPACE_ON_THE_DISC,
+	WITHOUT_ERROR
+};
+ErrorCode BeginProgramm(char const *inputFileName, string const &outputFileName, string const &searchStr, string const &replaceStr)
 {
-	bool wasError = false;
 	struct stat fileSize;
 	stat(inputFileName, &fileSize);
-
 	if (fileSize.st_size > 2147483647)
-	{
-		cout << "file size larger than 2 GB\nUse a file size less then 2GB please\n";
-		wasError = true;
+	{	
+		return ErrorCode::FILE_SIZE_LARGER_THAN_2GB;
 	}
-	if (!wasError)
+	
+	ifstream inputFile;
+	inputFile.open(inputFileName);
+	if (!inputFile.is_open())
 	{
-		ifstream inputFile;
-		ofstream outputFile;
+		cout << "Failed to open input file for reading\n";
+	}
 
-		string lineStr;
-		bool methodFind;
+	ofstream outputFile;
+	outputFile.open(outputFileName);
 
-		inputFile.open(inputFileName);
-		if (!inputFile.is_open())
+	string lineStr;
+	bool methodFind;
+	while (!inputFile.eof())
+	{
+		getline(inputFile, lineStr);
+		if (searchStr.empty() || replaceStr.empty() || lineStr.empty())
 		{
-			cout << "Failed to open input file for reading\n";
-			wasError = true;
+			methodFind = false;
+			outputFile << lineStr << endl;
 		}
-		if (!wasError)
+		else
 		{
-			outputFile.open(outputFileName);
-			if (!wasError)
+			if (!FindAndReplace(lineStr, searchStr, replaceStr, methodFind, outputFile))
 			{
-				while (!inputFile.eof())
-				{
-					getline(inputFile, lineStr);
-					if (searchStr.empty() || replaceStr.empty() || lineStr.empty())
-					{
-						methodFind = false;
-						outputFile << lineStr << endl;
-					}
-					else
-					{
-						wasError = FindAndReplace(lineStr, searchStr, replaceStr, methodFind, outputFile);
-					}
-				}
+				return ErrorCode::IS_NOT_ENOUGH_SPACE_ON_THE_DISC;
 			}
 		}
 	}
-	return wasError;
+	return ErrorCode::WITHOUT_ERROR;
 }
 
 int main(int argc, char** argv)
@@ -107,11 +103,20 @@ int main(int argc, char** argv)
 	char* inputFileName = argv[1];
 	string outputFileName = argv[2];
 	string searchStr = argv[3];
-	string replaceStr = argv[4];	
-	if (BeginProgramm(inputFileName, outputFileName, searchStr, replaceStr))
+	string replaceStr = argv[4];
+	switch (BeginProgramm(inputFileName, outputFileName, searchStr, replaceStr))
 	{
-		cout << "This program is completed with an error" << endl;
-		return 1;
+		case ErrorCode::FILE_SIZE_LARGER_THAN_2GB:
+			cout << "file size larger than 2 GB\nUse a file size less then 2GB please\n";
+			return 1;
+		case ErrorCode::CANT_OPEN_INPUT_FILE:
+			cout << "Failed to open input file for reading\n";
+			return 1;
+		case ErrorCode::IS_NOT_ENOUGH_SPACE_ON_THE_DISC:
+			cout << "is not enough space on the disc\nFree up disk space, please";
+			return 1;
+		default:
+			break;
 	}
 	return 0;
 }
