@@ -27,19 +27,15 @@ std::string FindAndReplace(const std::string & tpl, const std::string & searchSt
 
 		for (auto &it : positionUsedParamsP)
 		{
-			if (size_t(it.first) > position)
-			{
-				it.first += replaceString.length() - 1;
-				it.second += replaceString.length() - 1;
-			}
-		}
-
-		for (auto &it : positionUsedParamsP)
-		{
 			if ((size_t(it.first) <= position) && (size_t(it.second) >= (position + searchString.length() - 1)))
 			{
 				wasSet = true;
 				break;
+			}
+			if (position < size_t(it.first))
+			{
+				it.first += replaceString.length() - 1;
+				it.second += replaceString.length() - 1;
 			}
 		}
 
@@ -52,7 +48,7 @@ std::string FindAndReplace(const std::string & tpl, const std::string & searchSt
 		}
 		else
 		{
-			position = position + replaceString.length();
+			position++;
 		}
 		wasSet = false;
 	}
