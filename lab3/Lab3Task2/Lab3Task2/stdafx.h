@@ -15,6 +15,9 @@
 #include <algorithm>
 #include <map>
 #include <string>
+#include <sstream>
+#include <functional>
+
 
 using namespace std;
 
@@ -22,8 +25,6 @@ struct ByLength : public std::binary_function<string, string, bool>
 {
 	bool operator()(const string& lhs, const string& rhs) const
 		{
-			//int lhsAscii = atoi(lhs.c_str());
-			//int rhsAscii = atoi(rhs.c_str());
 			string lhsForCmp = lhs;
 			string rhsForCmp = rhs;
 			if (lhs.length() < rhs.length())
@@ -42,7 +43,6 @@ struct ByLength : public std::binary_function<string, string, bool>
 			}
 			int lhsAscii = 0;
 			int rhsAscii = 0;
-			//inputStr.erase(0, 4);
 			for (auto &it : lhsForCmp)
 			{
 				lhsAscii += int(it);

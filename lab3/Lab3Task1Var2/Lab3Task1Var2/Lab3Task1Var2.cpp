@@ -11,12 +11,12 @@ using namespace std;
 int main()
 {
 	CCar car;
-	CWorkWithUI remoteControl(car, cin, cout);
+	CWorkWithUI workWithUI(car, cin, cout);
 
 	while (!cin.eof() && !cin.fail())
 	{
 		cout << "> ";
-		if (!remoteControl.HandleCommand())
+		if (!workWithUI.HandleCommand())
 		{
 			cout << "Unknown command!" << endl;
 		}
