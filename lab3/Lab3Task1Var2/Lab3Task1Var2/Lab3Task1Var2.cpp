@@ -49,7 +49,12 @@ void WorkWithUser()
 			switch (fnv1a(inputStr.c_str()))
 			{
 				case fnv1a("info"): 
-					cout << car.GetInfo();
+					//cout << car.GetInfo();
+					//	info +=  "Engine car state " + GetEngineState() + "\n";
+					//	info += "Car moving in towards " + GetDirection() + "\n";
+					//	info += "Car have speed " + std::to_string(m_speed) + " km/s" + "\n";
+					//	info += "Car have gearshift " + std::to_string(m_gearshift) + "\n";
+					//	return info;
 					break;
 				case fnv1a("engineon"): 
 					if (!car.TurnOnEngine())
