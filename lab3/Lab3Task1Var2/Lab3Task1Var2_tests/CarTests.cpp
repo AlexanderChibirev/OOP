@@ -200,7 +200,7 @@ BOOST_AUTO_TEST_SUITE (Car_class)
 				BOOST_CHECK_EQUAL(validIncreasedSpeedCar.GetDirection(), MOVE_UP);//проверяем, что авто находится в движении
 				validIncreasedSpeedCar.SetGear(-1);//задаем передачу
 				BOOST_CHECK_EQUAL(validIncreasedSpeedCar.GetGear(), 0);//проверяем, что передача осталась преждней
-				BOOST_CHECK_EQUAL(validIncreasedSpeedCar.GetDirection(), 0);
+				BOOST_CHECK_EQUAL(validIncreasedSpeedCar.GetDirection(), MOVE_UP);//и направление не поменялось
 			}
 			
 		BOOST_AUTO_TEST_SUITE_END()
