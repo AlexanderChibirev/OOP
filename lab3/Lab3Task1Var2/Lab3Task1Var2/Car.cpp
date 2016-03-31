@@ -68,7 +68,7 @@ bool CCar::SetGear(int gear)
 		{
 			wasChange = true;
 		}
-		else if (((gear == -1) && ((m_gearshift == 0) && (m_moveDirection!=MOVE_UP)) || (m_gearshift == 1 && m_speed == 0))|| (gear == 0) && m_gearshift == 0)//тут не проходят
+		else if ((gear == -1) && ((m_gearshift == 0) && (m_moveDirection!=MOVE_UP) || (m_gearshift == 1 && m_speed == 0))|| (gear == 0) && m_gearshift == 0)//тут не проходят
 		{
 			m_gearshift = gear;
 			m_moveDirection = STAYING;
