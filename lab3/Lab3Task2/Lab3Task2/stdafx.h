@@ -36,58 +36,11 @@ enum ErrorCode {
 	INCORRECT_ENTER
 };
 
-struct ByLength : public std::binary_function<string, string, bool>
+struct ByAlphabet : public std::binary_function<std::string, std::string, bool>
 {
-	bool operator()(const string& lhs, const string& rhs) const
-	{
-		string lhsForCmp = lhs;
-		string rhsForCmp = rhs;
-		if (lhs.length() < rhs.length()) //AA < AAB
-		{
-			while (rhsForCmp.length() != lhs.length())
-			{
-				rhsForCmp.erase(lhs.length(), 1);
-			}
-		}
-		else if (lhs.length() > rhs.length()) //AAB > AA
-		{
-			while (lhsForCmp.length() != rhs.length())
-			{
-				lhsForCmp.erase(rhs.length(), 1);
-			}
-		}
-		int lhsAscii = 0;
-		int rhsAscii = 0;
-		/*for (size_t i = 0; i < lhsForCmp.length(); ++i)
-		{
-		if()
-
-
-		}*/
-		for (auto &it : lhsForCmp)
-		{
-			lhsAscii += int(it);
-			if (int(it) >= 97)
-			{
-				lhsAscii -= 32;
-			}
-		}
-		for (auto &it : rhsForCmp)
-		{
-			rhsAscii += int(it);
-			if (int(it) >= 97)
-			{
-				rhsAscii -= 32;
-			}
-		}
-		if (lhsAscii == rhsAscii)
-		{
-			return lhs < rhs;
-		}
-		return lhs < rhs;
-	}
+	bool const operator () (const std::string &str1, const std::string &str2) { return _stricoll(str1.c_str(), str2.c_str()) < 0; }
 };
 
-typedef map <string, string, ByLength> SortMap;
+typedef map <string, string, ByAlphabet> SortMap;
 
 // TODO: reference additional headers your program requires here

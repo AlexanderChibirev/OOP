@@ -20,12 +20,6 @@ using namespace std;
 
 int main()
 {
-	vector <string> myvector;
-	sort(myvector.begin(), myvector.begin());
-
-
-
-
 	CCalculator calculator;
 	CWorkWithUI workWithUI(calculator, cin, cout);
 	while (!cin.eof() && !cin.fail())

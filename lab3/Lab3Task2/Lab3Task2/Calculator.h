@@ -27,8 +27,8 @@ public:
 	string GetFn(string fnName);
 	string GetVariableValue(string varName) const;
 private:
-	map <string, string, ByLength> m_variableNameList;
-	map <string, SecondMapInformation, ByLength> m_functionNameList;
+	SortMap m_variableNameList;
+	map <string, SecondMapInformation, ByAlphabet> m_functionNameList;
 	ErrorCode m_errorCode;
 };
 
