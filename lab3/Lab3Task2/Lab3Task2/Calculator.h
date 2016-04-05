@@ -1,13 +1,34 @@
 #pragma once
+
+
 class CCalculator
 {
 public:
 	CCalculator();
 	~CCalculator();
-	void PutInfoInVariableList(string variable, string value);
-	void PrintVars();
+
+	ErrorCode CheckInfoInVariableList(string variable);
+	ErrorCode DeclareVariable(string variable);
+	ErrorCode PutInfoInVariableList(string variable, string value);
+	
+	bool CheckVarOnCoincidence(string variable);
+	bool CCalculator::CheckFunctionrOnCoincidence(string functionName);
+	bool IsDoubleNumber(string const &str);
+	bool  CCalculator::CheckValueForPrint(string);
+	bool CCalculator::CheckNameFn(const string &fnName, const string &firstValue, const string &operand, const string & secondValue);
+
+	void  PutValueInVariableList(string variable, string value);
+	void Print(string secondVar);
+	void PrintVars() const;
+	void Printfns();
+
+	double Calculation(double firstValue, string operand, double secondValue);
+		
+	string GetFn(string fnName);
+	string GetVariableValue(string varName) const;
 private:
 	map <string, string, ByLength> m_variableNameList;
-	map <string, string, ByLength> m_functionNameList;
+	map <string, SecondMapInformation, ByLength> m_functionNameList;
+	ErrorCode m_errorCode;
 };
 
