@@ -19,4 +19,6 @@
 #include <windows.h>
 #include <math.h>
 #include <cmath> 
+#include <algorithm>
+#include <iterator>
 // TODO: reference additional headers your program requires here
