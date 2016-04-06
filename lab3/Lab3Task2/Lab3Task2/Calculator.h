@@ -12,12 +12,12 @@ public:
 	ErrorCode PutInfoInVariableList(string variable, string value);
 	
 	bool CheckVarOnCoincidence(string variable);
-	bool CCalculator::CheckFunctionrOnCoincidence(string functionName);
+	bool CheckFunctionrOnCoincidence(string functionName);
 	bool IsDoubleNumber(string const &str);
-	bool  CCalculator::CheckValueForPrint(string);
-	bool CCalculator::CheckNameFn(const string &fnName, const string &firstValue, const string &operand, const string & secondValue);
+	bool  CheckValueForPrint(string);
+	bool CheckNameFn(const string &fnName, const string &firstValue, const string &operand, const string & secondValue);
 
-	void  PutValueInVariableList(string variable, string value);
+	void PutValueInVariableList(string variable, string value);
 	void Print(string secondVar);
 	void PrintVars() const;
 	void Printfns();

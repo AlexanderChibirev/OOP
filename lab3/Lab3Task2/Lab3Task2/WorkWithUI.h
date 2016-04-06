@@ -16,7 +16,7 @@ private:
 	bool Print(std::istream & args);
 	bool Printvars(std::istream & args);
 	bool Printfns(std::istream & args);
-	void CWorkWithUI::PrintError(const string &fnName, const string &firstValue, const string &operand, const string & secondValue);
+	void PrintError(const string &fnName, const string &firstValue, const string &operand, const string & secondValue);
 	void SplitName(string &firstValue, string &operand, string &secondValue,const int &posForNameSplit, const int &posForOperandSplit, const string &line);
 private:
 	typedef std::map<std::string, std::function<bool(std::istream & args)>> ActionMap;
