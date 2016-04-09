@@ -51,11 +51,14 @@ BOOST_AUTO_TEST_SUITE(ProcessVector_function)
 
 	BOOST_AUTO_TEST_CASE(MalovsTestHard)
 	{
-		BOOST_CHECK_EQUAL(ExpandTemplate("CCCAAA",
-		{ { "CC", "CCC" },
+		BOOST_CHECK_EQUAL(ExpandTemplate("BCCCGAAABà",
+		{ { "B","[b]" },
+		{ "G","{g}" },
+		{ "à","[a]" },
+		{ "CC", "CCC" },
 		{ "C", "CCCC" },
 		{"AA", "AAA"},
-		{ "A", "AAAA" } }), "CCCCCCCAAAAAAA");
+		{ "A", "AAAA" } }), "[b]CCCCCCC{g}AAAAAAA[b][a]");
 	}
 BOOST_AUTO_TEST_SUITE_END()
 

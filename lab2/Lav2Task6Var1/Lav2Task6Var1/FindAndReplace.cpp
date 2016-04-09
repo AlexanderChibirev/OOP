@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "FindAndReplace.h"
-std::string FindAndReplace(const std::string & tpl, const std::string & searchString, const std::string & replaceString, std::vector<std::pair<int, int>> &positionUsedParamsP)
+std::string FindAndReplace(const std::string & tpl, const std::string & searchString, const std::string & replaceString, std::vector<std::pair<int, int>> &positionUsedParams)
 {
 	if (searchString.empty())
 	{
@@ -25,7 +25,7 @@ std::string FindAndReplace(const std::string & tpl, const std::string & searchSt
 			rightPart += newText[i];
 		}
 
-		for (auto &it : positionUsedParamsP)
+		for (auto &it : positionUsedParams)
 		{
 			if ((size_t(it.first) <= position) && (size_t(it.second) >= (position + searchString.length() - 1)))
 			{
@@ -43,7 +43,7 @@ std::string FindAndReplace(const std::string & tpl, const std::string & searchSt
 		{
 			newText.clear();
 			newText.append(leftPart).append(replaceString).append(rightPart);
-			positionUsedParamsP.push_back(std::make_pair(position, position + replaceString.length() - 1));
+			positionUsedParams.push_back(std::make_pair(position, position + replaceString.length() - 1));
 			position = position + replaceString.length();
 		}
 		else

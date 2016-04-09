@@ -4,46 +4,11 @@
 
 #include "stdafx.h"
 #include <windows.h>
+#include "AddInformationIntoDictionaryFileTxt.h"
+#include "SearchWordsInDictionary.h"
+#include "WriteInDictionaryMap.h"
 
 
-
-using namespace std;
-
-typedef map <string, string> SSMap;
-
-void WorkWithUser(string &searchString, string &wordTranslate, SSMap &dictionaryMap, string &searchStringToLower, SSMap dictionaryNewMap);
-bool WriteInDictionaryMap(const string &dictionaryName, SSMap &dictionaryMap);
-string SearchWordsInDictionary(const string &searchString, SSMap &dictionaryMap, string &searchStringToLower);
-void AddInformationIntoDictionaryFileTxt(SSMap &newDictionary);
-
-bool WriteInDictionaryMap(const string &dictionaryName, SSMap &dictionaryMap)
-{
-	string lineStr;
-	ifstream dictionary(dictionaryName);
-	if (dictionary.is_open())
-	{
-		bool wasWord = false;
-		int count = 1;
-		string firstWord;
-		while (getline(dictionary, lineStr))
-		{
-			if (count % 2 == 0)
-			{
-				dictionaryMap[firstWord] = lineStr;
-			}
-			else
-			{
-				firstWord = lineStr;
-			}
-			++count;
-		}
-	}
-	else
-	{
-		return false;
-	}
-	return true;
-}
 
 void WorkWithUser( string &searchString,  string &wordTranslate, SSMap &dictionaryMap, string &searchStringToLower, SSMap dictionaryNewMap)
 {
@@ -95,44 +60,8 @@ void WorkWithUser( string &searchString,  string &wordTranslate, SSMap &dictiona
 	}
 }
 
-string SearchWordsInDictionary(const string &searchString, SSMap &dictionaryMap, string &searchStringToLower)
-{
-	string lineStrToLower;
-	string wordTranslate;
-	for (auto &it : dictionaryMap)///вывод на экран
-	{
-		string firstToLower = it.first;
-		string secondToLower = it.second;
-		transform(firstToLower.begin(), firstToLower.end(), firstToLower.begin(), tolower);
-		transform(secondToLower.begin(), secondToLower.end(), secondToLower.begin(), tolower);
-		if (firstToLower == searchStringToLower)
-		{
-			wordTranslate += it.second + ", ";
-		}
-		if (secondToLower == searchStringToLower)
-		{
-			wordTranslate += it.first + ", ";
-		}
-	}
-	if (!wordTranslate.empty())
-	{
-		wordTranslate.pop_back();
-		wordTranslate.pop_back();
-	}
-	return wordTranslate;
-}
 
-void AddInformationIntoDictionaryFileTxt(SSMap &newDictionary)
-{
-	ofstream dictionary("dictionary.txt", ios_base::app);
-	if (dictionary.is_open())
-	{
-		for (auto &it : newDictionary)
-		{
-			dictionary << it.first << endl << it.second << endl;
-		}
-	}
-}
+
 
 int _tmain()
 {
@@ -153,8 +82,7 @@ int _tmain()
 		return 1;
 	}
 	WorkWithUser(searchString, wordTranslate, dictionaryMap, searchStringToLower, dictionaryNewMap);
-	
-	
+
 	return 0;
 }
 
