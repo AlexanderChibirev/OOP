@@ -5,8 +5,6 @@
 
 using namespace std;
 
-
-
 int main(int argc, char** argv)
 {
 	
@@ -20,6 +18,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
+	
 	string inputFileName = argv[1];
 	string tpl;
 
