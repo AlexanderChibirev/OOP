@@ -10,40 +10,24 @@ CCalculator::CCalculator()
 CCalculator::~CCalculator()
 {
 }
-
-ErrorCode CCalculator::CheckInfoInVariableList(string var)
+bool CCalculator::IsDeclareVariable(const string & variable)
 {
-	if(!isalpha(var[0]))
+	if(!IsVariableDefine(variable) && !IsFunctionDefine(variable))
 	{
-		return FIRST_SYMBOL_IS_NOT_LETTER;
+		m_variableNameList[variable] = NAN;
+		return false;
 	}
-	if(!CheckVarOnCoincidence(var) || !CheckFunctionrOnCoincidence(var))
-	{
-		return VAR_HAS_ALREADY_BEEN_DECLARED;
-	}
-	return IS_ALL_OK;
-}
-
-ErrorCode CCalculator::DeclareVariable(string variable)
-{
-	m_errorCode = CheckInfoInVariableList(variable);
-	if(m_errorCode == IS_ALL_OK)
-	{
-		m_variableNameList[variable] = "nan";
-	}
-	return m_errorCode;
+	return true;
 }
 
 void  CCalculator::PrintVars() const
 {
 	for (auto &it : m_variableNameList)
 	{
-		if(it.second != "nan")
+		if(it.second != NAN)
 		{
-			std::string::size_type sz;
-			double secondEl = std::stod(it.second, &sz);
 			cout << it.first << ":";
-			printf("%.2f\n", secondEl);
+			printf("%.2f\n", it.second);
 		}
 		else
 		{
@@ -52,13 +36,11 @@ void  CCalculator::PrintVars() const
 	}
 }
 
-void CCalculator::Print(string var)
+void CCalculator::Print(double var)
 {
-	if (var != "nan")
+	if (var != NAN)
 	{
-		std::string::size_type sz;
-		double secondEl = std::stod(var, &sz);
-		printf("%.2f\n", secondEl);
+		printf("%.2f\n", var);
 	}
 	else
 	{
@@ -66,107 +48,74 @@ void CCalculator::Print(string var)
 	}
 }
 
-bool CCalculator::CheckValueForPrint(string varName) 
+bool CCalculator::CheckValueForPrint(const string & varName) 
 {
 	if (m_variableNameList.find(varName) != m_variableNameList.end())
 	{
-		string secondVar = m_variableNameList.find(varName)->second;
-		Print(secondVar);
+		Print(m_variableNameList.find(varName)->second);
 		return true;
 	}
 	else if (m_functionNameList.find(varName) != m_functionNameList.end())
 	{
-		string secondVar = GetFn(varName);
-		Print(secondVar);
+		Print(GetFn(varName));
 		return true;
 	}
 	return false;
 }
 
-bool CCalculator::CheckVarOnCoincidence(string variable)
+bool CCalculator::IsVariableDefine(const string & variable)
 {
 	if( m_variableNameList.find(variable) != m_variableNameList.end() )
 	{
-		return false;
+		return true;
 	}
-	return true;
+	return false;
 }
 
-bool CCalculator::CheckFunctionrOnCoincidence(string functionName)//is function define()
+bool CCalculator::IsFunctionDefine(const string & functionName)
 {
 	if (m_functionNameList.find(functionName) != m_functionNameList.end())
 	{
-		return false;//если встретили
+		return true;//если встретили
 	}
-	return true;//если не встретили такую же переменную
+	return false;//если не встретили такую же переменную
 }
 
-void  CCalculator::PutValueInVariableList(string variable, string value)//set variable value
+void  CCalculator::SetVariableValue(const string & variable, double value)
 {
 	m_variableNameList[variable] = value;
 }
 
-bool CCalculator::IsDoubleNumber(string const &str)
+bool CCalculator::PutInfoInVariableList(const string &variable, const string &value)
 {
-	int countPoint = 0;
-	for (auto &it : str)
+	if(IsFunctionDefine(value))
 	{
-		if (it == '.')
-		{
-			countPoint++;
-		}
-		else if(!isdigit(it))
-		{
-			return false;
-		}
+		SetVariableValue(variable, GetFn(value));
+		return true;
 	}
-	if (countPoint > 1 || str[0] == '.' || str[str.length()-1] == '.')
+	else if(IsVariableDefine(value))
 	{
-		return false;
+		SetVariableValue(variable, m_variableNameList.find(value)->second);
+		return true;
 	}
-	return true;
-}
-
-ErrorCode CCalculator::PutInfoInVariableList(string variable, string value)
-{
-	m_errorCode = CheckInfoInVariableList(variable);
-	if (m_errorCode == VAR_HAS_ALREADY_BEEN_DECLARED || m_errorCode == IS_ALL_OK )
+	else 
 	{
-		if(IsDoubleNumber(value))
-		{
-			PutValueInVariableList(variable, value);
-		}
-		else
-		{
-			m_errorCode = CheckInfoInVariableList(value);
-			if(!CheckFunctionrOnCoincidence(value))
-			{
-				PutValueInVariableList(variable, GetFn(value));
-				return m_errorCode;
-			}
-			if(!CheckVarOnCoincidence(value))
-			{
-				PutValueInVariableList(variable, m_variableNameList.find(value)->second);
-				return m_errorCode;
-			}
-			m_errorCode = INCORRECT_ENTER;
-		}
+		SetVariableValue(variable, atof(value.c_str()));
+		return true;
 	}
-	return m_errorCode;
+	return false;
 }
 
 void CCalculator::Printfns()
 {
 	for (auto &it : m_functionNameList)
 	{
-		std::string::size_type sz;
-		double secondEl = std::stod(GetFn(it.first), &sz);
 		cout << it.first << ":";
-		printf("%.2f\n", secondEl);
+		printf("%.2f\n", GetFn(it.first));
 	}
 }
 
-double CCalculator::Calculation(double firstValue, string operand, double secondValue)
+double CCalculator::Calculation(double firstValue, const string & operand, double secondValue)
 {
 	if (operand == "+")
 	{
@@ -190,7 +139,7 @@ double CCalculator::Calculation(double firstValue, string operand, double second
 bool CCalculator::CheckNameFn(const string &fnName, const string &firstValue, const string &operand, const string & secondValue)
 {
 	SecondMapInformation info;
-	if (CheckInfoInVariableList(firstValue) == VAR_HAS_ALREADY_BEEN_DECLARED && CheckInfoInVariableList(secondValue) == VAR_HAS_ALREADY_BEEN_DECLARED)
+	if (IsVariableDefine(firstValue) || IsFunctionDefine(firstValue) && IsVariableDefine(secondValue) || IsFunctionDefine(secondValue))
 	{
 		info.firstVal = firstValue;
 		info.operand = operand;
@@ -201,45 +150,42 @@ bool CCalculator::CheckNameFn(const string &fnName, const string &firstValue, co
 	return false;
 }
 
-string CCalculator::GetFn(string fnName)
+double CCalculator::GetFn(const string & fnName)
 {
 	SecondMapInformation information;
 	information = m_functionNameList.find(fnName)->second;
-	string firstValueStr;
-	string secondValueStr;
-	if(!CheckVarOnCoincidence(information.firstVal))
+	double firstValue;
+	double secondValue;
+	if(IsVariableDefine(information.firstVal))
 	{
-		firstValueStr = GetVariableValue(information.firstVal);
+		firstValue = GetVariableValue(information.firstVal);
 	}
 	else
 	{
-		firstValueStr = GetFn(information.firstVal);
+		firstValue = GetFn(information.firstVal);
 	}
-	if (!CheckVarOnCoincidence(information.secondVal))
+	if (IsVariableDefine(information.secondVal))
 	{
-		secondValueStr = GetVariableValue(information.secondVal);
+		secondValue = GetVariableValue(information.secondVal);
 	}
 	else
 	{
-		secondValueStr = GetFn(information.secondVal);
+		secondValue = GetFn(information.secondVal);
 	}
 	string operandStr = information.operand;
-	if (firstValueStr == "nan" || secondValueStr == "nan")
+	if (firstValue == NAN || secondValue == NAN)
 	{
-		return "nan";
+		return NAN;
 	}
-	std::string::size_type sz;
 	if(operandStr == "funWithOneValue")
 	{
-		return firstValueStr;
+		return firstValue;
 	}
-	double firstDouble = std::stod(firstValueStr, &sz);
-	double secondDouble = std::stod(secondValueStr, &sz);
-	return to_string(Calculation(firstDouble, operandStr, secondDouble));
+	return Calculation(firstValue, operandStr, secondValue);
 }
 
 
-string CCalculator::GetVariableValue(string varName) const
+double CCalculator::GetVariableValue(const string & varName) const
 {
 	return m_variableNameList.find(varName)->second;
 }

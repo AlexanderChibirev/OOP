@@ -43,14 +43,12 @@ bool CWorkWithUI::Var(std::istream & args)
 {
 	string line;
 	args >> line;
-	ErrorCode errorCode;
-	errorCode = m_calculator.DeclareVariable(line);
-	if (errorCode == FIRST_SYMBOL_IS_NOT_LETTER)
+	if (!isalpha(line[0]))
 	{
 		cout << "first symbol variable name is not letter, variable name must not start with a digit\n";
 		return false;
 	}
-	else if(errorCode == VAR_HAS_ALREADY_BEEN_DECLARED)
+	else if(m_calculator.IsDeclareVariable(line))
 	{
 		cout << "it's variable has already been declared\n";
 	}
@@ -73,6 +71,28 @@ bool  CWorkWithUI::Print(std::istream & args)
 	return true;
 }
 
+bool CWorkWithUI::IsCorrectValue(string const &str)
+{
+	int countPoint = 0;
+	for (auto &it : str)
+	{
+		if (it == '.')
+		{
+			countPoint++;
+		}
+		else if (!isdigit(it))
+		{
+			return false;
+		}
+	}
+	if (countPoint > 1 || str[0] == '.' || str[str.length() - 1] == '.')
+	{
+		return false;
+	}
+	return true;
+}
+
+
 bool CWorkWithUI::Let(std::istream & args)
 {
 	string line;
@@ -87,11 +107,18 @@ bool CWorkWithUI::Let(std::istream & args)
 	variable.append(line, 0, posForSplit);
 	string value;
 	value.append(line, posForSplit+1, line.length());
-	ErrorCode errorCode;
-	errorCode = m_calculator.PutInfoInVariableList(variable, value);
-	if(errorCode == INCORRECT_ENTER)
+	if (!isalpha(variable[0]))
 	{
-		cout << "incorrect entry, read help please\n";//добавить функцию которая выводит запись о том, как правильно вводить данные
+		cout << "First symbol variable name is not letter, variable name must not start with a digit\nRead help please\n";
+		return false;
+	}
+	if (IsCorrectValue(value))
+	{
+		m_calculator.PutInfoInVariableList(variable, value);
+	}
+	else
+	{
+		cout << "Incorrect entry, read help please\n";
 	}
 	return true;
 }
