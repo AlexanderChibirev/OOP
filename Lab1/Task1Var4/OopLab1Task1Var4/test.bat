@@ -31,11 +31,15 @@ fc /b output4.txt standard/emptyReplace.txt
 IF ERRORLEVEL 1 GOTO testFailed
 
 echo OK
+pause 
 exit /B
 
 :testFailed
 ECHO Testing failed
+pause
 exit /B
 
 :err
 echo Usage: test.bat <Path to %program%>
+
+pause

@@ -1,5 +1,7 @@
 #pragma once
 #include <boost/noncopyable.hpp>
+#include <iostream>
+#include "string"
 
 class CCalculator;
 

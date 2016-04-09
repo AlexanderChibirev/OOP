@@ -92,7 +92,7 @@ bool CCalculator::CheckVarOnCoincidence(string variable)
 	return true;
 }
 
-bool CCalculator::CheckFunctionrOnCoincidence(string functionName)
+bool CCalculator::CheckFunctionrOnCoincidence(string functionName)//is function define()
 {
 	if (m_functionNameList.find(functionName) != m_functionNameList.end())
 	{
@@ -101,7 +101,7 @@ bool CCalculator::CheckFunctionrOnCoincidence(string functionName)
 	return true;//если не встретили такую же переменную
 }
 
-void  CCalculator::PutValueInVariableList(string variable, string value)
+void  CCalculator::PutValueInVariableList(string variable, string value)//set variable value
 {
 	m_variableNameList[variable] = value;
 }

@@ -126,44 +126,31 @@ bool CWorkWithUI::Fn(std::istream & args)
 	string secondValue;
 	int posForOperandSplit;
 	posForOperandSplit = line.find("+");
-	if (posForOperandSplit == std::string::npos)
+	if ((posForOperandSplit = line.find("+")) != std::string::npos)
 	{
-		posForOperandSplit = line.find("-");
-		if (posForOperandSplit == std::string::npos)
-		{
-			posForOperandSplit = line.find("*");
-			if (posForOperandSplit == std::string::npos)
-			{
-				posForOperandSplit = line.find("/");
-				if (posForOperandSplit == std::string::npos)
-				{
-					string var;
-					var.append(line, posForNameSplit+1, line.length());
-					//получим значение секонд от имени функции разобьем ее на фест секон операнд и ввызовем задать функцию
-					PrintError(fnName, var, "funWithOneValue", var);
-				}
-				else 
-				{
-					SplitName(firstValue, operand, secondValue, posForNameSplit, posForOperandSplit, line);
-					PrintError(fnName, firstValue, operand, secondValue);
-				}
-			}
-			else 
-			{
-				SplitName(firstValue, operand, secondValue, posForNameSplit, posForOperandSplit, line);
-				PrintError(fnName, firstValue, operand, secondValue);
-			}
-		}
-		else
-		{
-			SplitName(firstValue, operand, secondValue, posForNameSplit, posForOperandSplit, line);
-			PrintError(fnName, firstValue, operand, secondValue);
-		}
+		SplitName(firstValue, operand, secondValue, posForNameSplit, posForOperandSplit, line);
+		PrintError(fnName, firstValue, operand, secondValue);	
 	}
-	else
+	else if ((posForOperandSplit = line.find("-")) != std::string::npos)
 	{
 		SplitName(firstValue, operand, secondValue, posForNameSplit, posForOperandSplit, line);
 		PrintError(fnName, firstValue, operand, secondValue);
+	}
+	else if ((posForOperandSplit = line.find("*")) != std::string::npos)
+	{
+		SplitName(firstValue, operand, secondValue, posForNameSplit, posForOperandSplit, line);
+		PrintError(fnName, firstValue, operand, secondValue);
+	}
+	else if ((posForOperandSplit = line.find("/")) != std::string::npos)
+	{
+		SplitName(firstValue, operand, secondValue, posForNameSplit, posForOperandSplit, line);
+		PrintError(fnName, firstValue, operand, secondValue);
+	}
+	else
+	{
+		string var;
+		var.append(line, posForNameSplit+1, line.length());
+		PrintError(fnName, var, "funWithOneValue", var);
 	}
 	return true;
 }

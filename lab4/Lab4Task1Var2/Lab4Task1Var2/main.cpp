@@ -5,17 +5,60 @@
 #include "LineSegment.h"
 #include "Dot.h"
 #include "IShape.h"
+#include "Rectangle.h"
+#include <istream>
+#include <sstream>
+#include <memory>
 
 using namespace std;
-
-
-int main()
+typedef sf::Vector2f V2f;
+string WriteDataOfFile (string & inputFileName)
 {
-	//vector<string> workWithUI(istream_iterator<string>(cin), (istream_iterator<string>()));
-	//vector<string> workWithUI;
-	std::vector<shared_ptr<IShape>> workWithUI;
-	CLineSegment line1(std::make_shared<CDot>(sf::Vector2f(10, 0)), std::make_shared<CDot>(sf::Vector2f(0, 10)), "black"); //так уже лучше)	
-	CLineSegment line2(std::make_shared<CDot>(sf::Vector2f(10, 6)), std::make_shared<CDot>(sf::Vector2f(1, 10)), "black"); //так уже лучше)
+
+	ifstream inputFile;
+	inputFile.open(inputFileName);
+	if (!inputFile.is_open())
+	{
+		cout << "Failed to open input file for reading\n";
+	}
+	string data;
+	while (!inputFile.eof())
+	{
+		getline(inputFile, data);
+	}
+	return data;
+}
+
+int main(int argc, char** argv)
+{
+	if (argc != 3)
+	{
+		cout << "Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n' <input file> <output file>'";
+		return 1;
+	}
+	string inputFileName = argv[1];
+	//string outputFileName = argv[2];
+
+	vector<shared_ptr<IShape>> workWithUI;
+	string lineUser = "rectangle 20 30 17 25 #ff0000 #00ff00";
+	istringstream ss(lineUser);
+	string options;
+	CLineSegment line1(make_shared<CDot>(V2f(10, 0)), make_shared<CDot>(V2f(0, 10)), "black"); //так уже лучше)	
+	CLineSegment line2(make_shared<CDot>(V2f(10, 6)), make_shared<CDot>(V2f(1, 10)), "black"); //так уже лучше)
+	while(ss)
+	{
+		ss >> options;
+		if(options == "rectangle")
+		{
+			//CRectangle(std::shared_ptr<CDot> &m_dotTopLeftCorner, std::shared_ptr<CLineSegment> &wight, std::shared_ptr<CLineSegment> &height, std::string const & lineColor, std::string const & fillColor);
+			//workWithUI.push_back(make_shared<CRectangle>(make_shared<CDot>(V2f(0, 10)), line1, line2, "asd", "sa"));
+		}
+	}
+	
+	workWithUI.push_back(make_shared<CDot>(V2f(10, 0)));
+	
+//	CLineSegment line1(make_shared<CDot>(V2f(10, 0)), make_shared<CDot>(V2f(0, 10)), "black");
+//	CLineSegment line2(make_shared<CDot>(V2f(10, 6)), make_shared<CDot>(V2f(1, 10)), "black");
 	std::cout << line1.GetLengthLine() << std::endl;
 	std::cout << line2.GetLengthLine();
     return 0;
