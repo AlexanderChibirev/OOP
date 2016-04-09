@@ -16,7 +16,12 @@
 #include <fstream>
 #include <map>
 #include <vector>
+#include <sstream>
+#include <functional>
 
 
+using namespace std;
+
+typedef map <string, string> SSMap;
 
 // TODO: reference additional headers your program requires here
