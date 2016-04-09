@@ -86,7 +86,7 @@ bool  CWorkWithUI::SetSpeed(std::istream & args)
 {
 	string line;
 	getline(args, line);
-	if(!m_car.SetGear(stoi(line)))
+	if(!m_car.SetSpeed(stoi(line)))
 	{
 		cout << "You can not change the speed\n";
 		return false;

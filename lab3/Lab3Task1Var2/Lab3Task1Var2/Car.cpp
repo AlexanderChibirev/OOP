@@ -11,7 +11,6 @@ CCar::CCar()
 
 }
 
-
 CCar::~CCar()
 {
 }
@@ -95,6 +94,7 @@ bool CCar::SetGear(int gear)
 	}
 	return wasChange;
 }
+
 
 bool  CCar::SetSpeed(int speed)
 {

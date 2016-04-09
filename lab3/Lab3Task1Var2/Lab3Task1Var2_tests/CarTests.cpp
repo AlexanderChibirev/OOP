@@ -121,7 +121,7 @@ BOOST_AUTO_TEST_SUITE (Car_class)
 					directionsCar.SetSpeed(10);
 					BOOST_CHECK_EQUAL(directionsCar.GetDirection(), STAYING);
 					directionsCar.SetGear(1);
-					BOOST_CHECK_EQUAL(directionsCar.GetDirection(),MOVE_UP);
+					BOOST_CHECK_EQUAL(directionsCar.GetDirection(), MOVE_UP);
 					directionsCar.SetGear(0);
 					BOOST_CHECK_EQUAL(directionsCar.GetDirection(), MOVE_UP);
 					directionsCar.SetSpeed(0);
