@@ -48,7 +48,7 @@ bool CWorkWithUI::Var(std::istream & args)
 		cout << "first symbol variable name is not letter, variable name must not start with a digit\n";
 		return false;
 	}
-	else if(m_calculator.IsDeclareVariable(line))
+	else if(!m_calculator.SetVariableIdentifier(line))
 	{
 		cout << "it's variable has already been declared\n";
 	}
@@ -56,7 +56,19 @@ bool CWorkWithUI::Var(std::istream & args)
 }
 bool CWorkWithUI::Printvars(std::istream & args) 
 {
-	m_calculator.PrintVars();
+	for (auto &it : m_calculator.GetVariableList())
+	{
+		if (isnan(it.second))
+		{
+			cout << it.first << ":" << "nan" << endl;
+			
+		}
+		else
+		{
+			cout << it.first << ":";
+			printf("%.2f\n", it.second);
+		}
+	}
 	return true;
 }
 
@@ -64,9 +76,18 @@ bool  CWorkWithUI::Print(std::istream & args)
 {
 	string line;
 	args >> line;
-	if (!m_calculator.CheckValueForPrint(line))
+	auto result = m_calculator.GetValue(line);
+	if (result == NULL)
 	{
 		cout << "not found value\n";
+	}
+	else if (isnan(result))
+	{
+		cout << "nan" << endl;
+	}
+	else 
+	{
+		printf("%.2f\n", result);
 	}
 	return true;
 }
@@ -114,7 +135,7 @@ bool CWorkWithUI::Let(std::istream & args)
 	}
 	if (IsCorrectValue(value))
 	{
-		m_calculator.PutInfoInVariableList(variable, value);
+		m_calculator.SetVariableValue(variable, value);
 	}
 	else
 	{
@@ -125,17 +146,29 @@ bool CWorkWithUI::Let(std::istream & args)
 
 bool CWorkWithUI::Printfns(std::istream & args)
 {
-	m_calculator.Printfns();
+	for (auto &it : m_calculator.GetFunctionList())
+	{
+		if (isnan( m_calculator.GetValueFn(it.first) ))
+		{
+			cout << it.first << ":" << "nan" << endl;
+		}
+		else
+		{
+			cout << it.first << ":";
+			printf("%.2f\n", m_calculator.GetValueFn(it.first));
+		}
+	}
 	return true;
 }
 
 void CWorkWithUI::PrintError(const string &fnName, const string &firstValue, const string &operand, const string & secondValue)
 {
-	if (!m_calculator.CheckNameFn(fnName, firstValue, operand, secondValue))
+	if (!m_calculator.SetFunction(fnName, firstValue, operand, secondValue))
 	{
 		cout << "функция не может вычислять цифры, потому что их нет в списках переменных\n";
 	}
 }
+
 bool CWorkWithUI::Fn(std::istream & args)
 {
 	string line;
@@ -181,6 +214,8 @@ bool CWorkWithUI::Fn(std::istream & args)
 	}
 	return true;
 }
+
+
 
 void CWorkWithUI::SplitName(string &firstValue, string &operand, string &secondValue, const int &posForNameSplit, const int &posForOperandSplit, const string &line)
 {

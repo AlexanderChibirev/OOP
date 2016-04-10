@@ -7,27 +7,22 @@ public:
 	CCalculator();
 	~CCalculator();
 
-	//ErrorCode CheckInfoInVariableList(const string & variable);
-	bool IsDeclareVariable(const string & variable);
-	bool PutInfoInVariableList(const string & variable, const string & value);
-	
-	bool  CheckValueForPrint(const string &varName);
-	bool CheckNameFn(const string &fnName, const string &firstValue, const string &operand, const string & secondValue);
+	bool SetVariableIdentifier(const string & variable);
+	bool SetVariableValue(const string & variable, const string & value);
+	bool SetFunction(const string &fnName, const string &firstValue, const string &operand, const string & secondValue);
 
-	void Print(double secondVar);
-	void PrintVars() const;
-	void Printfns();
+	map <string, double> GetVariableList() const; //printvars
+	map <string, SecondMapInformation> GetFunctionList() const; //printfns
+
+	double GetValueFn(const string & fnName);//print
+	double GetValue(const string &varName);//print
+private:
 	double Calculation(double firstValue, const string & operand, double secondValue);
-	double GetFn(const string & fnName);
-	double GetVariableValue(const string & varName) const;
-
+	double GetValueVariable(const string & varName) const;
+	bool IsVariableDefine(const string & variable) const;
+	bool IsFunctionDefine(const string & functionName) const;
 private:
-	void  CCalculator::SetVariableValue(const string & variable, double value);
-	bool IsVariableDefine(const string & variable);
-	bool IsFunctionDefine(const string & functionName);
-private:
-	map <string, double, ByAlphabet> m_variableNameList;
-	map <string, SecondMapInformation, ByAlphabet> m_functionNameList;
-	ErrorCode m_errorCode;
+	map <string, double> m_variableNameList;
+	map <string, SecondMapInformation> m_functionNameList;
 };
 

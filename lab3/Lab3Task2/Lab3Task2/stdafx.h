@@ -28,19 +28,3 @@ struct SecondMapInformation
 	string operand;
 	string secondVal;
 };
-
-enum ErrorCode {
-	VAR_HAS_ALREADY_BEEN_DECLARED,
-	FIRST_SYMBOL_IS_NOT_LETTER,
-	IS_ALL_OK,
-	INCORRECT_ENTER
-};
-
-struct ByAlphabet : public std::binary_function<std::string, std::string, bool>
-{
-	bool const operator () (const std::string &str1, const std::string &str2) { return _stricoll(str1.c_str(), str2.c_str()) < 0; }
-};
-
-typedef map <string, string, ByAlphabet> SortMap;
-
-// TODO: reference additional headers your program requires here

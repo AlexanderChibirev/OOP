@@ -10,69 +10,39 @@ CCalculator::CCalculator()
 CCalculator::~CCalculator()
 {
 }
-bool CCalculator::IsDeclareVariable(const string & variable)
+bool CCalculator::SetVariableIdentifier(const string & variable)
 {
 	if(!IsVariableDefine(variable) && !IsFunctionDefine(variable))
 	{
 		m_variableNameList[variable] = NAN;
-		return false;
-	}
-	return true;
-}
-
-void  CCalculator::PrintVars() const
-{
-	for (auto &it : m_variableNameList)
-	{
-		if(it.second != NAN)
-		{
-			cout << it.first << ":";
-			printf("%.2f\n", it.second);
-		}
-		else
-		{
-			cout << it.first << ":" << it.second << endl;
-		}
-	}
-}
-
-void CCalculator::Print(double var)
-{
-	if (var != NAN)
-	{
-		printf("%.2f\n", var);
-	}
-	else
-	{
-		cout << var << endl;
-	}
-}
-
-bool CCalculator::CheckValueForPrint(const string & varName) 
-{
-	if (m_variableNameList.find(varName) != m_variableNameList.end())
-	{
-		Print(m_variableNameList.find(varName)->second);
-		return true;
-	}
-	else if (m_functionNameList.find(varName) != m_functionNameList.end())
-	{
-		Print(GetFn(varName));
 		return true;
 	}
 	return false;
 }
 
-bool CCalculator::IsVariableDefine(const string & variable)
+double CCalculator::GetValue(const string & varName)//getValue
+{
+	if (m_variableNameList.find(varName) != m_variableNameList.end())//если встертили в списке переменных
+	{
+		return (m_variableNameList.find(varName)->second);
+	}
+	else if (m_functionNameList.find(varName) != m_functionNameList.end())//если встертили в списке функций
+	{
+		return GetValueFn(varName);
+	}
+	return NULL;
+}
+
+bool CCalculator::IsVariableDefine(const string & variable) const
 {
 	if( m_variableNameList.find(variable) != m_variableNameList.end() )
 	{
-		return true;
+		return true;//если встретили
 	}
-	return false;
+	return false;//если не встретили такую же переменную
 }
 
-bool CCalculator::IsFunctionDefine(const string & functionName)
+bool CCalculator::IsFunctionDefine(const string & functionName) const
 {
 	if (m_functionNameList.find(functionName) != m_functionNameList.end())
 	{
@@ -81,39 +51,23 @@ bool CCalculator::IsFunctionDefine(const string & functionName)
 	return false;//если не встретили такую же переменную
 }
 
-void  CCalculator::SetVariableValue(const string & variable, double value)
-{
-	m_variableNameList[variable] = value;
-}
-
-bool CCalculator::PutInfoInVariableList(const string &variable, const string &value)
+bool CCalculator::SetVariableValue(const string &variable, const string &value)
 {
 	if(IsFunctionDefine(value))
 	{
-		SetVariableValue(variable, GetFn(value));
+		m_variableNameList[variable] = GetValueFn(value);
 		return true;
 	}
 	else if(IsVariableDefine(value))
 	{
-		SetVariableValue(variable, m_variableNameList.find(value)->second);
+		m_variableNameList[variable] = m_variableNameList.find(value)->second;
 		return true;
 	}
-	else 
-	{
-		SetVariableValue(variable, atof(value.c_str()));
-		return true;
-	}
-	return false;
+	m_variableNameList[variable] = atof(value.c_str());
+	return true;
 }
 
-void CCalculator::Printfns()
-{
-	for (auto &it : m_functionNameList)
-	{
-		cout << it.first << ":";
-		printf("%.2f\n", GetFn(it.first));
-	}
-}
+
 
 double CCalculator::Calculation(double firstValue, const string & operand, double secondValue)
 {
@@ -129,14 +83,10 @@ double CCalculator::Calculation(double firstValue, const string & operand, doubl
 	{
 		return (firstValue * secondValue);
 	}
-	else
-	{
-		return (firstValue / secondValue);
-	}
-	return 0;
+	return (firstValue / secondValue);
 }
 
-bool CCalculator::CheckNameFn(const string &fnName, const string &firstValue, const string &operand, const string & secondValue)
+bool CCalculator::SetFunction(const string &fnName, const string &firstValue, const string &operand, const string & secondValue)
 {
 	SecondMapInformation info;
 	if (IsVariableDefine(firstValue) || IsFunctionDefine(firstValue) && IsVariableDefine(secondValue) || IsFunctionDefine(secondValue))
@@ -150,7 +100,7 @@ bool CCalculator::CheckNameFn(const string &fnName, const string &firstValue, co
 	return false;
 }
 
-double CCalculator::GetFn(const string & fnName)
+double CCalculator::GetValueFn(const string & fnName)
 {
 	SecondMapInformation information;
 	information = m_functionNameList.find(fnName)->second;
@@ -158,19 +108,19 @@ double CCalculator::GetFn(const string & fnName)
 	double secondValue;
 	if(IsVariableDefine(information.firstVal))
 	{
-		firstValue = GetVariableValue(information.firstVal);
+		firstValue = GetValueVariable(information.firstVal);
 	}
 	else
 	{
-		firstValue = GetFn(information.firstVal);
+		firstValue = GetValueFn(information.firstVal);
 	}
 	if (IsVariableDefine(information.secondVal))
 	{
-		secondValue = GetVariableValue(information.secondVal);
+		secondValue = GetValueVariable(information.secondVal);
 	}
 	else
 	{
-		secondValue = GetFn(information.secondVal);
+		secondValue = GetValueFn(information.secondVal);
 	}
 	string operandStr = information.operand;
 	if (firstValue == NAN || secondValue == NAN)
@@ -185,7 +135,16 @@ double CCalculator::GetFn(const string & fnName)
 }
 
 
-double CCalculator::GetVariableValue(const string & varName) const
+double CCalculator::GetValueVariable(const string & varName) const
 {
 	return m_variableNameList.find(varName)->second;
+}
+
+map <string, double> CCalculator::GetVariableList() const
+{
+	return m_variableNameList;
+}
+map <string, SecondMapInformation> CCalculator::GetFunctionList() const
+{
+	return m_functionNameList;
 }

@@ -21,7 +21,6 @@ private:
 	void PrintError(const string &fnName, const string &firstValue, const string &operand, const string & secondValue);
 	void SplitName(string &firstValue, string &operand, string &secondValue,const int &posForNameSplit, const int &posForOperandSplit, const string &line);
 	bool IsCorrectValue(string const &str);
-
 private:
 	typedef std::map<std::string, std::function<bool(std::istream & args)>> ActionMap;
 	CCalculator & m_calculator;
