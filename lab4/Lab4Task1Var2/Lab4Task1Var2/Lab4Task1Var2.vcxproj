@@ -151,6 +151,9 @@
   <ItemGroup>
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Dot.h" />
+    <ClInclude Include="GetDataFromFile.h" />
+    <ClInclude Include="GetParametrsShapes.h" />
+    <ClInclude Include="GetProcessedData.h" />
     <ClInclude Include="IShape.h" />
     <ClInclude Include="ISolidShape.h" />
     <ClInclude Include="LineSegment.h" />
@@ -158,10 +161,14 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Triangle.h" />
+    <ClInclude Include="WriteResultInOutputFile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Dot.cpp" />
+    <ClCompile Include="GetDataFromFile.cpp" />
+    <ClCompile Include="GetParametrsShapes.cpp" />
+    <ClCompile Include="GetProcessedData.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="LineSegment.cpp" />
     <ClCompile Include="Rectangle.cpp" />
@@ -172,6 +179,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="WriteResultInOutputFile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

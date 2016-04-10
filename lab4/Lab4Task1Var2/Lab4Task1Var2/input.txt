@@ -1,0 +1,6 @@
+rectangle 20 30 17 25 #ff0000 #00ff00
+rectangle 220 340 17 245 #ff0000 #00ff00
+rectangle 230 30 17 255 #ff0000 #00ff00
+rectangle 20 350 17 25 #ff0000 #00ff00
+rectangle 20 30 167 25 #ff0000 #00ff00
+circle 20 30 134

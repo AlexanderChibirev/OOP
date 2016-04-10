@@ -2,37 +2,36 @@
 #include "Triangle.h"
 
 
-CTriangle::CTriangle(std::shared_ptr<CLineSegment> &side1, std::shared_ptr<CLineSegment> &side2, std::shared_ptr<CLineSegment> &side3, std::string const & lineColor, std::string const & fillColor)
+CTriangle::CTriangle(std::shared_ptr<CDot> &point1, std::shared_ptr<CDot> &point2, std::shared_ptr<CDot> &point3, std::string const & lineColor, std::string const & fillColor)
 	:m_lineColor(lineColor),
 	m_fillColor(fillColor),
-	m_side1(side1),
-	m_side2(side2),
-	m_side3(side3)
+	m_point1(point1),
+	m_point2(point2),
+	m_point3(point3)
 {
 }
 
 double CTriangle::GetAreaShape() const
 {
-	return sqrt(GetPForHeronsFormula()*(GetPForHeronsFormula() - m_side1->GetLengthLine())*(GetPForHeronsFormula() - m_side2->GetLengthLine())*(GetPForHeronsFormula() - m_side3->GetLengthLine()));
+	return double(0.5)*((m_point1->GetCoordDot().x - m_point3->GetCoordDot().x) * (m_point2->GetCoordDot().y - m_point3->GetCoordDot().y) - \
+		(m_point2->GetCoordDot().x - m_point3->GetCoordDot().x) * (m_point1->GetCoordDot().y - m_point3->GetCoordDot().y));
 }
 
-double CTriangle::GetPForHeronsFormula() const
-{
-	return GetPerimeterShape() / double(2);
-}
 double CTriangle::GetPerimeterShape() const
 {
-	return m_side1->GetLengthLine() + m_side2->GetLengthLine() + m_side3->GetLengthLine();
+	return sqrt(pow((m_point2->GetCoordDot().x - m_point1->GetCoordDot().x), 2) + pow((m_point2->GetCoordDot().y - m_point1->GetCoordDot().y), 2)) + \
+		sqrt(pow((m_point3->GetCoordDot().x - m_point1->GetCoordDot().x), 2) + pow((m_point3->GetCoordDot().y - m_point1->GetCoordDot().y), 2)) + \
+		sqrt(pow((m_point3->GetCoordDot().x - m_point2->GetCoordDot().x), 2) + pow((m_point3->GetCoordDot().y - m_point2->GetCoordDot().y), 2));
 }
-std::string CTriangle::GetNameShape() const 
+std::string CTriangle::GetNameShape() const
 {
 	return "Triangle";
 }
-std::string CTriangle::GetLineColor() const 
+std::string CTriangle::GetLineColor() const
 {
 	return m_lineColor;
 }
-std::string CTriangle::GetInnerRegion() const 
+std::string CTriangle::GetInnerRegion() const
 {
 	return m_fillColor;
 }

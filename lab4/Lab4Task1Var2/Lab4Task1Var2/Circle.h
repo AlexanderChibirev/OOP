@@ -2,11 +2,10 @@
 #include "ISolidShape.h"
 #include "Dot.h"
 
-class CCircle: public ISolidShape
+class CCircle final : public ISolidShape
 {
 public:
 	CCircle(std::shared_ptr<CDot> &centerCircle, double &radius, std::string const & lineColor, std::string const & fillColor);
-
 
 	double GetAreaShape() const override;
 	double GetPerimeterShape() const override;
