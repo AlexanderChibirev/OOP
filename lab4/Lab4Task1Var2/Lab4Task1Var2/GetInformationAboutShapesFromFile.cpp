@@ -9,7 +9,7 @@ string GetInformationAboutShapesFromFile(string & inputFileName, bool &wasError)
 	string result;
 	if (!inputFile.is_open())
 	{
-		wasError == true;
+		wasError = true;
 	}
 	else
 	{
