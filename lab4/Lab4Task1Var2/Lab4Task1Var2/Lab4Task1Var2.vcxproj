@@ -94,6 +94,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>"tests.bat" $(TargetPath)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -108,6 +111,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>"tests.bat" $(TargetPath)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -151,7 +157,7 @@
   <ItemGroup>
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Dot.h" />
-    <ClInclude Include="GetDataFromFile.h" />
+    <ClInclude Include="GetInformationAboutShapesFromFile.h" />
     <ClInclude Include="GetParametrsShapes.h" />
     <ClInclude Include="GetProcessedData.h" />
     <ClInclude Include="IShape.h" />
@@ -166,7 +172,7 @@
   <ItemGroup>
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Dot.cpp" />
-    <ClCompile Include="GetDataFromFile.cpp" />
+    <ClCompile Include="GetInformationAboutShapesFromFile.cpp" />
     <ClCompile Include="GetParametrsShapes.cpp" />
     <ClCompile Include="GetProcessedData.cpp" />
     <ClCompile Include="main.cpp" />

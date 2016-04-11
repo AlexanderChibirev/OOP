@@ -1,0 +1,10 @@
+lineSegment 1 2 10 11 #ff0000
+lineSegment 2 3 11 12 #ff0001
+lineSegment 21 2 410 211 #ff0002
+lineSegment 11 2 310 11 #ff0003
+lineSegment 1 52 10 611 #ff0004
+lineSegment 1 72 108 911 #ff0005
+lineSegment 1 12 102 11 #ff0006
+lineSegment 1 231 102.123 11.123 #ff0007
+lineSegment 1 2.1 10.231 11.21 #ff0008
+lineSegment 1 2.232 10.213 -11 #ff0009

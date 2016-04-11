@@ -2,7 +2,7 @@
 #include "Triangle.h"
 
 
-CTriangle::CTriangle(std::shared_ptr<CDot> &point1, std::shared_ptr<CDot> &point2, std::shared_ptr<CDot> &point3, std::string const & lineColor, std::string const & fillColor)
+CTriangle::CTriangle(shared_ptr<CDot> &point1, shared_ptr<CDot> &point2, shared_ptr<CDot> &point3, string const &lineColor, string const &fillColor)
 	:m_lineColor(lineColor),
 	m_fillColor(fillColor),
 	m_point1(point1),
@@ -13,15 +13,15 @@ CTriangle::CTriangle(std::shared_ptr<CDot> &point1, std::shared_ptr<CDot> &point
 
 double CTriangle::GetAreaShape() const
 {
-	return double(0.5)*((m_point1->GetCoordDot().x - m_point3->GetCoordDot().x) * (m_point2->GetCoordDot().y - m_point3->GetCoordDot().y) - \
-		(m_point2->GetCoordDot().x - m_point3->GetCoordDot().x) * (m_point1->GetCoordDot().y - m_point3->GetCoordDot().y));
+	return fabs(double(0.5)*((m_point1->GetCoordDot().x - m_point3->GetCoordDot().x) * (m_point2->GetCoordDot().y - m_point3->GetCoordDot().y) - \
+		(m_point2->GetCoordDot().x - m_point3->GetCoordDot().x) * (m_point1->GetCoordDot().y - m_point3->GetCoordDot().y)));
 }
 
 double CTriangle::GetPerimeterShape() const
 {
-	return sqrt(pow((m_point2->GetCoordDot().x - m_point1->GetCoordDot().x), 2) + pow((m_point2->GetCoordDot().y - m_point1->GetCoordDot().y), 2)) + \
+	return fabs(sqrt(pow((m_point2->GetCoordDot().x - m_point1->GetCoordDot().x), 2) + pow((m_point2->GetCoordDot().y - m_point1->GetCoordDot().y), 2)) + \
 		sqrt(pow((m_point3->GetCoordDot().x - m_point1->GetCoordDot().x), 2) + pow((m_point3->GetCoordDot().y - m_point1->GetCoordDot().y), 2)) + \
-		sqrt(pow((m_point3->GetCoordDot().x - m_point2->GetCoordDot().x), 2) + pow((m_point3->GetCoordDot().y - m_point2->GetCoordDot().y), 2));
+		sqrt(pow((m_point3->GetCoordDot().x - m_point2->GetCoordDot().x), 2) + pow((m_point3->GetCoordDot().y - m_point2->GetCoordDot().y), 2)));
 }
 std::string CTriangle::GetNameShape() const
 {

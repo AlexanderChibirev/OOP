@@ -15,11 +15,11 @@ CRectangle::CRectangle(std::shared_ptr<CDot> &dotTopLeftCorner, double wight, do
 
 double CRectangle::GetAreaShape() const
 {
-	return m_wight * m_height;
+	return fabs(m_wight * m_height);
 }
 double CRectangle::GetPerimeterShape() const
 {
-	return  double(2) * (m_wight + m_height);
+	return  fabs(double(2) * (m_wight + m_height));
 }
 std::string CRectangle::GetNameShape() const 
 {

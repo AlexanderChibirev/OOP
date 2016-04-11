@@ -6,7 +6,7 @@
 class CTriangle final : public ISolidShape
 {
 public:
-	CTriangle(std::shared_ptr<CDot> &point1, std::shared_ptr<CDot> &point2, std::shared_ptr<CDot> &point3, std::string const & lineColor, std::string const & fillColor);
+	CTriangle(shared_ptr<CDot> &point1, shared_ptr<CDot> &point2, shared_ptr<CDot> &point3, string const &lineColor, string const &fillColor);
 	~CTriangle();
 	double GetAreaShape() const override;
 	double GetPerimeterShape() const override;

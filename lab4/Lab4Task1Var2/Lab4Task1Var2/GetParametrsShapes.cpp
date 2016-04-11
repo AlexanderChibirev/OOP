@@ -12,6 +12,10 @@ vector<shared_ptr<IShape>> GetParametrsShapes(const string &dataShapes)
 	while (ss)
 	{
 		ss >> nameShape;
+		if (ss.eof())
+		{
+			break;
+		}
 		if (nameShape == "point")
 		{
 			float x;
@@ -35,7 +39,7 @@ vector<shared_ptr<IShape>> GetParametrsShapes(const string &dataShapes)
 			ss >> x2;
 			ss >> y2;
 			ss >> lineColor;
-			informationAboutShape.push_back(make_shared<CLineSegment>(make_shared<CDot>(V2f(10, 0)), (make_shared<CDot>(V2f(0, 10))), "#00ff00"));
+			informationAboutShape.push_back(make_shared<CLineSegment>(make_shared<CDot>(V2f(x1, y1)), (make_shared<CDot>(V2f(x2, y2))), "#00ff00"));
 		}
 		else if (nameShape == "triangle")
 		{
@@ -58,7 +62,7 @@ vector<shared_ptr<IShape>> GetParametrsShapes(const string &dataShapes)
 			ss >> lineColor;
 			string fillColor;
 			ss >> fillColor;
-			informationAboutShape.push_back(make_shared<CTriangle>(make_shared<CDot>(V2f(x1, y1)), make_shared<CDot>(V2f(x2, y2)), make_shared<CDot>(V2f(x2, y2)), lineColor, fillColor));
+			informationAboutShape.push_back(make_shared<CTriangle>(make_shared<CDot>(V2f(x1, y1)), make_shared<CDot>(V2f(x2, y2)), make_shared<CDot>(V2f(x3, y3)), lineColor, fillColor));
 		}
 		else if (nameShape == "circle")
 		{

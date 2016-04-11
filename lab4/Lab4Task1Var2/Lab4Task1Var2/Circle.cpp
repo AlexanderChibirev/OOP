@@ -12,11 +12,11 @@ CCircle::CCircle(std::shared_ptr<CDot> &centerCircle, double &radius, std::strin
 
 double CCircle::GetAreaShape() const
 {
-	return  M_PI * pow(m_radius, 2);
+	return  fabs(M_PI * pow(m_radius, 2));
 }
 double CCircle::GetPerimeterShape() const
 {
-	return double(2) * M_PI * m_radius;
+	return fabs(double(2) * M_PI * m_radius);
 }
 std::string CCircle::GetNameShape() const
 {

@@ -1,0 +1,9 @@
+Triangle: area = 8,000000
+Triangle: area = 10,000000
+Triangle: area = 42,500000
+Triangle: area = 163,500000
+
+Triangle: perimeter = 164,166260
+Triangle: perimeter = 36,729610
+Triangle: perimeter = 16,542515
+Triangle: perimeter = 16,434906

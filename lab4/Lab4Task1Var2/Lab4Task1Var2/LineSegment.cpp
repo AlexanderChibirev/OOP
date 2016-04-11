@@ -2,17 +2,17 @@
 #include "LineSegment.h"
 #include "Dot.h"
 
-CLineSegment::CLineSegment(std::shared_ptr<CDot> dot1, std::shared_ptr<CDot> dot2, const std::string &lineColor)
+CLineSegment::CLineSegment(shared_ptr<CDot> &dot1, shared_ptr<CDot> &dot2, const string &lineColor)
 	:m_lineColor(lineColor),
 	m_dot1(dot1),
 	m_dot2(dot2)
 {//да не ладно оставим так, потом молов прокомментирует и поймем уже как лучше
 }
-std::string CLineSegment::GetNameShape() const 
+string CLineSegment::GetNameShape() const 
 {
-	return "Straight line";
+	return "lineSegment";
 }
-std::string CLineSegment::GetLineColor() const 
+string CLineSegment::GetLineColor() const 
 {
 	return m_lineColor;
 }
