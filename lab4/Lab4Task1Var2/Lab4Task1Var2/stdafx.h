@@ -25,7 +25,8 @@
 #include <sstream>
 #include <memory>
 
-
 using namespace std;
 typedef sf::Vector2f V2f;
+
+
 // TODO: reference additional headers your program requires here

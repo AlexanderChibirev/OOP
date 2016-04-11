@@ -5,6 +5,7 @@
 #include "Rectangle.h"
 #include "Triangle.h"
 #include "Circle.h"
+#include "Definition.h"
 
-
-vector<shared_ptr<IShape>> GetParametrsShapes(const string &dataShapes);
+void HexToDecCodeColor(string const & colorHex, int &RR, int &GG, int &BB);
+InfoAboutShapes GetParametrsShapes(const string &dataShapes);

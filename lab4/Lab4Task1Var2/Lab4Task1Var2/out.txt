@@ -1,0 +1,3 @@
+lineSegment: area = 0,000000
+
+lineSegment: perimeter = 28,284271

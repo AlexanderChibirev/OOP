@@ -2,7 +2,7 @@
 #include "Rectangle.h"
 
 
-CRectangle::CRectangle(std::shared_ptr<CDot> &dotTopLeftCorner, double wight, double height, std::string const & lineColor, std::string const & fillColor)
+CRectangle::CRectangle(std::shared_ptr<CDot> &dotTopLeftCorner, float wight, float height, std::string const & lineColor, std::string const & fillColor)
 	:m_dotTopLeftCorner(dotTopLeftCorner),
 	m_fillColor(fillColor),
 	m_height(height),

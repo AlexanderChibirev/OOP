@@ -2,7 +2,7 @@
 #include "Circle.h"
 
 
-CCircle::CCircle(std::shared_ptr<CDot> &centerCircle, double &radius, std::string const & lineColor, std::string const & fillColor)
+CCircle::CCircle(std::shared_ptr<CDot> &centerCircle, float &radius, std::string const & lineColor, std::string const & fillColor)
 	:m_centerCircle(centerCircle),
 	m_radius(radius),
 	m_lineColor(lineColor),
@@ -20,7 +20,7 @@ double CCircle::GetPerimeterShape() const
 }
 std::string CCircle::GetNameShape() const
 {
-	return "Circle";
+	return "circle";
 }
 std::string CCircle::GetLineColor() const
 {
