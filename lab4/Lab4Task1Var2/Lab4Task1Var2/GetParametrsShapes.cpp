@@ -3,7 +3,7 @@
 
 void HexToDecCodeColor(string const & colorHex, int &RR, int &GG, int &BB) 
 {
-	string dec = colorHex;
+	string dec = colorHex.substr(1,colorHex.size());
 	dec.insert(2, " ");
 	dec.insert(5, " ");
 	std::stringstream ss;
@@ -58,15 +58,17 @@ InfoAboutShapes GetParametrsShapes(const string &dataShapes)
 			ss >> y2;
 			ss >> lineColor;
 			vectors.informationAboutShape.push_back(make_shared<CLineSegment>(make_shared<CDot>(V2f(x1, y1)), (make_shared<CDot>(V2f(x2, y2))), lineColor));
-			
-			shared_ptr<sf::ConvexShape> shape = make_shared<sf::ConvexShape>();
-			shape->setPointCount(1);
-			shape->setPoint(0, sf::Vector2f(x2 - x1, y2 - x1));
+
+			shared_ptr<sf::RectangleShape> shape = make_shared<sf::RectangleShape>();
+			float lengthLineSegment = sqrt((pow((x2 - x1), 2)) + (pow((y2 - y1), 2)));
+			double angleOfRotation = (atan((y2 - y1) / (x2 - x1))) * 180 / M_PI;
+			shape->setSize(sf::Vector2f(float(lengthLineSegment), float(0.1)));
+			shape->rotate(float(angleOfRotation));
+			shape->setPosition(x1, y1);
 			HexToDecCodeColor(lineColor, RR, GG, BB);
-			shape->setOutlineThickness(2);
+			shape->setOutlineThickness(1);
 			shape->setOutlineColor(sf::Color(RR, GG, BB));
 			vectors.sfmlShapes.push_back(shape);
-
 		}
 		else if (nameShape == "triangle")
 		{
@@ -93,9 +95,9 @@ InfoAboutShapes GetParametrsShapes(const string &dataShapes)
 			
 			shared_ptr<sf::ConvexShape> shape = make_shared<sf::ConvexShape>();
 			shape->setPointCount(3);
-			shape->setPoint(0, sf::Vector2f(x2 - x1, y2 - x1));
-			shape->setPoint(1, sf::Vector2f(x3 - x1, y3 - x1));
-			shape->setPoint(2, sf::Vector2f(x3 - x2, y3 - x2));
+			shape->setPoint(0, sf::Vector2f(x1, y1));
+			shape->setPoint(1, sf::Vector2f(x2 , y2));
+			shape->setPoint(2, sf::Vector2f(x3 , y3));
 			HexToDecCodeColor(fillColor, RR, GG, BB);
 			shape->setFillColor(sf::Color(RR, GG, BB));
 			HexToDecCodeColor(lineColor, RR, GG, BB);
@@ -119,7 +121,7 @@ InfoAboutShapes GetParametrsShapes(const string &dataShapes)
 			
 			shared_ptr<sf::CircleShape> shape = make_shared<sf::CircleShape>();
 			shape->setRadius(radius);
-			shape->setPosition(x1, y1);
+			shape->setPosition(x1-radius, y1 - radius);
 			HexToDecCodeColor(fillColor, RR, GG, BB);
 			shape->setFillColor(sf::Color(RR, GG, BB));
 			HexToDecCodeColor(lineColor, RR, GG, BB);
