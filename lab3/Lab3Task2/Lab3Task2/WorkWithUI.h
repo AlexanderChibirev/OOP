@@ -2,6 +2,9 @@
 #include <boost/noncopyable.hpp>
 #include <iostream>
 #include "string"
+#include "Difinition.h"
+
+using namespace std;
 
 class CCalculator;
 
@@ -18,9 +21,8 @@ private:
 	bool Print(std::istream & args);
 	bool Printvars(std::istream & args);
 	bool Printfns(std::istream & args);
-	void PrintError(const string &fnName, const string &firstValue, const string &operand, const string & secondValue);
-	void SplitName(string &firstValue, string &operand, string &secondValue,const int &posForNameSplit, const int &posForOperandSplit, const string &line);
-	bool IsCorrectValue(string const &str);
+	void PrintError(const string &fnName, const string &firstValue, const OperationType &operation, const string & secondValue);
+	void SplitName(string &firstValue, string &operation, string &secondValue,const int &posForNameSplit, const int &posForOperationSplit, const string &line);
 private:
 	typedef std::map<std::string, std::function<bool(std::istream & args)>> ActionMap;
 	CCalculator & m_calculator;

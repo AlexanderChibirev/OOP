@@ -20,11 +20,7 @@
 #include <iomanip>
 #include <iostream>
 
-using namespace std;
-
-struct SecondMapInformation
-{
-	string firstVal;
-	string operand;
-	string secondVal;
-};
+#include <boost\signals2.hpp>
+#include <memory>
+#include <boost/optional.hpp>
+#include <boost/iterator/indirect_iterator.hpp>

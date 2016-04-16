@@ -10,12 +10,12 @@ CWorkWithUI::CWorkWithUI(CCalculator & calculator, std::istream & input, std::os
 	, m_input(input)
 	, m_output(output)
 	, m_actionMap({
-		{ "var", bind(&CWorkWithUI::Var, this, _1) },
-		{ "let", bind(&CWorkWithUI::Let, this, _1) },
-		{ "fn", bind(&CWorkWithUI::Fn, this, _1) },
-		{ "print", bind(&CWorkWithUI::Print, this, _1) },
-		{ "printvars", bind(&CWorkWithUI::Printvars, this, _1) },
-		{ "printfns", bind(&CWorkWithUI::Printfns, this, _1) },
+		{ "var", bind(&CWorkWithUI::Var, this, std::placeholders::_1) },
+		{ "let", bind(&CWorkWithUI::Let, this, std::placeholders::_1) },
+		{ "fn", bind(&CWorkWithUI::Fn, this, std::placeholders::_1) },
+		{ "print", bind(&CWorkWithUI::Print, this, std::placeholders::_1) },
+		{ "printvars", bind(&CWorkWithUI::Printvars, this, std::placeholders::_1) },
+		{ "printfns", bind(&CWorkWithUI::Printfns, this, std::placeholders::_1) }
 })
 {
 }
@@ -54,21 +54,28 @@ bool CWorkWithUI::Var(std::istream & args)
 	}
 	return true;
 }
-bool CWorkWithUI::Printvars(std::istream & args) 
+bool CWorkWithUI::Printvars(std::istream & args)
 {
-	for (auto &it : m_calculator.GetVariableList())
+	/*for (auto &it : m_calculator.GetVariableList())
 	{
 		if (isnan(it.second))
 		{
 			cout << it.first << ":" << "nan" << endl;
-			
+
 		}
 		else
 		{
 			cout << it.first << ":";
 			printf("%.2f\n", it.second);
 		}
+	}*/
+	for (auto start = m_calculator.BeginForVariableList(); start != m_calculator.EndForVariableList(); start++)
+	{
+	//	cout << *start << endl;
+
 	}
+	//m_calculator.BeginForVariableList();
+	//for (it = v.m_calculator.BeginForVariableList(); it != v.m_calculator.EndForVariableList(); it++) cout << *it << " ";
 	return true;
 }
 
@@ -77,7 +84,7 @@ bool  CWorkWithUI::Print(std::istream & args)
 	string line;
 	args >> line;
 	auto result = m_calculator.GetValue(line);
-	if (result == NULL)
+	if (result == INFINITY)
 	{
 		cout << "not found value\n";
 	}
@@ -88,27 +95,6 @@ bool  CWorkWithUI::Print(std::istream & args)
 	else 
 	{
 		printf("%.2f\n", result);
-	}
-	return true;
-}
-
-bool CWorkWithUI::IsCorrectValue(string const &str)
-{
-	int countPoint = 0;
-	for (auto &it : str)
-	{
-		if (it == '.')
-		{
-			countPoint++;
-		}
-		else if (!isdigit(it))
-		{
-			return false;
-		}
-	}
-	if (countPoint > 1 || str[0] == '.' || str[str.length() - 1] == '.')
-	{
-		return false;
 	}
 	return true;
 }
@@ -133,13 +119,13 @@ bool CWorkWithUI::Let(std::istream & args)
 		cout << "First symbol variable name is not letter, variable name must not start with a digit\nRead help please\n";
 		return false;
 	}
-	if (IsCorrectValue(value))
+	if(isdigit(value[0]))
 	{
-		m_calculator.SetVariableValue(variable, value);
+		m_calculator.SetVariableValue(variable, atof(value.c_str()));
 	}
 	else
 	{
-		cout << "Incorrect entry, read help please\n";
+		m_calculator.SetVariableValue(variable, value);//
 	}
 	return true;
 }
@@ -161,9 +147,9 @@ bool CWorkWithUI::Printfns(std::istream & args)
 	return true;
 }
 
-void CWorkWithUI::PrintError(const string &fnName, const string &firstValue, const string &operand, const string & secondValue)
+void CWorkWithUI::PrintError(const string &fnName, const string &firstValue, const OperationType &operation, const string & secondValue)
 {
-	if (!m_calculator.SetFunction(fnName, firstValue, operand, secondValue))
+	if (!m_calculator.DefineFunction(fnName, firstValue, operation, secondValue))
 	{
 		cout << "функция не может вычислять цифры, потому что их нет в списках переменных\n";
 	}
@@ -182,46 +168,49 @@ bool CWorkWithUI::Fn(std::istream & args)
 	string fnName;
 	fnName.append(line, 0, posForNameSplit);
 	string firstValue;
-	string operand;
+	string operation;
 	string secondValue;
-	int posForOperandSplit;
-	posForOperandSplit = line.find("+");
-	if ((posForOperandSplit = line.find("+")) != std::string::npos)
+	int posForOperationSplit;
+	posForOperationSplit = line.find("+");
+	if ((posForOperationSplit = line.find("+")) != std::string::npos)
 	{
-		SplitName(firstValue, operand, secondValue, posForNameSplit, posForOperandSplit, line);
-		PrintError(fnName, firstValue, operand, secondValue);	
+		SplitName(firstValue, operation, secondValue, posForNameSplit, posForOperationSplit, line);
+		PrintError(fnName, firstValue, OperationType::ADD, secondValue);
 	}
-	else if ((posForOperandSplit = line.find("-")) != std::string::npos)
+	else if ((posForOperationSplit = line.find("-")) != std::string::npos)
 	{
-		SplitName(firstValue, operand, secondValue, posForNameSplit, posForOperandSplit, line);
-		PrintError(fnName, firstValue, operand, secondValue);
+		SplitName(firstValue, operation, secondValue, posForNameSplit, posForOperationSplit, line);
+		PrintError(fnName, firstValue, OperationType::SUB, secondValue);
 	}
-	else if ((posForOperandSplit = line.find("*")) != std::string::npos)
+	else if ((posForOperationSplit = line.find("*")) != std::string::npos)
 	{
-		SplitName(firstValue, operand, secondValue, posForNameSplit, posForOperandSplit, line);
-		PrintError(fnName, firstValue, operand, secondValue);
+		SplitName(firstValue, operation, secondValue, posForNameSplit, posForOperationSplit, line);
+		PrintError(fnName, firstValue, OperationType::MUL, secondValue);
 	}
-	else if ((posForOperandSplit = line.find("/")) != std::string::npos)
+	else if ((posForOperationSplit = line.find("/")) != std::string::npos)
 	{
-		SplitName(firstValue, operand, secondValue, posForNameSplit, posForOperandSplit, line);
-		PrintError(fnName, firstValue, operand, secondValue);
+		SplitName(firstValue, operation, secondValue, posForNameSplit, posForOperationSplit, line);
+		PrintError(fnName, firstValue, OperationType::DIV, secondValue);
 	}
 	else
 	{
 		string var;
 		var.append(line, posForNameSplit+1, line.length());
-		PrintError(fnName, var, "funWithOneValue", var);
+		if (!m_calculator.DefineFunction(fnName, var))
+		{
+			cout << "функция не может вычислять цифры, потому что их нет в списках переменных\n";
+		}
 	}
 	return true;
 }
 
 
 
-void CWorkWithUI::SplitName(string &firstValue, string &operand, string &secondValue, const int &posForNameSplit, const int &posForOperandSplit, const string &line)
+void CWorkWithUI::SplitName(string &firstValue, string &operation, string &secondValue, const int &posForNameSplit, const int &posForOperationSplit, const string &line)
 {
-	firstValue.append(line, posForNameSplit + 1, posForOperandSplit - 1 - posForNameSplit);
-	operand.append(line, posForOperandSplit, 1);
-	secondValue.append(line, posForOperandSplit + 1, line.length());
+	firstValue.append(line, posForNameSplit + 1, posForOperationSplit - 1 - posForNameSplit);
+	operation.append(line, posForOperationSplit, 1);
+	secondValue.append(line, posForOperationSplit + 1, line.length());
 }
 CWorkWithUI::~CWorkWithUI()
 {

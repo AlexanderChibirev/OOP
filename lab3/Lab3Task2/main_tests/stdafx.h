@@ -26,12 +26,7 @@
 #include <boost/test/unit_test.hpp>
 #include <iostream>
 
-using namespace std;
-
-struct SecondMapInformation
-{
-	string firstVal;
-	string operand;
-	string secondVal;
-};
-// TODO: reference additional headers your program requires here
+#include <boost\signals2.hpp>
+#include <memory>
+#include <boost/optional.hpp>
+#include <boost/iterator/indirect_iterator.hpp>
