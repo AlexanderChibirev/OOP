@@ -26,7 +26,7 @@
 #include <boost/test/unit_test.hpp>
 #include <iostream>
 
-#include <boost\signals2.hpp>
 #include <memory>
 #include <boost/optional.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
+#include <boost/optional/optional_io.hpp>

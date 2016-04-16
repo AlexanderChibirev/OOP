@@ -56,26 +56,19 @@ bool CWorkWithUI::Var(std::istream & args)
 }
 bool CWorkWithUI::Printvars(std::istream & args)
 {
-	/*for (auto &it : m_calculator.GetVariableList())
+	for (CCalculator::ConstIteratorForVariablesList iter = m_calculator.BeginItForVariablesList(); iter != m_calculator.EndItForVariablesList(); ++iter)
 	{
-		if (isnan(it.second))
+		if (isnan(iter->second))
 		{
-			cout << it.first << ":" << "nan" << endl;
+			cout << iter->first << ":" << "nan" << endl;
 
 		}
 		else
 		{
-			cout << it.first << ":";
-			printf("%.2f\n", it.second);
+			cout << iter->first << ":";
+			printf("%.2f\n", iter->second);
 		}
-	}*/
-	for (auto start = m_calculator.BeginForVariableList(); start != m_calculator.EndForVariableList(); start++)
-	{
-	//	cout << *start << endl;
-
 	}
-	//m_calculator.BeginForVariableList();
-	//for (it = v.m_calculator.BeginForVariableList(); it != v.m_calculator.EndForVariableList(); it++) cout << *it << " ";
 	return true;
 }
 
@@ -83,18 +76,17 @@ bool  CWorkWithUI::Print(std::istream & args)
 {
 	string line;
 	args >> line;
-	auto result = m_calculator.GetValue(line);
-	if (result == INFINITY)
+	if (!m_calculator.GetValue(line).is_initialized())
 	{
 		cout << "not found value\n";
 	}
-	else if (isnan(result))
+	else if (isnan(m_calculator.GetValue(line).get()))
 	{
 		cout << "nan" << endl;
 	}
 	else 
 	{
-		printf("%.2f\n", result);
+		printf("%.2f\n", m_calculator.GetValue(line).get());
 	}
 	return true;
 }
@@ -132,16 +124,17 @@ bool CWorkWithUI::Let(std::istream & args)
 
 bool CWorkWithUI::Printfns(std::istream & args)
 {
-	for (auto &it : m_calculator.GetFunctionList())
+	for (CCalculator::ConstIteratorForFunctionsList iter = m_calculator.BeginItForFunctionList(); iter != m_calculator.EndItForFunctionList(); ++iter)
 	{
-		if (isnan( m_calculator.GetValueFn(it.first) ))
+		if (isnan(m_calculator.GetValueFn(iter->first)))
 		{
-			cout << it.first << ":" << "nan" << endl;
+			cout << iter->first << ":" << "nan" << endl;
+
 		}
 		else
 		{
-			cout << it.first << ":";
-			printf("%.2f\n", m_calculator.GetValueFn(it.first));
+			cout << iter->first << ":";
+			printf("%.2f\n", m_calculator.GetValueFn(iter->first ));
 		}
 	}
 	return true;
