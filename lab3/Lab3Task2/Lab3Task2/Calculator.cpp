@@ -21,7 +21,7 @@ bool CCalculator::SetVariableIdentifier(const string & variable)
 	return false;
 }
 
-boost::optional<double> CCalculator::GetValue(const string & identifier)
+boost::optional<double> CCalculator::GetValue(const string & identifier) const
 {
 	boost::optional<double> valueEmpty;
 	if (m_variableNameList.find(identifier) != m_variableNameList.end())
@@ -39,9 +39,9 @@ bool CCalculator::IsVariableDefined(const string & variable) const
 {
 	if( m_variableNameList.find(variable) != m_variableNameList.end() )
 	{
-		return true;//если встретили
+		return true;
 	}
-	return false;//если не встретили такую же переменную
+	return false;
 }
 
 bool CCalculator::IsFunctionDefined(const string & functionName) const
@@ -76,7 +76,7 @@ bool CCalculator::SetVariableValue(const string &variable, double value)
 
 
 
-double CCalculator::CalculateFunction(double firstValue, const OperationType &operation, double secondValue)
+double CCalculator::CalculateFunction(double firstValue, const OperationType &operation, double secondValue) const
 {
 	if (operation == OperationType::ADD)
 	{
@@ -121,7 +121,7 @@ bool CCalculator::DefineFunction(const string &fnName, const string &identifier)
 	return false;
 }
 
-double CCalculator::GetValueFn(const string & fnName)
+double CCalculator::GetValueFn(const string & fnName) const
 {
 	if (m_functionNameList.find(fnName)->second.wasTwoOperands == false)
 	{
@@ -157,7 +157,8 @@ double CCalculator::GetValueFn(const string & fnName)
 	{
 		return NAN;
 	}
-	return  CalculateFunction(firstValue, information.operation, secondValue);
+	
+	return CalculateFunction(firstValue, information.operation, secondValue);
 }
 
 

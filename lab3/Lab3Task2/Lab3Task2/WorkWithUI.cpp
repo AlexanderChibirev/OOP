@@ -117,7 +117,7 @@ bool CWorkWithUI::Let(std::istream & args)
 	}
 	else
 	{
-		m_calculator.SetVariableValue(variable, value);//
+		m_calculator.SetVariableValue(variable, value);
 	}
 	return true;
 }
@@ -134,7 +134,7 @@ bool CWorkWithUI::Printfns(std::istream & args)
 		else
 		{
 			cout << iter->first << ":";
-			printf("%.2f\n", m_calculator.GetValueFn(iter->first ));
+			printf("%.2f\n", m_calculator.GetValueFn(iter->first));
 		}
 	}
 	return true;
