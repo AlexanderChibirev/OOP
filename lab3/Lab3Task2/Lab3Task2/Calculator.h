@@ -35,11 +35,10 @@ public:
 	bool DefineFunction(const string &fnName, const string &firstValue, const OperationType &, const string & secondValue);
 	bool DefineFunction(const string &fnName, const string &firstValue);
 
-	double GetValueFn(const string & fnName) const ;
+	boost::optional<double>  GetFunctionsValue(const string & fnName) const ;
 	boost::optional<double>  GetValue(const string &identifier) const;
 private:
-	double CalculateFunction(double firstValue, const OperationType &operation, double secondValue) const;
-	double GetVariableValue(const string & varName) const;
+	double  CalculateFunction(double firstValue, const OperationType &operation, double secondValue) const;
 	bool IsVariableDefined(const string & variable) const;
 	bool IsFunctionDefined(const string & functionName) const;
 private:

@@ -66,7 +66,7 @@ bool CWorkWithUI::Printvars(std::istream & args)
 		else
 		{
 			cout << iter->first << ":";
-			printf("%.2f\n", iter->second);
+			cout << std::fixed <<std::setprecision(2) << iter->second << endl;
 		}
 	}
 	return true;
@@ -86,7 +86,7 @@ bool  CWorkWithUI::Print(std::istream & args)
 	}
 	else 
 	{
-		printf("%.2f\n", m_calculator.GetValue(line).get());
+		cout << std::fixed << std::setprecision(2) << m_calculator.GetValue(line).get() << endl;
 	}
 	return true;
 }
@@ -126,7 +126,7 @@ bool CWorkWithUI::Printfns(std::istream & args)
 {
 	for (CCalculator::ConstIteratorForFunctionsList iter = m_calculator.BeginItForFunctionList(); iter != m_calculator.EndItForFunctionList(); ++iter)
 	{
-		if (isnan(m_calculator.GetValueFn(iter->first)))
+		if (isnan(m_calculator.GetFunctionsValue(iter->first).get()))
 		{
 			cout << iter->first << ":" << "nan" << endl;
 
@@ -134,7 +134,7 @@ bool CWorkWithUI::Printfns(std::istream & args)
 		else
 		{
 			cout << iter->first << ":";
-			printf("%.2f\n", m_calculator.GetValueFn(iter->first));
+			cout << std::fixed << std::setprecision(2) << m_calculator.GetFunctionsValue(iter->first).get() << endl;
 		}
 	}
 	return true;

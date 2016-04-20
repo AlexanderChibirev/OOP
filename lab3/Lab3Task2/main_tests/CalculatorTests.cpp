@@ -76,10 +76,17 @@ BOOST_FIXTURE_TEST_SUITE(Calculator, CalculatorFixture)
 		{
 			BOOST_CHECK(calculator.SetVariableValue("v", 42));
 			BOOST_CHECK(calculator.DefineFunction("function", "v"));
-			BOOST_CHECK_EQUAL(calculator.GetValueFn("function"), 42);
+			BOOST_CHECK_EQUAL(calculator.GetFunctionsValue("function").get(), 42);
 			BOOST_CHECK(calculator.SetVariableValue("v", 43));
-			BOOST_CHECK_EQUAL(calculator.GetValueFn("function"), 43);
+			BOOST_CHECK_EQUAL(calculator.GetFunctionsValue("function").get(), 43);
 		}
+		/*BOOST_AUTO_TEST_CASE(test_for_defineFunction)
+		{
+			BOOST_CHECK(calculator.SetVariableValue("v", 2));
+			BOOST_CHECK(calculator.DefineFunction("y", "v"));
+			BOOST_CHECK(calculator.SetVariableValue("x", 2));
+			BOOST_CHECK(calculator.DefineFunction("s", "y", OperationType::ADD, "x"));
+		}*/
 		BOOST_AUTO_TEST_SUITE_END()
 
 
@@ -144,7 +151,7 @@ BOOST_FIXTURE_TEST_SUITE(Calculator, CalculatorFixture)
 				map <string, double> functionList;
 				for (CCalculator::ConstIteratorForFunctionsList iter = calculator.BeginItForFunctionList(); iter != calculator.EndItForFunctionList(); ++iter)
 				{
-					functionList[iter->first] = calculator.GetValueFn(iter->first);
+					functionList[iter->first] = calculator.GetFunctionsValue(iter->first).get();
 				}
 				BOOST_CHECK(functionList == functionListTest);
 			}
@@ -157,7 +164,7 @@ BOOST_FIXTURE_TEST_SUITE(Calculator, CalculatorFixture)
 						BOOST_CHECK(calculator.DefineFunction("radiusSquared", "radius", OperationType::MUL, "radius"));
 						BOOST_CHECK(calculator.DefineFunction("circleArea", "pi", OperationType::MUL, "radiusSquared"));
 						BOOST_CHECK(calculator.SetVariableValue("radius", 10));
-						BOOST_CHECK_CLOSE(calculator.GetValueFn("circleArea"), 314.15, 1e-2);
+						BOOST_CHECK_CLOSE(calculator.GetFunctionsValue("circleArea").get(), 314.15, 1e-2);
 					}
 					BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
