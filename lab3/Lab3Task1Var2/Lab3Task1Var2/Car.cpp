@@ -82,7 +82,7 @@ bool CCar::SetGear(int gear)
 		else if ((gear == 1) && (m_speed > 0 && m_speed <= 30) && m_gearshift != -1 ||
 			((gear == 1) && (m_speed == 0)) ||
 			((gear == 2) && (m_speed >= 20 && m_speed <= 50) && m_gearshift != -1)||
-			(gear == 3) && (m_speed >= 30 && m_speed <= 60)||
+			(gear == 3) && (m_speed >= 30 && m_speed < 60)||
 			(gear == 4) && (m_speed >= 40 && m_speed <= 90)||
 			(gear == 5) && (m_speed >= 50 && m_speed <= 150)|| 
 			((gear == 0) && m_gearshift > 0))

@@ -23,7 +23,7 @@ public:
 private:
 	bool m_engineState;
 	int	m_speed; 
-	int m_gearshift ; //передача
+	int m_gearshift;
 	MoveDirection m_moveDirection;
 };
 
