@@ -80,45 +80,69 @@ BOOST_AUTO_TEST_SUITE(DivisionDoubleNumbers)
 		BOOST_CHECK_CLOSE(r.ToDouble(), 0.333333, 1e-1);
 
 	}
+	BOOST_AUTO_TEST_CASE(cant_have_zero_denominator)
+	{
+		BOOST_REQUIRE_THROW(CRational(1, 0), std::invalid_argument);
+	}
 BOOST_AUTO_TEST_SUITE_END()
 //////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 2. Реализовать унарный + и унарный -
 BOOST_AUTO_TEST_SUITE(TestUnaryMinusReturnsTheDifferenceOfTwoRationalNumbers)
-BOOST_AUTO_TEST_CASE(rational_number_and_integer)
-{
-	VerifyRational(+CRational(2, 3), 2, 3);
-}
-BOOST_AUTO_TEST_CASE(rational_number_with_integer)
-{
-	VerifyRational(+CRational(-2, 3), -2, 3);
-}
-BOOST_AUTO_TEST_CASE(integer_and_rational)
-{
-	VerifyRational(+CRational(2, -3), -2, 3);
-}
+	BOOST_AUTO_TEST_CASE(rational_number_and_integer)
+	{
+		VerifyRational(+CRational(2, 3), 2, 3);
+	}
+	BOOST_AUTO_TEST_CASE(rational_number_with_integer)
+	{
+		VerifyRational(+CRational(-2, 3), -2, 3);
+	}
+	BOOST_AUTO_TEST_CASE(integer_and_rational)
+	{
+		VerifyRational(+CRational(2, -3), -2, 3);
+	}
 BOOST_AUTO_TEST_SUITE_END()
 /////////////////////////////////////////////////////////////////
-BOOST_AUTO_TEST_SUITE(TestUnaryPlusReturnsTheResultOfAdditionTwo)
-BOOST_AUTO_TEST_CASE(rational_numbers)
-{
-	VerifyRational(+CRational(2, 3), 2, 3);
-}
-BOOST_AUTO_TEST_CASE(rational_number_with_integer)
-{
-	VerifyRational(+CRational(-2, 3), -2, 3);
-}
-BOOST_AUTO_TEST_CASE(integer_nuber_with_rational)
-{
-	VerifyRational(+CRational(2, -3), -2, 3);
-}
+BOOST_AUTO_TEST_SUITE(TestUnaryPlusReturnsTheResultOfAdditionTwoNum)
+	BOOST_AUTO_TEST_CASE(rational_numbers)
+	{
+		VerifyRational(+CRational(2, 3), 2, 3);
+	}
+	BOOST_AUTO_TEST_CASE(rational_number_with_integer)
+	{
+		VerifyRational(+CRational(-2, 3), -2, 3);
+	}
+	BOOST_AUTO_TEST_CASE(integer_nuber_with_rational)
+	{
+		VerifyRational(+CRational(2, -3), -2, 3);
+	}
 BOOST_AUTO_TEST_SUITE_END()
 //////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 3. Реализовать бинарный +
+BOOST_AUTO_TEST_SUITE(TestBinaryPlusReturnsTheResultOfAdditionTwoNum)
+	BOOST_AUTO_TEST_CASE(rational_numbers)
+	{
+		VerifyRational(CRational(1, 2) + CRational(1, 6), 2, 3);
+	}
 
+	BOOST_AUTO_TEST_CASE(rational_number_with_integer)
+	{
+		VerifyRational(CRational(1, 2) + 1, 3, 2);
+	}
+	BOOST_AUTO_TEST_CASE(integer_nuber_with_rational)
+	{
+		VerifyRational(1 + CRational(1, 2), 3, 2);
+	}
+	BOOST_AUTO_TEST_CASE(does_not_changed_when_zero_is_added)
+	{
+		VerifyRational(CRational(1, 2) + CRational(), 1, 2);
+		VerifyRational(CRational(1, 2) + 0, 1, 2);
+		VerifyRational(0 + CRational(1, 2), 1, 2);
+	}
+BOOST_AUTO_TEST_SUITE_END()
 // Возвращает результат сложения двух рациональных чисел, 
 //	рационального числа с целым, целого числа с рациональным.
 //	(1/2) + (1/6) = (2/3)
@@ -128,6 +152,26 @@ BOOST_AUTO_TEST_SUITE_END()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 4. Реализовать бинарный -
+BOOST_AUTO_TEST_SUITE(TestBinaryMinusReturnsTheResultDifferenceTtwoRationalNumbers)
+	BOOST_AUTO_TEST_CASE(rational_numbers)
+	{
+		VerifyRational(CRational(1, 2) - CRational(1, 6), 1, 3);
+	}
+
+	BOOST_AUTO_TEST_CASE(rational_number_and_integer)
+	{
+		VerifyRational(1 - CRational(1, 2), 1, 2);
+	}
+	BOOST_AUTO_TEST_CASE(integer_nuber_and_rational)
+	{
+		VerifyRational(CRational(1, 2) - 1, -1, 2);
+	}
+	BOOST_AUTO_TEST_CASE(does_not_changed_when_subtracts_zero)
+	{
+		VerifyRational(CRational(1, 2) - CRational(), 1, 2);
+		VerifyRational(CRational(1, 2) - 0, 1, 2);
+	}
+BOOST_AUTO_TEST_SUITE_END()
 // Возвращает разность двух рациональных чисел, 
 //	рационального числа и целого, либо целого числа и рационального:
 //	(1/2) - (1/6) = (1/3)
@@ -166,19 +210,18 @@ BOOST_AUTO_TEST_SUITE_END()
 //////////////////////////////////////////////////////////////////////////
 // TODO: 6. Реализовать оператор -=
 BOOST_AUTO_TEST_SUITE(TestUnaryMinus)
-BOOST_AUTO_TEST_CASE(subtract_floating_point_integer)
-{
-	CRational minuend(1, 2);
-
-	minuend -= CRational(1, 6);
-	VerifyRational(minuend, 1, 3);
-}
-BOOST_AUTO_TEST_CASE(subtract_integer)
-{
-	CRational minuend = CRational(1, 2);
-	minuend -= 1;
-	VerifyRational(minuend, -1, 2);
-}
+	BOOST_AUTO_TEST_CASE(subtract_floating_point_integer)
+	{
+		CRational minuend(1, 2);
+		minuend -= CRational(1, 6);
+		VerifyRational(minuend, 1, 3);
+	}
+	BOOST_AUTO_TEST_CASE(subtract_integer)
+	{
+		CRational minuend = CRational(1, 2);
+		minuend -= 1;
+		VerifyRational(minuend, -1, 2);
+	}
 BOOST_AUTO_TEST_SUITE_END()
 // Выполняет уменьшение рационального числа на величину второго рационального либо целого числа :
 // (1/2) -= (1/6)  → (1/3)
@@ -187,9 +230,24 @@ BOOST_AUTO_TEST_SUITE_END()
 
 
 
-
 //////////////////////////////////////////////////////////////////////////
 // TODO: 7. Реализовать оператор *
+BOOST_AUTO_TEST_SUITE(TestMultiplicationReturnsTheResultTheProduct)
+	BOOST_AUTO_TEST_CASE(rational_num)
+	{
+		VerifyRational( (CRational(1, 2) * CRational(2, 3)), 1, 3);
+	}
+
+	BOOST_AUTO_TEST_CASE(rational_and_integer)
+	{
+		VerifyRational( (CRational(1, 2) * CRational(-3)), -3, 2);
+	}
+
+	BOOST_AUTO_TEST_CASE(integer_and_rational)
+	{
+		VerifyRational( (CRational(7) *  CRational(2) / CRational(3)), 14, 3);
+	}
+BOOST_AUTO_TEST_SUITE_END()
 // Возвращает результат произведения рациональных чисел, 
 //	рационального и целого, либо целого и рационального :
 //	(1/2) * (2/3) = (1/3)
@@ -203,6 +261,27 @@ BOOST_AUTO_TEST_SUITE_END()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 8. Реализовать оператор /
+BOOST_AUTO_TEST_SUITE(TestDevisionReturnsTheResultQuotientOfTwoNum)
+	BOOST_AUTO_TEST_CASE(rational_num)
+	{
+		VerifyRational((CRational(1, 2) / CRational(2, 3)), 3, 4);
+	}
+
+	BOOST_AUTO_TEST_CASE(rational_and_integer)
+	{
+		VerifyRational( (CRational(1, 2) / CRational(5)), 1, 10);
+	}
+
+	BOOST_AUTO_TEST_CASE(integer_and_rational)
+	{
+		VerifyRational( (CRational(7) / CRational(1, 2)), 14, 1);
+	}
+	BOOST_AUTO_TEST_CASE(can_not_divide_by_zero)
+	{
+		BOOST_REQUIRE_THROW(CRational(1, 2) / CRational(0, 1), std::invalid_argument);
+		BOOST_REQUIRE_THROW(CRational(1, 2) / CRational(0), std::invalid_argument);
+	}
+BOOST_AUTO_TEST_SUITE_END()
 // Возвращает частное двух рациональных чисел, 
 //	рационального и целого, целого и рационального :
 //	(1/2) ⁄ (2/3) = (3/4)
@@ -216,6 +295,16 @@ BOOST_AUTO_TEST_SUITE_END()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 9. Реализовать оператор *=
+BOOST_AUTO_TEST_SUITE(TestMultiplication)
+	BOOST_AUTO_TEST_CASE(multiplication_floating_point_integer)
+	{		
+		VerifyRational( (CRational(1, 2) *= CRational(2, 3)), 1, 3);
+	}
+	BOOST_AUTO_TEST_CASE(multiplication_integer)
+	{
+		VerifyRational((CRational(1, 2) *= 3), 3, 2);
+	}
+BOOST_AUTO_TEST_SUITE_END()
 // Умножает значение первого рационального числа на другое рациональное, 
 //	либо целое:
 //	(1/2) *= (2/3) → (1/3)
@@ -228,6 +317,20 @@ BOOST_AUTO_TEST_SUITE_END()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 10. Реализовать оператор /=
+BOOST_AUTO_TEST_SUITE(TestDevision)
+	BOOST_AUTO_TEST_CASE(division_floating_point_integer)
+	{
+		VerifyRational( (CRational(1, 2) /= CRational(2, 3)), 3, 4);
+	}
+	BOOST_AUTO_TEST_CASE(division_integer)
+	{
+		VerifyRational((CRational(1, 2) /= 3), 1, 6);
+	}
+	BOOST_AUTO_TEST_CASE(can_not_divide_rational_and_zero)
+	{
+		BOOST_REQUIRE_THROW(CRational(1, 2) / CRational(0,1), std::invalid_argument);
+	}
+BOOST_AUTO_TEST_SUITE_END()
 // Делит первое рациональное число на другое рациональное, 
 //	либо целое:
 //	(1/2) /= (2/3) → (3/4)
@@ -239,6 +342,23 @@ BOOST_AUTO_TEST_SUITE_END()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 11. Реализовать операторы == и !=
+BOOST_AUTO_TEST_SUITE(CheckEqualityAndInequalityTwoNum)
+	BOOST_AUTO_TEST_CASE(rational)
+	{
+		BOOST_CHECK(CRational(1, 2) == CRational(1, 2));
+		BOOST_CHECK(!(CRational(1, 2) == CRational(2, 3)));
+	}
+	BOOST_AUTO_TEST_CASE(rational_and_integer)
+	{
+		BOOST_CHECK(CRational(4, 1) == CRational(4));
+		BOOST_CHECK(!(CRational(1, 2) == CRational(7)));
+	}
+	BOOST_AUTO_TEST_CASE(integer_and_rational)
+	{
+		BOOST_CHECK(CRational(4) == CRational(4, 1));
+		BOOST_CHECK(!(CRational(3) == CRational(2,3)));
+	}
+BOOST_AUTO_TEST_SUITE_END()
 // Проверяют равенство (и неравенство) двух рациональных чисел, 
 //	целого и рационального, рационального и целого:
 //	(1/2) == (1/2) → true
@@ -254,6 +374,65 @@ BOOST_AUTO_TEST_SUITE_END()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 12. Реализовать операторы <, >, <=, >=
+BOOST_AUTO_TEST_SUITE(OperatorLarger)
+	BOOST_AUTO_TEST_CASE(larger_rational)
+	{
+		BOOST_CHECK(CRational(2, 1) > CRational(1, 2));
+	}
+	BOOST_AUTO_TEST_CASE(larger_rational_and_integer)
+	{
+		BOOST_CHECK(CRational(4, 1) > CRational(3));
+	}
+	BOOST_AUTO_TEST_CASE(larger_integer_and_rational)
+	{
+		BOOST_CHECK(CRational(3) > CRational(2, 3));
+	}
+BOOST_AUTO_TEST_SUITE_END()
+/////////////////////////////////////////////////////////
+BOOST_AUTO_TEST_SUITE(OperatorLess)
+	BOOST_AUTO_TEST_CASE(less_rational)
+	{
+		BOOST_CHECK(CRational(1, 2) < CRational(2, 1));
+	}
+	BOOST_AUTO_TEST_CASE(less_rational_and_integer)
+	{
+		BOOST_CHECK(!(CRational(4, 1) < CRational(1)));
+	}
+	BOOST_AUTO_TEST_CASE(less_integer_and_rational)
+	{
+		BOOST_CHECK(!(CRational(4) < CRational(1, 4)));
+	}
+BOOST_AUTO_TEST_SUITE_END()
+///////////////////////////////////////////////////////
+BOOST_AUTO_TEST_SUITE(OperatorLessOrEquality)
+	BOOST_AUTO_TEST_CASE(Less_or_equality_rational)
+	{
+		BOOST_CHECK(!(CRational(1, 2) <= CRational(1, 3)));
+	}
+	BOOST_AUTO_TEST_CASE(Less_or_equality_rational_and_integer)
+	{
+		BOOST_CHECK(CRational(3) <= CRational(7,2));
+	}
+	BOOST_AUTO_TEST_CASE(Less_or_equality_integer_and_rational)
+	{
+		BOOST_CHECK(!(CRational(7,2) <= CRational(3)));
+	}
+BOOST_AUTO_TEST_SUITE_END()
+///////////////////////////////////////////////////
+BOOST_AUTO_TEST_SUITE(OperatorLargerOrEquality)
+	BOOST_AUTO_TEST_CASE(larger_or_equality_rational)
+	{
+		BOOST_CHECK(CRational(1, 2) >= CRational(1, 3));
+	}
+BOOST_AUTO_TEST_CASE(larger_or_equality_rational_and_integer)
+	{
+		BOOST_CHECK(CRational(8, 2) >= CRational(3));
+	}
+	BOOST_AUTO_TEST_CASE(larger_or_equality_integer_and_rational)
+	{
+		BOOST_CHECK(!(CRational(3) >= CRational(8, 2)));
+	}
+BOOST_AUTO_TEST_SUITE_END()
 // Сравнивают два рациональных числа, рациональное с целым, 
 //	целое с рациональным:
 //	(1/2) >= (1/3) → true
@@ -269,8 +448,17 @@ BOOST_AUTO_TEST_SUITE_END()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 13. Реализовать оператор вывода рационального числа в выходной поток 
+BOOST_AUTO_TEST_SUITE(TestOutstream)
+BOOST_AUTO_TEST_CASE(can_write_into_output_stream)
+{
+	std::ostringstream outstream = std::ostringstream();
+	outstream << CRational(7, 15);
+	BOOST_CHECK_EQUAL(outstream.str(), "7/15");
+}
+BOOST_AUTO_TEST_SUITE_END()
 //	std::ostream в формате <числитель>/<знаменатель>, 
 //	например: 7/15
+
 //////////////////////////////////////////////////////////////////////////
 
 
@@ -278,6 +466,15 @@ BOOST_AUTO_TEST_SUITE_END()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 14. Реализовать оператор ввода рационального числа из входного потока 
+BOOST_AUTO_TEST_SUITE(TestInstream)
+BOOST_AUTO_TEST_CASE(can_read_from_input_stream)
+{
+	std::istringstream instream = std::istringstream("7/15");
+	CRational rational;
+	instream >> rational;
+	VerifyRational(rational, 7, 15);
+}
+BOOST_AUTO_TEST_SUITE_END()
 //	std::istream в формате <числитель>/<знаменатель>, 
 //	например: 7/15
 //////////////////////////////////////////////////////////////////////////
