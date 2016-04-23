@@ -3,13 +3,9 @@
 #include <memory>
 #include <vector>
 #include <boost/iterator/indirect_iterator.hpp>
-
-
-
 #include <list>
 #include <vector>
 #include <deque>
-
 #include <boost/range/functions.hpp>
 
 using namespace std;
@@ -39,8 +35,8 @@ public:
 	boost::optional<double>  GetValue(const string &identifier) const;
 private:
 	double  CalculateFunction(double firstValue, const OperationType &operation, double secondValue) const;
-	bool IsVariableDefined(const string & variable) const;
-	bool IsFunctionDefined(const string & functionName) const;
+	boost::optional<OperationsFunction> GetOperationsFunction(const string & functionName) const;
+	boost::optional<double> GetVariableValue(const string &identifier) const;
 private:
 	map <string, double> m_variableNameList;
 	map <string, OperationsFunction> m_functionNameList;

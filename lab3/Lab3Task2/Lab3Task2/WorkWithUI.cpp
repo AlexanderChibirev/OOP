@@ -111,9 +111,12 @@ bool CWorkWithUI::Let(std::istream & args)
 		cout << "First symbol variable name is not letter, variable name must not start with a digit\nRead help please\n";
 		return false;
 	}
-	if(isdigit(value[0]))
+	if (isdigit(value[0]))
 	{
-		m_calculator.SetVariableValue(variable, atof(value.c_str()));
+		if (!m_calculator.SetVariableValue(variable, atof(value.c_str()))) 
+		{
+			cout << "variable can not be set to other undeclared variable";
+		}
 	}
 	else
 	{
@@ -191,7 +194,7 @@ bool CWorkWithUI::Fn(std::istream & args)
 		var.append(line, posForNameSplit+1, line.length());
 		if (!m_calculator.DefineFunction(fnName, var))
 		{
-			cout << "функция не может вычислять цифры, потому что их нет в списках переменных\n";
+			cout << "incorrect expression" << endl;
 		}
 	}
 	return true;
