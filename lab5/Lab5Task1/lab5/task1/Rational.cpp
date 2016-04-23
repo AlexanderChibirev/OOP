@@ -6,10 +6,6 @@ CRational::CRational(int numerator, int denominator)
 	: m_numerator(numerator)
 	, m_denominator(denominator)
 {
-	if(denominator == 0)
-	{
-		throw std::invalid_argument("denominator must not be equal to zero");
-	}
 	if (denominator < 0)
 	{
 		m_numerator = -m_numerator;
@@ -34,14 +30,6 @@ void CRational::Normalize()
 	m_numerator /= gcd;
 	m_denominator /= gcd;
 }
-CRational & CRational::operator-=(CRational const & difference)
-{
-	m_numerator *= difference.GetDenominator();
-	m_numerator -= m_denominator * difference.GetNumerator();
-	m_denominator *= difference.GetDenominator();
-	Normalize();
-	return *this;
-}
 unsigned GCD(unsigned a, unsigned b)
 {
 	while (b != 0)
@@ -52,19 +40,12 @@ unsigned GCD(unsigned a, unsigned b)
 	return (a != 0) ? a : 1;
 }
 
-
+//////////////////////////////////////////////////////////////////////////
+// TODO: 1. Реализовать метод ToDouble() согласно заданию
 double CRational::ToDouble()
 {
 	return double(m_numerator) / double(m_denominator);
 }
-
-//std::string CRational::OperatorSub(double minuend, double subtrahend)
-//{
-//	
-//}
-
-//////////////////////////////////////////////////////////////////////////
-// TODO: 1. Реализовать метод ToDouble() согласно заданию
 //////////////////////////////////////////////////////////////////////////
 
 
@@ -72,6 +53,15 @@ double CRational::ToDouble()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 2. Реализовать унарный + и унарный -
+
+CRational const CRational::operator-()const
+{
+	return CRational(-m_numerator, m_denominator);
+}
+CRational const CRational::operator+()const
+{
+	return *this;
+}
 //////////////////////////////////////////////////////////////////////////
 
 
@@ -79,6 +69,12 @@ double CRational::ToDouble()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 3. Реализовать бинарный +
+CRational const operator +(CRational const &rational1, CRational const &rational2)
+{
+	return (CRational((rational1.GetNumerator() * rational2.GetDenominator())
+		+ (rational2.GetNumerator() * rational1.GetDenominator()),
+		rational1.GetDenominator() * rational2.GetDenominator()));
+}
 //////////////////////////////////////////////////////////////////////////
 
 
@@ -86,6 +82,10 @@ double CRational::ToDouble()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 4. Реализовать бинарный -
+CRational const operator -(CRational const &rational1, CRational const &rational2)
+{
+	return rational1 + -rational2;
+}
 //////////////////////////////////////////////////////////////////////////
 
 
@@ -93,6 +93,14 @@ double CRational::ToDouble()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 5. Реализовать оператор +=
+CRational & CRational::operator+=(CRational const& difference)
+{
+	m_numerator *= difference.GetDenominator();
+	m_numerator += m_denominator * difference.GetNumerator();
+	m_denominator *= difference.GetDenominator();
+	Normalize();
+	return *this;
+}
 //////////////////////////////////////////////////////////////////////////
 
 
@@ -100,6 +108,14 @@ double CRational::ToDouble()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 6. Реализовать оператор -=
+CRational & CRational::operator-=(CRational const & difference)
+{
+	m_numerator *= difference.GetDenominator();
+	m_numerator -= m_denominator * difference.GetNumerator();
+	m_denominator *= difference.GetDenominator();
+	Normalize();
+	return *this;
+}
 //////////////////////////////////////////////////////////////////////////
 
 
@@ -135,6 +151,15 @@ double CRational::ToDouble()
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 11. Реализовать операторы == и !=
+bool operator == (CRational const & rational1, CRational const & rational2)
+{
+	return (rational1.GetNumerator() == rational2.GetNumerator()) && (rational1.GetDenominator() == rational2.GetDenominator());
+}
+
+bool operator != (CRational const & rational1, CRational const & rational2)
+{
+	return !(rational1 == rational2);
+}
 //////////////////////////////////////////////////////////////////////////
 
 

@@ -63,72 +63,68 @@ BOOST_AUTO_TEST_SUITE(Rational_number)
 	
 //////////////////////////////////////////////////////////////////////////
 // TODO: 1. Реализовать метод ToDouble() согласно заданию
-// Возвращает отношение числителя и знаменателя в виде числа double
-// Пример использования:
-//	CRational r(3, 5)
-//	cout << r.ToDouble(); // Должно вывести 0.6
-//////////////////////////////////////////////////////////////////////////
+BOOST_AUTO_TEST_SUITE(DivisionDoubleNumbers)
+	BOOST_AUTO_TEST_CASE(TestThenRaditionalNum)
+	{
+		CRational r(3, 5);
+		BOOST_CHECK_CLOSE(r.ToDouble(), 0.6, 1e-10);
+	}
+	BOOST_AUTO_TEST_CASE(TestThenNumerationIsZero)
+	{
+		CRational r(0, 4);
+		BOOST_CHECK_CLOSE(r.ToDouble(), 0, 1e-10);
+	}
+	BOOST_AUTO_TEST_CASE(TestThenResultMustBeRational)
+	{
+		CRational r(1, 3);
+		BOOST_CHECK_CLOSE(r.ToDouble(), 0.333333, 1e-1);
 
-	BOOST_AUTO_TEST_SUITE(DivisionDoubleNumbers)
-		BOOST_AUTO_TEST_CASE(ThenRaditionalNum)
-		{
-			CRational r(3, 5);
-			BOOST_CHECK_CLOSE(r.ToDouble(), 0.6, 1e-10);
-		}
-		BOOST_AUTO_TEST_CASE(TestThenNumerationIsZero)
-		{
-			CRational r(0, 4);
-			BOOST_CHECK_CLOSE(r.ToDouble(), 0, 1e-10);
-		}
-		BOOST_AUTO_TEST_CASE(TestThenResultMustBeRational)
-		{
-			CRational r(1, 3);
-			BOOST_CHECK_CLOSE(r.ToDouble(), 0.333333, 1e-1);
-		
-		}
-		BOOST_AUTO_TEST_SUITE_END()
-		BOOST_AUTO_TEST_SUITE(TestUnaryDifference)
-			BOOST_AUTO_TEST_CASE(MinuendMinusSubtrahend)
-		{
-			CRational minuend(1, 2);
-			CRational subtrahend(1, 6);
-			minuend -= subtrahend;
-			BOOST_CHECK_EQUAL(minuend.GetNumerator(), 1);
-		}
-		BOOST_AUTO_TEST_SUITE_END()
+	}
+BOOST_AUTO_TEST_SUITE_END()
+//////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 2. Реализовать унарный + и унарный -
-// Указание: см. материалы к лекции
-// Пример использования:
-//	const CRational r1(3, 5);
-//	CRational r2 = -r1; // r2 должно стать -3/5
-//	assert(r2.GetNumerator(), -3);
-//	assert(r2.GetDenominator(), 5);
-//	CRational r3 = +r2; // r3 также равно -3/5
-//	assert(r3.GetNumerator(), -3);
-//	assert(r3.GetDenominator(), 5);
-// Унарный минус возвращает раицональное число без знака
-// Унарный плюс возвращает рациональное число, равное текущему
-// Реализация не должна допускать операции вроде:
-//  -someRational = someOtherRational;
-//	+someRational = someOtherRational;
+BOOST_AUTO_TEST_SUITE(TestUnaryMinusReturnsTheDifferenceOfTwoRationalNumbers)
+BOOST_AUTO_TEST_CASE(rational_number_and_integer)
+{
+	VerifyRational(+CRational(2, 3), 2, 3);
+}
+BOOST_AUTO_TEST_CASE(rational_number_with_integer)
+{
+	VerifyRational(+CRational(-2, 3), -2, 3);
+}
+BOOST_AUTO_TEST_CASE(integer_and_rational)
+{
+	VerifyRational(+CRational(2, -3), -2, 3);
+}
+BOOST_AUTO_TEST_SUITE_END()
+/////////////////////////////////////////////////////////////////
+BOOST_AUTO_TEST_SUITE(TestUnaryPlusReturnsTheResultOfAdditionTwo)
+BOOST_AUTO_TEST_CASE(rational_numbers)
+{
+	VerifyRational(+CRational(2, 3), 2, 3);
+}
+BOOST_AUTO_TEST_CASE(rational_number_with_integer)
+{
+	VerifyRational(+CRational(-2, 3), -2, 3);
+}
+BOOST_AUTO_TEST_CASE(integer_nuber_with_rational)
+{
+	VerifyRational(+CRational(2, -3), -2, 3);
+}
+BOOST_AUTO_TEST_SUITE_END()
 //////////////////////////////////////////////////////////////////////////
-
-
-
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 3. Реализовать бинарный +
+
 // Возвращает результат сложения двух рациональных чисел, 
 //	рационального числа с целым, целого числа с рациональным.
 //	(1/2) + (1/6) = (2/3)
 //	(1/2) + 1     = (3/2)
 //	1 + (1/2)     = (3/2)
 //////////////////////////////////////////////////////////////////////////
-
-
-
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 4. Реализовать бинарный -
@@ -144,6 +140,20 @@ BOOST_AUTO_TEST_SUITE(Rational_number)
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 5. Реализовать оператор +=
+BOOST_AUTO_TEST_SUITE(TestUnaryPlus)
+	BOOST_AUTO_TEST_CASE(addition_floating_point_integer)
+	{
+		CRational rational = CRational(1, 2);
+		rational += CRational(1, 6);
+		VerifyRational(rational, 2, 3);
+	}
+	BOOST_AUTO_TEST_CASE(addition_integer)
+	{
+		CRational rational = CRational(1, 2);
+		rational += 1;
+		VerifyRational(rational, 3, 2);
+	}
+BOOST_AUTO_TEST_SUITE_END()
 // Выполняет увеличение рационального числа на величину второго рационального,
 //	либо целого числа:
 //	(1/2) += (1/6)  → (2/3)
@@ -155,6 +165,21 @@ BOOST_AUTO_TEST_SUITE(Rational_number)
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 6. Реализовать оператор -=
+BOOST_AUTO_TEST_SUITE(TestUnaryMinus)
+BOOST_AUTO_TEST_CASE(subtract_floating_point_integer)
+{
+	CRational minuend(1, 2);
+
+	minuend -= CRational(1, 6);
+	VerifyRational(minuend, 1, 3);
+}
+BOOST_AUTO_TEST_CASE(subtract_integer)
+{
+	CRational minuend = CRational(1, 2);
+	minuend -= 1;
+	VerifyRational(minuend, -1, 2);
+}
+BOOST_AUTO_TEST_SUITE_END()
 // Выполняет уменьшение рационального числа на величину второго рационального либо целого числа :
 // (1/2) -= (1/6)  → (1/3)
 // (1/2) -= 1      → (-1/2)
