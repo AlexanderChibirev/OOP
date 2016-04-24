@@ -6,8 +6,7 @@
 #include "GetParametrsShapes.h"
 #include "WriteResultInOutputFile.h"
 #include "GetProcessedData.h"
-#include "Definition.h"
-
+#include "ShapesContainer.h"
 
 void PrintHelp()
 {
@@ -62,8 +61,12 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	//string dataShapes = GetInformationAboutShapesFromUser();
-	InfoAboutShapes informationAboutShape = GetParametrsShapes(dataShapes);
-	string resultForWriteInFile = GetProcessedData(informationAboutShape.informationAboutShape);
+	CShapesContainer informationAboutShape = GetParametrsShapes(dataShapes);
+	for (auto &it : informationAboutShape.GetShapes())
+	{
+	//	it->
+	}
+	string resultForWriteInFile = GetProcessedData(informationAboutShape);
 	string outputFileName = argv[2];
 	if (!WriteResultInOutputFile(resultForWriteInFile, outputFileName))
 	{
@@ -72,7 +75,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////
-	sf::View view;
+	/*sf::View view;
 	sf::RenderWindow window(sf::VideoMode(800, 700), "SFML Shape");
 	view.reset(sf::FloatRect(0, 0, 800, 700));
 	sf::Clock clock;
@@ -101,7 +104,7 @@ int main(int argc, char** argv)
 			window.draw(*it);
 		}
 		window.display();
-	}
+	}*/
 	//////////////////////////////////////////////////////////////////////////////////////////
     return 0;
 }

@@ -1,5 +1,7 @@
 #pragma once
 #include "IShape.h"
+#include "ShapesContainer.h"
 
 
-string GetProcessedData(vector<shared_ptr<IShape>> &informationAboutShape);
+void MergeData(vector<shared_ptr<IShape>> const &informationAboutShape, string &data);
+string GetProcessedData(CShapesContainer &informationAboutShape);

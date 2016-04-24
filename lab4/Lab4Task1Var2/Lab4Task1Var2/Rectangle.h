@@ -6,16 +6,14 @@
 class CRectangle final :public ISolidShape
 {
 public:
-	CRectangle(std::shared_ptr<CDot> &m_dotTopLeftCorner, float wight, float height, std::string const & lineColor, std::string const & fillColor);
-	~CRectangle();
-	double GetAreaShape() const override;
-	double GetPerimeterShape() const override;
-	std::string GetNameShape() const override;
+	CRectangle(const sf::Vector2f &m_dotTopLeftCorner, float wight, float height, std::string const & lineColor, std::string const & fillColor);
+	double GetShapeArea() const override;
+	double GetShapePerimeter() const override;
+	std::string GetShapeData() const override;
 	std::string GetLineColor() const override;
 	std::string GetInnerRegion() const override;
-
 private:
-	std::shared_ptr<CDot> m_dotTopLeftCorner;
+	sf::Vector2f m_dotTopLeftCorner;
 	double m_wight;//ширина
 	double m_height;//высота давно пора запомнить пидр
 	std::string m_lineColor;

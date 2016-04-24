@@ -5,19 +5,15 @@
 class CCircle final : public ISolidShape
 {
 public:
-	CCircle(std::shared_ptr<CDot> &centerCircle, float &radius, std::string const & lineColor, std::string const & fillColor);
+	CCircle(const sf::Vector2f &centerCircle, float &radius, std::string const & lineColor, std::string const & fillColor);
 
-	double GetAreaShape() const override;
-	double GetPerimeterShape() const override;
-	std::string GetNameShape() const override;
+	double GetShapeArea() const override;
+	double GetShapePerimeter() const override;
+	std::string GetShapeData() const override;
 	std::string GetLineColor() const override;
 	std::string GetInnerRegion() const override;
-
-	~CCircle();
-
-
 private:
-	std::shared_ptr<CDot> m_centerCircle;
+	sf::Vector2f m_centerCircle;
 	double m_radius;
 	std::string m_lineColor;
 	std::string m_fillColor;

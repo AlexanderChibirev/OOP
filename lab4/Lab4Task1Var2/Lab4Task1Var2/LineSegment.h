@@ -6,17 +6,16 @@
 class CLineSegment : public IShape
 {
 public:
-	CLineSegment(shared_ptr<CDot> &dot1, shared_ptr<CDot> &dot2, const string &lineColor);
-	virtual std::string GetNameShape() const override;
+	CLineSegment(const sf::Vector2f &dot1, const sf::Vector2f &dot2, const string &lineColor);
+	virtual std::string GetShapeData() const override;
 	virtual std::string GetLineColor() const override;
-	virtual double GetAreaShape() const override;
-	virtual double GetPerimeterShape() const override;
+	virtual double GetShapeArea() const override;
+	virtual double GetShapePerimeter() const override;
 	double GetLengthLine() const;
-	~CLineSegment();
 private:
 	string m_lineColor;
-	shared_ptr<CDot> m_dot1;
-	shared_ptr<CDot> m_dot2;
+	sf::Vector2f  m_dot1;
+	sf::Vector2f  m_dot2;
 };
 //Надо принять их по shared ptr в конструктор
 //твои точки как это сделать? первый раз у меня))

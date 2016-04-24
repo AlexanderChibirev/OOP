@@ -157,8 +157,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IShapeSet.h" />
+    <ClInclude Include="ShapesContainer.h" />
     <ClInclude Include="Circle.h" />
-    <ClInclude Include="Definition.h" />
     <ClInclude Include="Dot.h" />
     <ClInclude Include="GetInformationAboutShapesFromFile.h" />
     <ClInclude Include="GetParametrsShapes.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="WriteResultInOutputFile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ShapesContainer.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Dot.cpp" />
     <ClCompile Include="GetInformationAboutShapesFromFile.cpp" />

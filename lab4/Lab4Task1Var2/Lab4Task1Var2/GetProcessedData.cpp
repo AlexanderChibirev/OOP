@@ -2,28 +2,29 @@
 #include "GetProcessedData.h"
 #include "IShape.h"
 
-string GetProcessedData(vector<shared_ptr<IShape>> &informationAboutShape)
+
+void MergeData(vector<shared_ptr<IShape>> const &informationAboutShape, string &data) 
 {
-	vector< pair<double, string> > area;
-	vector< pair<double, string> > perimeter;
-	int count = 1;
-	for (auto &it : informationAboutShape)
+	for (auto it : informationAboutShape)
 	{
-		perimeter.push_back(pair<double, string>(it->GetPerimeterShape(), it->GetNameShape()));
-		area.push_back(pair<double, string>(it->GetAreaShape(), it->GetNameShape()));
-		count++;
+		data += it->GetShapeData();
 	}
-	string result;
-	sort(area.begin(), area.end());
-	for (auto &it : area)
+}
+
+string GetProcessedData(CShapesContainer &informationAboutShape)
+{
+	string data;
+	auto repositoryAuxiliary = informationAboutShape.GetShapes();
+	sort(repositoryAuxiliary.begin(), repositoryAuxiliary.end(), [](shared_ptr<IShape> const &shape1, shared_ptr<IShape> const &shape2)
 	{
-		result += it.second + ": area = " + to_string(it.first) + "\n";
-	}
-	result += "\n";
-	sort(perimeter.rbegin(), perimeter.rend());
-	for (auto &it :perimeter)
+		return shape1->GetShapeArea() < shape2->GetShapeArea();
+	});
+	MergeData(informationAboutShape.GetShapes(), data);
+	data += "\n\n\n\n";
+	sort(repositoryAuxiliary.begin(), repositoryAuxiliary.end(), [](shared_ptr<IShape> const &shape1, shared_ptr<IShape> const &shape2)
 	{
-		result += it.second + ": perimeter = " + to_string(it.first) + "\n";
-	}
-	return result;
+		return shape1->GetShapePerimeter() > shape2->GetShapePerimeter();
+	});
+	MergeData(informationAboutShape.GetShapes(), data);
+	return data;
 }

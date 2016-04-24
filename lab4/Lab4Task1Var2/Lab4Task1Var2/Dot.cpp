@@ -5,19 +5,20 @@ CDot::CDot(const sf::Vector2f &coordinates)
 {
 
 }
-double CDot::GetAreaShape() const
+double CDot::GetShapeArea() const
 {
 	return double(0);
 }
 
-double CDot::GetPerimeterShape() const
+double CDot::GetShapePerimeter() const
 {
 	return double(0);
 }
 
-std::string CDot::GetNameShape() const
+std::string CDot::GetShapeData() const
 {
-	return "Dot";
+	return "Point: Coordinates <" + to_string(m_coordinates.x) + ", " + to_string(m_coordinates.y) + ">" \
+		+ " P = " + to_string(GetShapePerimeter()) + ", S = " + to_string(GetShapeArea()) + "\n";
 }
 
 sf::Vector2f CDot::GetCoordDot() const
@@ -28,8 +29,4 @@ sf::Vector2f CDot::GetCoordDot() const
 std::string CDot::GetLineColor() const
 {
 	return "Black";
-}
-
-CDot::~CDot()//заеб
-{
 }

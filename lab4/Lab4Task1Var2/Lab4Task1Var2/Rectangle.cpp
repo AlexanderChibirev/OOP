@@ -2,7 +2,7 @@
 #include "Rectangle.h"
 
 
-CRectangle::CRectangle(std::shared_ptr<CDot> &dotTopLeftCorner, float wight, float height, std::string const & lineColor, std::string const & fillColor)
+CRectangle::CRectangle(const sf::Vector2f &dotTopLeftCorner, float wight, float height, std::string const & lineColor, std::string const & fillColor)
 	:m_dotTopLeftCorner(dotTopLeftCorner),
 	m_fillColor(fillColor),
 	m_height(height),
@@ -13,17 +13,19 @@ CRectangle::CRectangle(std::shared_ptr<CDot> &dotTopLeftCorner, float wight, flo
 
 }
 
-double CRectangle::GetAreaShape() const
+double CRectangle::GetShapeArea() const
 {
 	return fabs(m_wight * m_height);
 }
-double CRectangle::GetPerimeterShape() const
+double CRectangle::GetShapePerimeter() const
 {
 	return  fabs(double(2) * (m_wight + m_height));
 }
-std::string CRectangle::GetNameShape() const 
+std::string CRectangle::GetShapeData() const 
 {
-	return "Rectangle";
+	return "Rectangle: Coordinates <" + to_string(m_dotTopLeftCorner.x) + ", " + to_string(m_dotTopLeftCorner.y) \
+		+ "> Wight = " + to_string(m_wight) + ", Height = " + to_string(m_height) + ", LineColor = " + GetLineColor() + "InnerRegion = "+ GetInnerRegion() \
+		+ ", P = "+ to_string(GetShapePerimeter()) + ", S = " + to_string(GetShapeArea()) + "\n";
 }
 std::string CRectangle::GetLineColor() const
 {
@@ -35,6 +37,3 @@ std::string CRectangle::GetInnerRegion() const
 }
 
 
-CRectangle::~CRectangle()
-{
-}

@@ -2,7 +2,7 @@
 #include "Triangle.h"
 
 
-CTriangle::CTriangle(shared_ptr<CDot> &point1, shared_ptr<CDot> &point2, shared_ptr<CDot> &point3, string const &lineColor, string const &fillColor)
+CTriangle::CTriangle(const sf::Vector2f &point1, const sf::Vector2f &point2, const sf::Vector2f &point3, string const &lineColor, string const &fillColor)
 	:m_lineColor(lineColor),
 	m_fillColor(fillColor),
 	m_point1(point1),
@@ -11,21 +11,25 @@ CTriangle::CTriangle(shared_ptr<CDot> &point1, shared_ptr<CDot> &point2, shared_
 {
 }
 
-double CTriangle::GetAreaShape() const
+double CTriangle::GetShapeArea() const
 {
-	return fabs(double(0.5)*((m_point1->GetCoordDot().x - m_point3->GetCoordDot().x) * (m_point2->GetCoordDot().y - m_point3->GetCoordDot().y) - \
-		(m_point2->GetCoordDot().x - m_point3->GetCoordDot().x) * (m_point1->GetCoordDot().y - m_point3->GetCoordDot().y)));
+	return fabs(double(0.5)*((m_point1.x - m_point3.x) * (m_point2.y - m_point3.y) - \
+		(m_point2.x - m_point3.x) * (m_point1.y - m_point3.y)));
 }
 
-double CTriangle::GetPerimeterShape() const
+double CTriangle::GetShapePerimeter() const
 {
-	return fabs(sqrt(pow((m_point2->GetCoordDot().x - m_point1->GetCoordDot().x), 2) + pow((m_point2->GetCoordDot().y - m_point1->GetCoordDot().y), 2)) + \
-		sqrt(pow((m_point3->GetCoordDot().x - m_point1->GetCoordDot().x), 2) + pow((m_point3->GetCoordDot().y - m_point1->GetCoordDot().y), 2)) + \
-		sqrt(pow((m_point3->GetCoordDot().x - m_point2->GetCoordDot().x), 2) + pow((m_point3->GetCoordDot().y - m_point2->GetCoordDot().y), 2)));
+	return fabs(sqrt(pow((m_point2.x - m_point1.x), 2) + pow((m_point2.y - m_point1.y), 2)) + \
+		sqrt(pow((m_point3.x - m_point1.x), 2) + pow((m_point3.y - m_point1.y), 2)) + \
+		sqrt(pow((m_point3.x - m_point2.x), 2) + pow((m_point3.y - m_point2.y), 2)));
 }
-std::string CTriangle::GetNameShape() const
+std::string CTriangle::GetShapeData() const
 {
-	return "Triangle";
+	return "Triangle: Coordinates point first<" + to_string(m_point1.x) + ", " + to_string(m_point1.y) \
+		+ ">, Coordinates point second<" + to_string(m_point2.x) + ", " + to_string(m_point2.y) \
+		+ ">, Coordinates point third <" + to_string(m_point3.x) + ", " + to_string(m_point3.y) \
+		+ ", LineColor = " + GetLineColor() + ", InnerRegion = " + GetInnerRegion() \
+		+ ", P = " + to_string(GetShapePerimeter()) + ", S = " + to_string(GetShapeArea()) + "\n";
 }
 std::string CTriangle::GetLineColor() const
 {
@@ -34,8 +38,4 @@ std::string CTriangle::GetLineColor() const
 std::string CTriangle::GetInnerRegion() const
 {
 	return m_fillColor;
-}
-
-CTriangle::~CTriangle()
-{
 }

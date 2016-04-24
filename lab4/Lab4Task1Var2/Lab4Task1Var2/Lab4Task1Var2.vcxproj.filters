@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ShapesView">
+      <UniqueIdentifier>{4284869b-fc43-40e1-808b-4128fe515258}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -57,7 +60,10 @@
     <ClInclude Include="GetInformationAboutShapesFromFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Definition.h">
+    <ClInclude Include="ShapesContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IShapeSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -93,6 +99,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GetInformationAboutShapesFromFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapesContainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
