@@ -2,7 +2,7 @@
 #include "Triangle.h"
 
 
-CTriangle::CTriangle(const sf::Vector2f &point1, const sf::Vector2f &point2, const sf::Vector2f &point3, string const &lineColor, string const &fillColor)
+CTriangle::CTriangle(const V2f &point1, const V2f &point2, const V2f &point3, string const &lineColor, string const &fillColor)
 	:m_lineColor(lineColor),
 	m_fillColor(fillColor),
 	m_point1(point1),
@@ -23,7 +23,7 @@ double CTriangle::GetShapePerimeter() const
 		sqrt(pow((m_point3.x - m_point1.x), 2) + pow((m_point3.y - m_point1.y), 2)) + \
 		sqrt(pow((m_point3.x - m_point2.x), 2) + pow((m_point3.y - m_point2.y), 2)));
 }
-std::string CTriangle::GetShapeData() const
+std::string CTriangle::ToString() const
 {
 	return "Triangle: Coordinates point first<" + to_string(m_point1.x) + ", " + to_string(m_point1.y) \
 		+ ">, Coordinates point second<" + to_string(m_point2.x) + ", " + to_string(m_point2.y) \

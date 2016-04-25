@@ -4,4 +4,4 @@
 
 
 void MergeData(vector<shared_ptr<IShape>> const &informationAboutShape, string &data);
-string GetProcessedData(CShapesContainer &informationAboutShape);
+string GetSortedData(CShapesContainer &informationAboutShape);

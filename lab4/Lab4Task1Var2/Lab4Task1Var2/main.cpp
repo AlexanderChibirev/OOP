@@ -66,7 +66,7 @@ int main(int argc, char** argv)
 	{
 	//	it->
 	}
-	string resultForWriteInFile = GetProcessedData(informationAboutShape);
+	string resultForWriteInFile = GetSortedData(informationAboutShape);
 	string outputFileName = argv[2];
 	if (!WriteResultInOutputFile(resultForWriteInFile, outputFileName))
 	{
@@ -75,7 +75,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////
-	/*sf::View view;
+	sf::View view;
 	sf::RenderWindow window(sf::VideoMode(800, 700), "SFML Shape");
 	view.reset(sf::FloatRect(0, 0, 800, 700));
 	sf::Clock clock;
@@ -98,13 +98,13 @@ int main(int argc, char** argv)
 
 		window.setView(view);
 		window.clear(sf::Color::White);
-		for (auto &it : informationAboutShape.sfmlShapes)
+		for (auto &it : informationAboutShape.GetShapesView())
 		{
 
 			window.draw(*it);
 		}
 		window.display();
-	}*/
+	}
 	//////////////////////////////////////////////////////////////////////////////////////////
     return 0;
 }

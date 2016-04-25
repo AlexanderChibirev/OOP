@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Dot.h"
-CDot::CDot(const sf::Vector2f &coordinates)
+CDot::CDot(const V2f &coordinates)
 	:m_coordinates({ coordinates.x, coordinates.y })
 {
 
@@ -15,13 +15,13 @@ double CDot::GetShapePerimeter() const
 	return double(0);
 }
 
-std::string CDot::GetShapeData() const
+std::string CDot::ToString() const
 {
 	return "Point: Coordinates <" + to_string(m_coordinates.x) + ", " + to_string(m_coordinates.y) + ">" \
 		+ " P = " + to_string(GetShapePerimeter()) + ", S = " + to_string(GetShapeArea()) + "\n";
 }
 
-sf::Vector2f CDot::GetCoordDot() const
+V2f CDot::GetCoordDot() const
 {
 	return m_coordinates;
 }

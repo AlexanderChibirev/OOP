@@ -2,8 +2,8 @@
 #include "Rectangle.h"
 
 
-CRectangle::CRectangle(const sf::Vector2f &dotTopLeftCorner, float wight, float height, std::string const & lineColor, std::string const & fillColor)
-	:m_dotTopLeftCorner(dotTopLeftCorner),
+CRectangle::CRectangle(const V2f &cordTopLeftCorner, float wight, float height, std::string const & lineColor, std::string const & fillColor)
+	:m_dotTopLeftCorner(cordTopLeftCorner),
 	m_fillColor(fillColor),
 	m_height(height),
 	m_lineColor(lineColor),
@@ -21,7 +21,7 @@ double CRectangle::GetShapePerimeter() const
 {
 	return  fabs(double(2) * (m_wight + m_height));
 }
-std::string CRectangle::GetShapeData() const 
+std::string CRectangle::ToString() const 
 {
 	return "Rectangle: Coordinates <" + to_string(m_dotTopLeftCorner.x) + ", " + to_string(m_dotTopLeftCorner.y) \
 		+ "> Wight = " + to_string(m_wight) + ", Height = " + to_string(m_height) + ", LineColor = " + GetLineColor() + "InnerRegion = "+ GetInnerRegion() \

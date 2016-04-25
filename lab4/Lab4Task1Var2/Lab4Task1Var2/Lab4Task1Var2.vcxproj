@@ -157,7 +157,12 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IShapeSet.h" />
+    <ClInclude Include="Circle_view.h" />
+    <ClInclude Include="Difinition.h" />
+    <ClInclude Include="DotView.h" />
+    <ClInclude Include="IShapeView.h" />
+    <ClInclude Include="LineSegment_view.h" />
+    <ClInclude Include="Rectangle_view.h" />
     <ClInclude Include="ShapesContainer.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Dot.h" />
@@ -171,15 +176,20 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Triangle.h" />
+    <ClInclude Include="Triangle_view.h" />
     <ClInclude Include="WriteResultInOutputFile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Circle_view.cpp" />
+    <ClCompile Include="DotView.cpp" />
+    <ClCompile Include="LineSegment_view.cpp" />
+    <ClCompile Include="Rectangle_view.cpp" />
     <ClCompile Include="ShapesContainer.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Dot.cpp" />
     <ClCompile Include="GetInformationAboutShapesFromFile.cpp" />
     <ClCompile Include="GetParametrsShapes.cpp" />
-    <ClCompile Include="GetProcessedData.cpp" />
+    <ClCompile Include="GetSortedData.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="LineSegment.cpp" />
     <ClCompile Include="Rectangle.cpp" />
@@ -190,6 +200,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="Triangle_view.cpp" />
     <ClCompile Include="WriteResultInOutputFile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

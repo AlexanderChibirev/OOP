@@ -2,13 +2,13 @@
 #include "LineSegment.h"
 #include "Dot.h"
 
-CLineSegment::CLineSegment(const sf::Vector2f &dot1, const sf::Vector2f &dot2, const string &lineColor)
+CLineSegment::CLineSegment(const V2f &dot1, const V2f &dot2, const string &lineColor)
 	:m_lineColor(lineColor),
 	m_dot1(dot1),
 	m_dot2(dot2)
-{//да не ладно оставим так, потом молов прокомментирует и поймем уже как лучше
+{
 }
-string CLineSegment::GetShapeData() const 
+string CLineSegment::ToString() const 
 {
 	return "LineSegment: Coordinates begin <" + to_string(m_dot1.x) + ", " + to_string(m_dot1.y) \
 		+ ">" + ", Coordinates end <" + to_string(m_dot2.x) + ", " + to_string(m_dot2.y) \

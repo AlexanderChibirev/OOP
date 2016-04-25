@@ -63,7 +63,25 @@
     <ClInclude Include="ShapesContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IShapeSet.h">
+    <ClInclude Include="IShapeView.h">
+      <Filter>ShapesView</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle_view.h">
+      <Filter>ShapesView</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle_view.h">
+      <Filter>ShapesView</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle_view.h">
+      <Filter>ShapesView</Filter>
+    </ClInclude>
+    <ClInclude Include="LineSegment_view.h">
+      <Filter>ShapesView</Filter>
+    </ClInclude>
+    <ClInclude Include="DotView.h">
+      <Filter>ShapesView</Filter>
+    </ClInclude>
+    <ClInclude Include="Difinition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -95,14 +113,29 @@
     <ClCompile Include="WriteResultInOutputFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GetProcessedData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GetInformationAboutShapesFromFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShapesContainer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetSortedData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle_view.cpp">
+      <Filter>ShapesView</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle_view.cpp">
+      <Filter>ShapesView</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle_view.cpp">
+      <Filter>ShapesView</Filter>
+    </ClCompile>
+    <ClCompile Include="LineSegment_view.cpp">
+      <Filter>ShapesView</Filter>
+    </ClCompile>
+    <ClCompile Include="DotView.cpp">
+      <Filter>ShapesView</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

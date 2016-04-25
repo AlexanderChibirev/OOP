@@ -7,11 +7,11 @@ void MergeData(vector<shared_ptr<IShape>> const &informationAboutShape, string &
 {
 	for (auto it : informationAboutShape)
 	{
-		data += it->GetShapeData();
+		data += it->ToString();
 	}
 }
 
-string GetProcessedData(CShapesContainer &informationAboutShape)
+string GetSortedData(CShapesContainer &informationAboutShape)
 {
 	string data;
 	auto repositoryAuxiliary = informationAboutShape.GetShapes();
