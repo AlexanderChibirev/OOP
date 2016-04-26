@@ -3,7 +3,7 @@
 
 CCircleView::CCircleView(V2f const & pos, float radius, ShapeColor const & lineColor, ShapeColor const & fillColor)
 {
-	m_circle.setPosition({ pos.x, pos.y });
+	m_circle.setPosition({ pos.x - radius, pos.y - radius });
 	m_circle.setRadius(radius);
 	m_circle.setOutlineColor(sf::Color(lineColor.RR, lineColor.GG, lineColor.BB));
 	m_circle.setOutlineThickness(2.f);
