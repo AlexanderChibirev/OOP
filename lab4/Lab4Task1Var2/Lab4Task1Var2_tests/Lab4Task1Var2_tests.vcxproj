@@ -94,11 +94,15 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>"$(TargetPath)" --log_level=test_suite</Command>
+      <Command>"$(TargetPath)" --log_level=test_suite </Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Running unit tests</Message>
     </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -113,11 +117,15 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>"$(TargetPath)" --log_level=test_suite</Command>
+      <Command>"$(TargetPath)" --log_level=test_suite </Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Running unit tests</Message>
     </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

@@ -1,123 +1,126 @@
-Dot: area = 0,000000
-Dot: area = 0,000000
-Dot: area = 0,000000
-Dot: area = 0,000000
-Dot: area = 0,000000
-Dot: area = 0,000000
-Dot: area = 0,000000
-Dot: area = 0,000000
-Dot: area = 0,000000
-Dot: area = 0,000000
-Dot: area = 0,000000
-Dot: area = 0,000000
-Dot: area = 0,000000
-Dot: area = 0,000000
-Dot: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-Triangle: area = 8,000000
-Triangle: area = 10,000000
-Triangle: area = 42,500000
-Triangle: area = 163,500000
-Circle: area = 314,159265
-Circle: area = 314,159265
-Rectangle: area = 425,000000
-Rectangle: area = 425,000000
-Rectangle: area = 425,000000
-Rectangle: area = 433,635000
-Rectangle: area = 436,410000
-Circle: area = 1256,637061
-Circle: area = 1256,637061
-Rectangle: area = 4165,000000
-Rectangle: area = 4175,000000
-Rectangle: area = 4175,000000
-Rectangle: area = 4186,400000
-Rectangle: area = 4335,000000
-Rectangle: area = 4335,000000
-Rectangle: area = 4342,896500
-Rectangle: area = 4394,729670
-Circle: area = 7853,981634
-Circle: area = 7853,981634
-Circle: area = 15393,804003
-Circle: area = 15393,804003
-Rectangle: area = 27178,000000
-Circle: area = 32685,129968
-Circle: area = 32685,129968
-Rectangle: area = 41752,000000
-Rectangle: area = 43401,000000
-Rectangle: area = 43792,000000
-Rectangle: area = 43809,000000
-Rectangle: area = 44183,000000
-Rectangle: area = 419504,000000
-Rectangle: area = 428927,000000
-Rectangle: area = 432196,000000
+Point: Coordinates <12,000000, 13,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <14,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 13,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <14,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 13,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <14,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 13,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <14,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 13,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <14,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 51,000000> P = 0,000000, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 2,000000>, Coordinates end <10,000000, 11,000000, LineColor = #ff0000, P = 12,727922, S = 0,000000
+LineSegment: Coordinates begin <2,000000, 3,000000>, Coordinates end <11,000000, 12,000000, LineColor = #ff0001, P = 12,727922, S = 0,000000
+LineSegment: Coordinates begin <21,000000, 2,000000>, Coordinates end <410,000000, 211,000000, LineColor = #ff0002, P = 441,590302, S = 0,000000
+LineSegment: Coordinates begin <11,000000, 2,000000>, Coordinates end <310,000000, 11,000000, LineColor = #ff0003, P = 299,135406, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 52,000000>, Coordinates end <10,000000, 611,000000, LineColor = #ff0004, P = 559,072449, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 72,000000>, Coordinates end <108,000000, 911,000000, LineColor = #ff0005, P = 845,795471, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 12,000000>, Coordinates end <102,000000, 11,000000, LineColor = #ff0006, P = 101,004951, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 231,000000>, Coordinates end <102,123001, 11,123000, LineColor = #ff0007, P = 242,016022, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 2,100000>, Coordinates end <10,231000, 11,210000, LineColor = #ff0008, P = 12,969328, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 2,232000>, Coordinates end <10,213000, -11,000000, LineColor = #ff0009, P = 16,123436, S = 0,000000
+Rectangle: Coordinates <20,213123, 30,000000> Wight = 17,000000, Height = 25231,000000, LineColor = #ff00000, InnerRegion = #00ff00, P = 50496,000000, S = 428927,000000
+Rectangle: Coordinates <220,100006, 340,000000> Wight = 17,000000, Height = 245,000000, LineColor = #ff00100, InnerRegion = #00ff00, P = 524,000000, S = 4165,000000
+Rectangle: Coordinates <230,000000, 30,345341> Wight = 17,000000, Height = 255,000000, LineColor = #ff00200, InnerRegion = #00ff00, P = 544,000000, S = 4335,000000
+Rectangle: Coordinates <20,000000, 350,000000> Wight = 17,345400, Height = 25,000000, LineColor = #ff00400, InnerRegion = #00ff00, P = 84,690796, S = 433,635010
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,234234, Height = 255,000000, LineColor = #ff03000, InnerRegion = #00ff00, P = 544,468445, S = 4394,729492
+Rectangle: Coordinates <20,240999, 350,000000> Wight = 17,000000, Height = 2576,000000, LineColor = #ff05000, InnerRegion = #00ff00, P = 5186,000000, S = 43792,000000
+Rectangle: Coordinates <20,000000, 310,000000> Wight = 167,000000, Height = 25,000000, LineColor = #ff00600, InnerRegion = #00ff00, P = 384,000000, S = 4175,000000
+Rectangle: Coordinates <20,000000, 313120,000000> Wight = 17,000000, Height = 2599,000000, LineColor = #ff00700, InnerRegion = #00ff00, P = 5232,000000, S = 44183,000000
+Rectangle: Coordinates <20,000000, 30,120001> Wight = 167,000000, Height = 25,000000, LineColor = #ff08000, InnerRegion = #00ff00, P = 384,000000, S = 4175,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 17,000000, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00ff00, P = 84,000000, S = 425,000000
+Rectangle: Coordinates <220,000000, 340,000000> Wight = 17,000000, Height = 2456,000000, LineColor = #ff09000, InnerRegion = #00ff00, P = 4946,000000, S = 41752,000000
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,000000, Height = 2553,000000, LineColor = #ff0000, InnerRegion = #00f1f00, P = 5140,000000, S = 43401,000000
+Rectangle: Coordinates <20,000000, 350,000000> Wight = 17,456400, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00f1f00, P = 84,912796, S = 436,410004
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,000000, Height = 255,000000, LineColor = #ff0000, InnerRegion = #00f2f00, P = 544,000000, S = 4335,000000
+Rectangle: Coordinates <20,000000, 350,234222> Wight = 17,000000, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00f3f00, P = 84,000000, S = 425,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 167,000000, Height = 2588,000000, LineColor = #ff0000, InnerRegion = #00f4f00, P = 5510,000000, S = 432196,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 17,000000, Height = 2577,000000, LineColor = #ff0000, InnerRegion = #00ff500, P = 5188,000000, S = 43809,000000
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,000000, Height = 255,464493, LineColor = #ff0000, InnerRegion = #007ff00, P = 544,928955, S = 4342,896484
+Rectangle: Coordinates <20,455999, 3500,123047> Wight = 17,000000, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00f6f00, P = 84,000000, S = 425,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 167,455994, Height = 25,000000, LineColor = #ff0000, InnerRegion = #008ff00, P = 384,911987, S = 4186,399902
+Rectangle: Coordinates <20,000000, 30,455999> Wight = 107,000000, Height = 254,000000, LineColor = #ff0000, InnerRegion = #00ff900, P = 722,000000, S = 27178,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 167,000000, Height = 2512,000000, LineColor = #ff0000, InnerRegion = #00f0f00, P = 5358,000000, S = 419504,000000
+Triangle: Coordinates point first<1,000000, 4,000000>, Coordinates point second<4,000000, 5,000000>, Coordinates point third <8,000000, 1,000000, LineColor = #ff0000, InnerRegion = #ff0400, P = 16,434906, S = 8,000000
+Triangle: Coordinates point first<1,000000, 2,000000>, Coordinates point second<4,000000, 6,000000>, Coordinates point third <82,000000, 1,000000, LineColor = #ff0030, InnerRegion = #ff0000, P = 164,166260, S = 163,500000
+Triangle: Coordinates point first<1,000000, 3,000000>, Coordinates point second<4,000000, 5,000000>, Coordinates point third <8,000000, 1,000000, LineColor = #ff0040, InnerRegion = #ff0000, P = 16,542515, S = 10,000000
+Triangle: Coordinates point first<1,000000, 1,000000>, Coordinates point second<9,000000, 6,000000>, Coordinates point third <18,000000, 1,000000, LineColor = #ff0000, InnerRegion = #ff0030, P = 36,729610, S = 42,500000
+Circle: Coordinates center circle <1,000000, 2,000000> Radius = 10,000000, LineColor = #ff0010, InnerRegion = #ff0100, P = 62,831852, S = 314,159271
+Circle: Coordinates center circle <31,000000, 2,000000> Radius = 20,000000, LineColor = #ff0000, InnerRegion = #ff0200, P = 125,663704, S = 1256,637085
+Circle: Coordinates center circle <11,000000, 2,000000> Radius = 50,000000, LineColor = #ff0300, InnerRegion = #ff0050, P = 314,159271, S = 7853,981445
+Circle: Coordinates center circle <100,000000, 2,000000> Radius = 70,000000, LineColor = #ff0000, InnerRegion = #ff0800, P = 439,822968, S = 15393,803711
+Circle: Coordinates center circle <1,000000, 2,000000> Radius = 102,000000, LineColor = #ff0500, InnerRegion = #ff1000, P = 640,884888, S = 32685,130859
+Circle: Coordinates center circle <111,000000, 2,000000> Radius = 10,000000, LineColor = #ff0700, InnerRegion = #ff0200, P = 62,831852, S = 314,159271
+Circle: Coordinates center circle <31,000000, 2,000000> Radius = 20,000000, LineColor = #ff0060, InnerRegion = #ff0050, P = 125,663704, S = 1256,637085
+Circle: Coordinates center circle <1133,000000, 2,000000> Radius = 50,000000, LineColor = #ff0100, InnerRegion = #ff0040, P = 314,159271, S = 7853,981445
+Circle: Coordinates center circle <100,000000, 2,000000> Radius = 70,000000, LineColor = #ff0040, InnerRegion = #ff0010, P = 439,822968, S = 15393,803711
+Circle: Coordinates center circle <122,000000, 2,000000> Radius = 102,000000, LineColor = #ff0070, InnerRegion = #ff1200, P = 640,884888, S = 32685,130859
 
-Rectangle: perimeter = 50496,000000
-Rectangle: perimeter = 5510,000000
-Rectangle: perimeter = 5358,000000
-Rectangle: perimeter = 5232,000000
-Rectangle: perimeter = 5188,000000
-Rectangle: perimeter = 5186,000000
-Rectangle: perimeter = 5140,000000
-Rectangle: perimeter = 4946,000000
-lineSegment: perimeter = 845,795471
-Rectangle: perimeter = 722,000000
-Circle: perimeter = 640,884901
-Circle: perimeter = 640,884901
-lineSegment: perimeter = 559,072449
-Rectangle: perimeter = 544,929000
-Rectangle: perimeter = 544,468468
-Rectangle: perimeter = 544,000000
-Rectangle: perimeter = 544,000000
-Rectangle: perimeter = 524,000000
-lineSegment: perimeter = 441,590302
-Circle: perimeter = 439,822972
-Circle: perimeter = 439,822972
-Rectangle: perimeter = 384,912000
-Rectangle: perimeter = 384,000000
-Rectangle: perimeter = 384,000000
-Circle: perimeter = 314,159265
-Circle: perimeter = 314,159265
-lineSegment: perimeter = 299,135406
-lineSegment: perimeter = 242,016022
-Triangle: perimeter = 164,166260
-Circle: perimeter = 125,663706
-Circle: perimeter = 125,663706
-lineSegment: perimeter = 101,004951
-Rectangle: perimeter = 84,912800
-Rectangle: perimeter = 84,690800
-Rectangle: perimeter = 84,000000
-Rectangle: perimeter = 84,000000
-Rectangle: perimeter = 84,000000
-Circle: perimeter = 62,831853
-Circle: perimeter = 62,831853
-Triangle: perimeter = 36,729610
-Triangle: perimeter = 16,542515
-Triangle: perimeter = 16,434906
-lineSegment: perimeter = 16,123436
-lineSegment: perimeter = 12,969328
-lineSegment: perimeter = 12,727922
-lineSegment: perimeter = 12,727922
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
-Dot: perimeter = 0,000000
+
+
+
+Point: Coordinates <12,000000, 13,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <14,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 13,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <14,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 13,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <14,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 13,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <14,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 13,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <14,000000, 51,000000> P = 0,000000, S = 0,000000
+Point: Coordinates <12,000000, 51,000000> P = 0,000000, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 2,000000>, Coordinates end <10,000000, 11,000000, LineColor = #ff0000, P = 12,727922, S = 0,000000
+LineSegment: Coordinates begin <2,000000, 3,000000>, Coordinates end <11,000000, 12,000000, LineColor = #ff0001, P = 12,727922, S = 0,000000
+LineSegment: Coordinates begin <21,000000, 2,000000>, Coordinates end <410,000000, 211,000000, LineColor = #ff0002, P = 441,590302, S = 0,000000
+LineSegment: Coordinates begin <11,000000, 2,000000>, Coordinates end <310,000000, 11,000000, LineColor = #ff0003, P = 299,135406, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 52,000000>, Coordinates end <10,000000, 611,000000, LineColor = #ff0004, P = 559,072449, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 72,000000>, Coordinates end <108,000000, 911,000000, LineColor = #ff0005, P = 845,795471, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 12,000000>, Coordinates end <102,000000, 11,000000, LineColor = #ff0006, P = 101,004951, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 231,000000>, Coordinates end <102,123001, 11,123000, LineColor = #ff0007, P = 242,016022, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 2,100000>, Coordinates end <10,231000, 11,210000, LineColor = #ff0008, P = 12,969328, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 2,232000>, Coordinates end <10,213000, -11,000000, LineColor = #ff0009, P = 16,123436, S = 0,000000
+Rectangle: Coordinates <20,213123, 30,000000> Wight = 17,000000, Height = 25231,000000, LineColor = #ff00000, InnerRegion = #00ff00, P = 50496,000000, S = 428927,000000
+Rectangle: Coordinates <220,100006, 340,000000> Wight = 17,000000, Height = 245,000000, LineColor = #ff00100, InnerRegion = #00ff00, P = 524,000000, S = 4165,000000
+Rectangle: Coordinates <230,000000, 30,345341> Wight = 17,000000, Height = 255,000000, LineColor = #ff00200, InnerRegion = #00ff00, P = 544,000000, S = 4335,000000
+Rectangle: Coordinates <20,000000, 350,000000> Wight = 17,345400, Height = 25,000000, LineColor = #ff00400, InnerRegion = #00ff00, P = 84,690796, S = 433,635010
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,234234, Height = 255,000000, LineColor = #ff03000, InnerRegion = #00ff00, P = 544,468445, S = 4394,729492
+Rectangle: Coordinates <20,240999, 350,000000> Wight = 17,000000, Height = 2576,000000, LineColor = #ff05000, InnerRegion = #00ff00, P = 5186,000000, S = 43792,000000
+Rectangle: Coordinates <20,000000, 310,000000> Wight = 167,000000, Height = 25,000000, LineColor = #ff00600, InnerRegion = #00ff00, P = 384,000000, S = 4175,000000
+Rectangle: Coordinates <20,000000, 313120,000000> Wight = 17,000000, Height = 2599,000000, LineColor = #ff00700, InnerRegion = #00ff00, P = 5232,000000, S = 44183,000000
+Rectangle: Coordinates <20,000000, 30,120001> Wight = 167,000000, Height = 25,000000, LineColor = #ff08000, InnerRegion = #00ff00, P = 384,000000, S = 4175,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 17,000000, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00ff00, P = 84,000000, S = 425,000000
+Rectangle: Coordinates <220,000000, 340,000000> Wight = 17,000000, Height = 2456,000000, LineColor = #ff09000, InnerRegion = #00ff00, P = 4946,000000, S = 41752,000000
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,000000, Height = 2553,000000, LineColor = #ff0000, InnerRegion = #00f1f00, P = 5140,000000, S = 43401,000000
+Rectangle: Coordinates <20,000000, 350,000000> Wight = 17,456400, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00f1f00, P = 84,912796, S = 436,410004
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,000000, Height = 255,000000, LineColor = #ff0000, InnerRegion = #00f2f00, P = 544,000000, S = 4335,000000
+Rectangle: Coordinates <20,000000, 350,234222> Wight = 17,000000, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00f3f00, P = 84,000000, S = 425,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 167,000000, Height = 2588,000000, LineColor = #ff0000, InnerRegion = #00f4f00, P = 5510,000000, S = 432196,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 17,000000, Height = 2577,000000, LineColor = #ff0000, InnerRegion = #00ff500, P = 5188,000000, S = 43809,000000
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,000000, Height = 255,464493, LineColor = #ff0000, InnerRegion = #007ff00, P = 544,928955, S = 4342,896484
+Rectangle: Coordinates <20,455999, 3500,123047> Wight = 17,000000, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00f6f00, P = 84,000000, S = 425,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 167,455994, Height = 25,000000, LineColor = #ff0000, InnerRegion = #008ff00, P = 384,911987, S = 4186,399902
+Rectangle: Coordinates <20,000000, 30,455999> Wight = 107,000000, Height = 254,000000, LineColor = #ff0000, InnerRegion = #00ff900, P = 722,000000, S = 27178,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 167,000000, Height = 2512,000000, LineColor = #ff0000, InnerRegion = #00f0f00, P = 5358,000000, S = 419504,000000
+Triangle: Coordinates point first<1,000000, 4,000000>, Coordinates point second<4,000000, 5,000000>, Coordinates point third <8,000000, 1,000000, LineColor = #ff0000, InnerRegion = #ff0400, P = 16,434906, S = 8,000000
+Triangle: Coordinates point first<1,000000, 2,000000>, Coordinates point second<4,000000, 6,000000>, Coordinates point third <82,000000, 1,000000, LineColor = #ff0030, InnerRegion = #ff0000, P = 164,166260, S = 163,500000
+Triangle: Coordinates point first<1,000000, 3,000000>, Coordinates point second<4,000000, 5,000000>, Coordinates point third <8,000000, 1,000000, LineColor = #ff0040, InnerRegion = #ff0000, P = 16,542515, S = 10,000000
+Triangle: Coordinates point first<1,000000, 1,000000>, Coordinates point second<9,000000, 6,000000>, Coordinates point third <18,000000, 1,000000, LineColor = #ff0000, InnerRegion = #ff0030, P = 36,729610, S = 42,500000
+Circle: Coordinates center circle <1,000000, 2,000000> Radius = 10,000000, LineColor = #ff0010, InnerRegion = #ff0100, P = 62,831852, S = 314,159271
+Circle: Coordinates center circle <31,000000, 2,000000> Radius = 20,000000, LineColor = #ff0000, InnerRegion = #ff0200, P = 125,663704, S = 1256,637085
+Circle: Coordinates center circle <11,000000, 2,000000> Radius = 50,000000, LineColor = #ff0300, InnerRegion = #ff0050, P = 314,159271, S = 7853,981445
+Circle: Coordinates center circle <100,000000, 2,000000> Radius = 70,000000, LineColor = #ff0000, InnerRegion = #ff0800, P = 439,822968, S = 15393,803711
+Circle: Coordinates center circle <1,000000, 2,000000> Radius = 102,000000, LineColor = #ff0500, InnerRegion = #ff1000, P = 640,884888, S = 32685,130859
+Circle: Coordinates center circle <111,000000, 2,000000> Radius = 10,000000, LineColor = #ff0700, InnerRegion = #ff0200, P = 62,831852, S = 314,159271
+Circle: Coordinates center circle <31,000000, 2,000000> Radius = 20,000000, LineColor = #ff0060, InnerRegion = #ff0050, P = 125,663704, S = 1256,637085
+Circle: Coordinates center circle <1133,000000, 2,000000> Radius = 50,000000, LineColor = #ff0100, InnerRegion = #ff0040, P = 314,159271, S = 7853,981445
+Circle: Coordinates center circle <100,000000, 2,000000> Radius = 70,000000, LineColor = #ff0040, InnerRegion = #ff0010, P = 439,822968, S = 15393,803711
+Circle: Coordinates center circle <122,000000, 2,000000> Radius = 102,000000, LineColor = #ff0070, InnerRegion = #ff1200, P = 640,884888, S = 32685,130859

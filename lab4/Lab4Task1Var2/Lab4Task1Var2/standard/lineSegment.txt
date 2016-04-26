@@ -1,21 +1,24 @@
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
-lineSegment: area = 0,000000
+LineSegment: Coordinates begin <1,000000, 2,000000>, Coordinates end <10,000000, 11,000000, LineColor = #ff0000, P = 12,727922, S = 0,000000
+LineSegment: Coordinates begin <2,000000, 3,000000>, Coordinates end <11,000000, 12,000000, LineColor = #ff0001, P = 12,727922, S = 0,000000
+LineSegment: Coordinates begin <21,000000, 2,000000>, Coordinates end <410,000000, 211,000000, LineColor = #ff0002, P = 441,590302, S = 0,000000
+LineSegment: Coordinates begin <11,000000, 2,000000>, Coordinates end <310,000000, 11,000000, LineColor = #ff0003, P = 299,135406, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 52,000000>, Coordinates end <10,000000, 611,000000, LineColor = #ff0004, P = 559,072449, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 72,000000>, Coordinates end <108,000000, 911,000000, LineColor = #ff0005, P = 845,795471, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 12,000000>, Coordinates end <102,000000, 11,000000, LineColor = #ff0006, P = 101,004951, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 231,000000>, Coordinates end <102,123001, 11,123000, LineColor = #ff0007, P = 242,016022, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 2,100000>, Coordinates end <10,231000, 11,210000, LineColor = #ff0008, P = 12,969328, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 2,232000>, Coordinates end <10,213000, -11,000000, LineColor = #ff0009, P = 16,123436, S = 0,000000
 
-lineSegment: perimeter = 845,795471
-lineSegment: perimeter = 559,072449
-lineSegment: perimeter = 441,590302
-lineSegment: perimeter = 299,135406
-lineSegment: perimeter = 242,016022
-lineSegment: perimeter = 101,004951
-lineSegment: perimeter = 16,123436
-lineSegment: perimeter = 12,969328
-lineSegment: perimeter = 12,727922
-lineSegment: perimeter = 12,727922
+
+
+
+LineSegment: Coordinates begin <1,000000, 2,000000>, Coordinates end <10,000000, 11,000000, LineColor = #ff0000, P = 12,727922, S = 0,000000
+LineSegment: Coordinates begin <2,000000, 3,000000>, Coordinates end <11,000000, 12,000000, LineColor = #ff0001, P = 12,727922, S = 0,000000
+LineSegment: Coordinates begin <21,000000, 2,000000>, Coordinates end <410,000000, 211,000000, LineColor = #ff0002, P = 441,590302, S = 0,000000
+LineSegment: Coordinates begin <11,000000, 2,000000>, Coordinates end <310,000000, 11,000000, LineColor = #ff0003, P = 299,135406, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 52,000000>, Coordinates end <10,000000, 611,000000, LineColor = #ff0004, P = 559,072449, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 72,000000>, Coordinates end <108,000000, 911,000000, LineColor = #ff0005, P = 845,795471, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 12,000000>, Coordinates end <102,000000, 11,000000, LineColor = #ff0006, P = 101,004951, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 231,000000>, Coordinates end <102,123001, 11,123000, LineColor = #ff0007, P = 242,016022, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 2,100000>, Coordinates end <10,231000, 11,210000, LineColor = #ff0008, P = 12,969328, S = 0,000000
+LineSegment: Coordinates begin <1,000000, 2,232000>, Coordinates end <10,213000, -11,000000, LineColor = #ff0009, P = 16,123436, S = 0,000000

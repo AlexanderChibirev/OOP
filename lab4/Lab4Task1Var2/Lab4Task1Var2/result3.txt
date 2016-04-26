@@ -1,0 +1,48 @@
+Rectangle: Coordinates <20,213123, 30,000000> Wight = 17,000000, Height = 25231,000000, LineColor = #ff00000, InnerRegion = #00ff00, P = 50496,000000, S = 428927,000000
+Rectangle: Coordinates <220,100006, 340,000000> Wight = 17,000000, Height = 245,000000, LineColor = #ff00100, InnerRegion = #00ff00, P = 524,000000, S = 4165,000000
+Rectangle: Coordinates <230,000000, 30,345341> Wight = 17,000000, Height = 255,000000, LineColor = #ff00200, InnerRegion = #00ff00, P = 544,000000, S = 4335,000000
+Rectangle: Coordinates <20,000000, 350,000000> Wight = 17,345400, Height = 25,000000, LineColor = #ff00400, InnerRegion = #00ff00, P = 84,690796, S = 433,635010
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,234234, Height = 255,000000, LineColor = #ff03000, InnerRegion = #00ff00, P = 544,468445, S = 4394,729492
+Rectangle: Coordinates <20,240999, 350,000000> Wight = 17,000000, Height = 2576,000000, LineColor = #ff05000, InnerRegion = #00ff00, P = 5186,000000, S = 43792,000000
+Rectangle: Coordinates <20,000000, 310,000000> Wight = 167,000000, Height = 25,000000, LineColor = #ff00600, InnerRegion = #00ff00, P = 384,000000, S = 4175,000000
+Rectangle: Coordinates <20,000000, 313120,000000> Wight = 17,000000, Height = 2599,000000, LineColor = #ff00700, InnerRegion = #00ff00, P = 5232,000000, S = 44183,000000
+Rectangle: Coordinates <20,000000, 30,120001> Wight = 167,000000, Height = 25,000000, LineColor = #ff08000, InnerRegion = #00ff00, P = 384,000000, S = 4175,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 17,000000, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00ff00, P = 84,000000, S = 425,000000
+Rectangle: Coordinates <220,000000, 340,000000> Wight = 17,000000, Height = 2456,000000, LineColor = #ff09000, InnerRegion = #00ff00, P = 4946,000000, S = 41752,000000
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,000000, Height = 2553,000000, LineColor = #ff0000, InnerRegion = #00f1f00, P = 5140,000000, S = 43401,000000
+Rectangle: Coordinates <20,000000, 350,000000> Wight = 17,456400, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00f1f00, P = 84,912796, S = 436,410004
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,000000, Height = 255,000000, LineColor = #ff0000, InnerRegion = #00f2f00, P = 544,000000, S = 4335,000000
+Rectangle: Coordinates <20,000000, 350,234222> Wight = 17,000000, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00f3f00, P = 84,000000, S = 425,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 167,000000, Height = 2588,000000, LineColor = #ff0000, InnerRegion = #00f4f00, P = 5510,000000, S = 432196,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 17,000000, Height = 2577,000000, LineColor = #ff0000, InnerRegion = #00ff500, P = 5188,000000, S = 43809,000000
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,000000, Height = 255,464493, LineColor = #ff0000, InnerRegion = #007ff00, P = 544,928955, S = 4342,896484
+Rectangle: Coordinates <20,455999, 3500,123047> Wight = 17,000000, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00f6f00, P = 84,000000, S = 425,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 167,455994, Height = 25,000000, LineColor = #ff0000, InnerRegion = #008ff00, P = 384,911987, S = 4186,399902
+Rectangle: Coordinates <20,000000, 30,455999> Wight = 107,000000, Height = 254,000000, LineColor = #ff0000, InnerRegion = #00ff900, P = 722,000000, S = 27178,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 167,000000, Height = 2512,000000, LineColor = #ff0000, InnerRegion = #00f0f00, P = 5358,000000, S = 419504,000000
+
+
+
+
+Rectangle: Coordinates <20,213123, 30,000000> Wight = 17,000000, Height = 25231,000000, LineColor = #ff00000, InnerRegion = #00ff00, P = 50496,000000, S = 428927,000000
+Rectangle: Coordinates <220,100006, 340,000000> Wight = 17,000000, Height = 245,000000, LineColor = #ff00100, InnerRegion = #00ff00, P = 524,000000, S = 4165,000000
+Rectangle: Coordinates <230,000000, 30,345341> Wight = 17,000000, Height = 255,000000, LineColor = #ff00200, InnerRegion = #00ff00, P = 544,000000, S = 4335,000000
+Rectangle: Coordinates <20,000000, 350,000000> Wight = 17,345400, Height = 25,000000, LineColor = #ff00400, InnerRegion = #00ff00, P = 84,690796, S = 433,635010
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,234234, Height = 255,000000, LineColor = #ff03000, InnerRegion = #00ff00, P = 544,468445, S = 4394,729492
+Rectangle: Coordinates <20,240999, 350,000000> Wight = 17,000000, Height = 2576,000000, LineColor = #ff05000, InnerRegion = #00ff00, P = 5186,000000, S = 43792,000000
+Rectangle: Coordinates <20,000000, 310,000000> Wight = 167,000000, Height = 25,000000, LineColor = #ff00600, InnerRegion = #00ff00, P = 384,000000, S = 4175,000000
+Rectangle: Coordinates <20,000000, 313120,000000> Wight = 17,000000, Height = 2599,000000, LineColor = #ff00700, InnerRegion = #00ff00, P = 5232,000000, S = 44183,000000
+Rectangle: Coordinates <20,000000, 30,120001> Wight = 167,000000, Height = 25,000000, LineColor = #ff08000, InnerRegion = #00ff00, P = 384,000000, S = 4175,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 17,000000, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00ff00, P = 84,000000, S = 425,000000
+Rectangle: Coordinates <220,000000, 340,000000> Wight = 17,000000, Height = 2456,000000, LineColor = #ff09000, InnerRegion = #00ff00, P = 4946,000000, S = 41752,000000
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,000000, Height = 2553,000000, LineColor = #ff0000, InnerRegion = #00f1f00, P = 5140,000000, S = 43401,000000
+Rectangle: Coordinates <20,000000, 350,000000> Wight = 17,456400, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00f1f00, P = 84,912796, S = 436,410004
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,000000, Height = 255,000000, LineColor = #ff0000, InnerRegion = #00f2f00, P = 544,000000, S = 4335,000000
+Rectangle: Coordinates <20,000000, 350,234222> Wight = 17,000000, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00f3f00, P = 84,000000, S = 425,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 167,000000, Height = 2588,000000, LineColor = #ff0000, InnerRegion = #00f4f00, P = 5510,000000, S = 432196,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 17,000000, Height = 2577,000000, LineColor = #ff0000, InnerRegion = #00ff500, P = 5188,000000, S = 43809,000000
+Rectangle: Coordinates <230,000000, 30,000000> Wight = 17,000000, Height = 255,464493, LineColor = #ff0000, InnerRegion = #007ff00, P = 544,928955, S = 4342,896484
+Rectangle: Coordinates <20,455999, 3500,123047> Wight = 17,000000, Height = 25,000000, LineColor = #ff0000, InnerRegion = #00f6f00, P = 84,000000, S = 425,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 167,455994, Height = 25,000000, LineColor = #ff0000, InnerRegion = #008ff00, P = 384,911987, S = 4186,399902
+Rectangle: Coordinates <20,000000, 30,455999> Wight = 107,000000, Height = 254,000000, LineColor = #ff0000, InnerRegion = #00ff900, P = 722,000000, S = 27178,000000
+Rectangle: Coordinates <20,000000, 30,000000> Wight = 167,000000, Height = 2512,000000, LineColor = #ff0000, InnerRegion = #00f0f00, P = 5358,000000, S = 419504,000000

@@ -1,9 +1,12 @@
-Triangle: area = 8,000000
-Triangle: area = 10,000000
-Triangle: area = 42,500000
-Triangle: area = 163,500000
+Triangle: Coordinates point first<1,000000, 4,000000>, Coordinates point second<4,000000, 5,000000>, Coordinates point third <8,000000, 1,000000, LineColor = #ff0000, InnerRegion = #ff0400, P = 16,434906, S = 8,000000
+Triangle: Coordinates point first<1,000000, 2,000000>, Coordinates point second<4,000000, 6,000000>, Coordinates point third <82,000000, 1,000000, LineColor = #ff0030, InnerRegion = #ff0000, P = 164,166260, S = 163,500000
+Triangle: Coordinates point first<1,000000, 3,000000>, Coordinates point second<4,000000, 5,000000>, Coordinates point third <8,000000, 1,000000, LineColor = #ff0040, InnerRegion = #ff0000, P = 16,542515, S = 10,000000
+Triangle: Coordinates point first<1,000000, 1,000000>, Coordinates point second<9,000000, 6,000000>, Coordinates point third <18,000000, 1,000000, LineColor = #ff0000, InnerRegion = #ff0030, P = 36,729610, S = 42,500000
 
-Triangle: perimeter = 164,166260
-Triangle: perimeter = 36,729610
-Triangle: perimeter = 16,542515
-Triangle: perimeter = 16,434906
+
+
+
+Triangle: Coordinates point first<1,000000, 4,000000>, Coordinates point second<4,000000, 5,000000>, Coordinates point third <8,000000, 1,000000, LineColor = #ff0000, InnerRegion = #ff0400, P = 16,434906, S = 8,000000
+Triangle: Coordinates point first<1,000000, 2,000000>, Coordinates point second<4,000000, 6,000000>, Coordinates point third <82,000000, 1,000000, LineColor = #ff0030, InnerRegion = #ff0000, P = 164,166260, S = 163,500000
+Triangle: Coordinates point first<1,000000, 3,000000>, Coordinates point second<4,000000, 5,000000>, Coordinates point third <8,000000, 1,000000, LineColor = #ff0040, InnerRegion = #ff0000, P = 16,542515, S = 10,000000
+Triangle: Coordinates point first<1,000000, 1,000000>, Coordinates point second<9,000000, 6,000000>, Coordinates point third <18,000000, 1,000000, LineColor = #ff0000, InnerRegion = #ff0030, P = 36,729610, S = 42,500000

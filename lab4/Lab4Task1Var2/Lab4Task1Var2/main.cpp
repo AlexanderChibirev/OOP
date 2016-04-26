@@ -38,43 +38,8 @@ string GetInformationAboutShapesFromUser()
 	return result;
 }
 
-
-int main(int argc, char** argv)
+void drawingShapes(const CShapesContainer & informationAboutShape)
 {
-	setlocale(LC_ALL, "RUS");
-	SetConsoleOutputCP(1251);
-	SetConsoleCP(1251);
-
-	if (argc != 3)
-	{
-		cout << "Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n' <input file> <output file>'";
-		return 1;
-	}
-
-	string inputFileName = argv[1];
-	bool wasError = false;
-	string dataShapes = GetInformationAboutShapesFromFile(inputFileName, wasError);
-	if (wasError)
-	{
-
-		cout << "Failed to open input file for reading\n";
-		return 1;
-	}
-	//string dataShapes = GetInformationAboutShapesFromUser();
-	CShapesContainer informationAboutShape = GetParametrsShapes(dataShapes);
-	for (auto &it : informationAboutShape.GetShapes())
-	{
-	//	it->
-	}
-	string resultForWriteInFile = GetSortedData(informationAboutShape);
-	string outputFileName = argv[2];
-	if (!WriteResultInOutputFile(resultForWriteInFile, outputFileName))
-	{
-
-		cout << "Failed to open output file for reading\n";
-		return 1;
-	}
-	//////////////////////////////////////////////////////////////////////////////////////////
 	sf::View view;
 	sf::RenderWindow window(sf::VideoMode(800, 700), "SFML Shape");
 	view.reset(sf::FloatRect(0, 0, 800, 700));
@@ -105,7 +70,37 @@ int main(int argc, char** argv)
 		}
 		window.display();
 	}
-	//////////////////////////////////////////////////////////////////////////////////////////
-    return 0;
+}
+
+int main(int argc, char** argv)
+{
+	setlocale(LC_ALL, "RUS");
+	SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
+	if (argc != 3)
+	{
+		cout << "Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n' <input file> <output file>'";
+		return 1;
+	}
+	//string dataShapes = GetInformationAboutShapesFromUser();
+	string inputFileName = argv[1];
+	bool wasError = false;
+	string dataShapes = GetInformationAboutShapesFromFile(inputFileName, wasError);
+	if (wasError)
+	{
+		cout << "Failed to open input file for reading\n";
+		return 1;
+	}
+	CShapesContainer informationAboutShape = GetParametrsShapes(dataShapes);
+	string resultForWriteInFile = GetSortedData(informationAboutShape);
+	string outputFileName = argv[2];
+	if (!WriteResultInOutputFile(resultForWriteInFile, outputFileName))
+	{
+
+		cout << "Failed to open output file for reading\n";
+		return 1;
+	}
+	drawingShapes(informationAboutShape);
+	return 0;
 }
 

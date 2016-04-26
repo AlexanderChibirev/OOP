@@ -1,21 +1,24 @@
-Circle: area = 314,159265
-Circle: area = 314,159265
-Circle: area = 1256,637061
-Circle: area = 1256,637061
-Circle: area = 7853,981634
-Circle: area = 7853,981634
-Circle: area = 15393,804003
-Circle: area = 15393,804003
-Circle: area = 32685,129968
-Circle: area = 32685,129968
+Circle: Coordinates center circle <1,000000, 2,000000> Radius = 10,000000, LineColor = #ff0010, InnerRegion = #ff0100, P = 62,831852, S = 314,159271
+Circle: Coordinates center circle <31,000000, 2,000000> Radius = 20,000000, LineColor = #ff0000, InnerRegion = #ff0200, P = 125,663704, S = 1256,637085
+Circle: Coordinates center circle <11,000000, 2,000000> Radius = 50,000000, LineColor = #ff0300, InnerRegion = #ff0050, P = 314,159271, S = 7853,981445
+Circle: Coordinates center circle <100,000000, 2,000000> Radius = 70,000000, LineColor = #ff0000, InnerRegion = #ff0800, P = 439,822968, S = 15393,803711
+Circle: Coordinates center circle <1,000000, 2,000000> Radius = 102,000000, LineColor = #ff0500, InnerRegion = #ff1000, P = 640,884888, S = 32685,130859
+Circle: Coordinates center circle <111,000000, 2,000000> Radius = 10,000000, LineColor = #ff0700, InnerRegion = #ff0200, P = 62,831852, S = 314,159271
+Circle: Coordinates center circle <31,000000, 2,000000> Radius = 20,000000, LineColor = #ff0060, InnerRegion = #ff0050, P = 125,663704, S = 1256,637085
+Circle: Coordinates center circle <1133,000000, 2,000000> Radius = 50,000000, LineColor = #ff0100, InnerRegion = #ff0040, P = 314,159271, S = 7853,981445
+Circle: Coordinates center circle <100,000000, 2,000000> Radius = 70,000000, LineColor = #ff0040, InnerRegion = #ff0010, P = 439,822968, S = 15393,803711
+Circle: Coordinates center circle <122,000000, 2,000000> Radius = 102,000000, LineColor = #ff0070, InnerRegion = #ff1200, P = 640,884888, S = 32685,130859
 
-Circle: perimeter = 640,884901
-Circle: perimeter = 640,884901
-Circle: perimeter = 439,822972
-Circle: perimeter = 439,822972
-Circle: perimeter = 314,159265
-Circle: perimeter = 314,159265
-Circle: perimeter = 125,663706
-Circle: perimeter = 125,663706
-Circle: perimeter = 62,831853
-Circle: perimeter = 62,831853
+
+
+
+Circle: Coordinates center circle <1,000000, 2,000000> Radius = 10,000000, LineColor = #ff0010, InnerRegion = #ff0100, P = 62,831852, S = 314,159271
+Circle: Coordinates center circle <31,000000, 2,000000> Radius = 20,000000, LineColor = #ff0000, InnerRegion = #ff0200, P = 125,663704, S = 1256,637085
+Circle: Coordinates center circle <11,000000, 2,000000> Radius = 50,000000, LineColor = #ff0300, InnerRegion = #ff0050, P = 314,159271, S = 7853,981445
+Circle: Coordinates center circle <100,000000, 2,000000> Radius = 70,000000, LineColor = #ff0000, InnerRegion = #ff0800, P = 439,822968, S = 15393,803711
+Circle: Coordinates center circle <1,000000, 2,000000> Radius = 102,000000, LineColor = #ff0500, InnerRegion = #ff1000, P = 640,884888, S = 32685,130859
+Circle: Coordinates center circle <111,000000, 2,000000> Radius = 10,000000, LineColor = #ff0700, InnerRegion = #ff0200, P = 62,831852, S = 314,159271
+Circle: Coordinates center circle <31,000000, 2,000000> Radius = 20,000000, LineColor = #ff0060, InnerRegion = #ff0050, P = 125,663704, S = 1256,637085
+Circle: Coordinates center circle <1133,000000, 2,000000> Radius = 50,000000, LineColor = #ff0100, InnerRegion = #ff0040, P = 314,159271, S = 7853,981445
+Circle: Coordinates center circle <100,000000, 2,000000> Radius = 70,000000, LineColor = #ff0040, InnerRegion = #ff0010, P = 439,822968, S = 15393,803711
+Circle: Coordinates center circle <122,000000, 2,000000> Radius = 102,000000, LineColor = #ff0070, InnerRegion = #ff1200, P = 640,884888, S = 32685,130859
