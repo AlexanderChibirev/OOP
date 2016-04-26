@@ -13,18 +13,18 @@ CRectangle::CRectangle(const V2f &cordTopLeftCorner, float wight, float height, 
 
 }
 
-double CRectangle::GetShapeArea() const
+float CRectangle::GetShapeArea() const
 {
 	return fabs(m_wight * m_height);
 }
-double CRectangle::GetShapePerimeter() const
+float CRectangle::GetShapePerimeter() const
 {
-	return  fabs(double(2) * (m_wight + m_height));
+	return  fabs(float(2) * (m_wight + m_height));
 }
 std::string CRectangle::ToString() const 
 {
 	return "Rectangle: Coordinates <" + to_string(m_dotTopLeftCorner.x) + ", " + to_string(m_dotTopLeftCorner.y) \
-		+ "> Wight = " + to_string(m_wight) + ", Height = " + to_string(m_height) + ", LineColor = " + GetLineColor() + "InnerRegion = "+ GetInnerRegion() \
+		+ "> Wight = " + to_string(m_wight) + ", Height = " + to_string(m_height) + ", LineColor = " + GetLineColor() + ", InnerRegion = "+ GetInnerRegion() \
 		+ ", P = "+ to_string(GetShapePerimeter()) + ", S = " + to_string(GetShapeArea()) + "\n";
 }
 std::string CRectangle::GetLineColor() const

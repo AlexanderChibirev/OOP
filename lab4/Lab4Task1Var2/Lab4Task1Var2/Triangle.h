@@ -10,8 +10,8 @@ class CTriangle final : public ISolidShape
 {
 public:
 	CTriangle(const V2f &point1, const V2f &point2, const V2f &point3, string const &lineColor, string const &fillColor);
-	double GetShapeArea() const override;
-	double GetShapePerimeter() const override;
+	float GetShapeArea() const override;
+	float GetShapePerimeter() const override;
 	std::string ToString() const override;
 	std::string GetLineColor() const override;
 	std::string GetInnerRegion() const override;

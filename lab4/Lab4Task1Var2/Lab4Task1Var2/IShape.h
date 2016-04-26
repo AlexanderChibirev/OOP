@@ -6,8 +6,8 @@ class IShape
 {
 public:
 	virtual ~IShape() = default;
-	virtual double GetShapeArea() const = 0;
-	virtual double GetShapePerimeter() const = 0;
+	virtual float GetShapeArea() const = 0;
+	virtual float GetShapePerimeter() const = 0;
 	virtual std::string ToString() const = 0;
 	virtual std::string GetLineColor() const = 0;
 };

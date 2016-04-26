@@ -10,13 +10,13 @@ CCircle::CCircle(const V2f &centerCircle, float &radius, std::string const & lin
 {
 }
 
-double CCircle::GetShapeArea() const
+float CCircle::GetShapeArea() const
 {
-	return  fabs(M_PI * pow(m_radius, 2));
+	return  float(fabs(M_PI * pow(m_radius, 2)));
 }
-double CCircle::GetShapePerimeter() const
+float CCircle::GetShapePerimeter() const
 {
-	return fabs(double(2) * M_PI * m_radius);
+	return float(fabs(float(2) * M_PI * m_radius));
 }
 std::string CCircle::ToString() const
 {

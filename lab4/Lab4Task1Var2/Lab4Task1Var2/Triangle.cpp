@@ -11,13 +11,13 @@ CTriangle::CTriangle(const V2f &point1, const V2f &point2, const V2f &point3, st
 {
 }
 
-double CTriangle::GetShapeArea() const
+float CTriangle::GetShapeArea() const
 {
-	return fabs(double(0.5)*((m_point1.x - m_point3.x) * (m_point2.y - m_point3.y) - \
+	return fabs(float(0.5)*((m_point1.x - m_point3.x) * (m_point2.y - m_point3.y) - \
 		(m_point2.x - m_point3.x) * (m_point1.y - m_point3.y)));
 }
 
-double CTriangle::GetShapePerimeter() const
+float CTriangle::GetShapePerimeter() const
 {
 	return fabs(sqrt(pow((m_point2.x - m_point1.x), 2) + pow((m_point2.y - m_point1.y), 2)) + \
 		sqrt(pow((m_point3.x - m_point1.x), 2) + pow((m_point3.y - m_point1.y), 2)) + \

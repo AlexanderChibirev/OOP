@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "..\\Lab3Task2\Calculator.h"
 #include <boost/test/unit_test.hpp>
-#include <boost/test/output_test_stream.hpp>
-#include <iostream>
+///#include <boost/test/output_test_stream.hpp>
+//#include <iostream>
 #include "..\\Lab3Task2\WorkWithUI.h"
 #include "..\\Lab3Task2\Difinition.h"
 

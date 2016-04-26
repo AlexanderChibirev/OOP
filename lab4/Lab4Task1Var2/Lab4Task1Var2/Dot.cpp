@@ -5,14 +5,14 @@ CDot::CDot(const V2f &coordinates)
 {
 
 }
-double CDot::GetShapeArea() const
+float CDot::GetShapeArea() const
 {
-	return double(0);
+	return float(0);
 }
 
-double CDot::GetShapePerimeter() const
+float CDot::GetShapePerimeter() const
 {
-	return double(0);
+	return float(0);
 }
 
 std::string CDot::ToString() const
@@ -28,5 +28,5 @@ V2f CDot::GetCoordDot() const
 
 std::string CDot::GetLineColor() const
 {
-	return "Black";
+	return "#000000";
 }
