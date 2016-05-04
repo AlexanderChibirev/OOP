@@ -6,7 +6,6 @@
 #include "CreateShape.h"
 #include "WriteResultInOutputFile.h"
 #include "GetProcessedData.h"
-#include "ShapesContainer.h"
 
 void PrintHelp()
 {
@@ -21,11 +20,12 @@ void PrintHelp()
 	cout << "после ввода данных фигуры жмите enter и вводите данные для седующей фигуры,\nчтобы закончить ввод данных, введите три точки(...)\nЕсли все понятно, можете начинать, удачи!\n>";
 }
 
-string GetInformationAboutShapesFromUser()
+vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> GetInformationAboutShapesFromUser()
 {
 	PrintHelp();
 	string lineStr;
 	string result;
+	vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> shapes;
 	while (getline(cin, lineStr) )
 	{
 		cout << ">";
@@ -33,12 +33,13 @@ string GetInformationAboutShapesFromUser()
 		{
 			break;
 		}
-		result += lineStr += "\n";
+		auto shape = CreateShape(lineStr);
+		shapes.push_back(move(shape));
 	}
-	return result;
+	return shapes;
 }
 
-void DrawShapes(const CShapesContainer & informationAboutShape)
+void DrawShapes(const vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> & informationAboutShape)
 {
 	sf::View view;
 	sf::RenderWindow window(sf::VideoMode(800, 700), "SFML Shape");
@@ -63,7 +64,7 @@ void DrawShapes(const CShapesContainer & informationAboutShape)
 
 		window.setView(view);
 		window.clear(sf::Color::White);
-		for (auto &it : informationAboutShape.GetShapes())
+		for (auto &it : informationAboutShape)
 		{
 			window.draw(*it.second);
 		}
@@ -81,24 +82,23 @@ int main(int argc, char** argv)
 		cout << "Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n' <input file> <output file>'";
 		return 1;
 	}
-	//string dataShapes = GetInformationAboutShapesFromUser();
 	string inputFileName = argv[1];
 	bool wasError = false;
-	string dataShapes = GetInformationAboutShapesFromFile(inputFileName, wasError);
+	auto shapes = GetInformationAboutShapesFromFile(inputFileName, wasError);
 	if (wasError)
 	{
 		cout << "Failed to open input file for reading\n";
 		return 1;
 	}
-	CShapesContainer informationAboutShape = CreateShape(dataShapes);
-	string resultForWriteInFile = GetSortedData(informationAboutShape);
+	//auto shapes = GetInformationAboutShapesFromUser();
+	string resultForWriteInFile = GetSortedData(shapes);
 	string outputFileName = argv[2];
 	if (!WriteResultInOutputFile(resultForWriteInFile, outputFileName))
 	{
 		cout << "Failed to open output file for reading\n";
 		return 1;
 	}
-	DrawShapes(informationAboutShape);
+	DrawShapes(shapes);
 	return 0;
 }
 

@@ -11,16 +11,16 @@ void MergeData(vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> const &i
 	}
 }
 
-string GetSortedData(CShapesContainer &informationAboutShape)
+string GetSortedData(vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> &informationAboutShape)
 {
 	string data;
-	auto repositoryAuxiliary = informationAboutShape.GetShapes();
+	auto repositoryAuxiliary = informationAboutShape;
 	sort(repositoryAuxiliary.begin(), repositoryAuxiliary.end(), [](pair<shared_ptr<IShape>, shared_ptr<IShapeView>> const &shape1,
 		pair<shared_ptr<IShape>, shared_ptr<IShapeView>> const &shape2)
 	{
 		return shape1.first->GetShapeArea() < shape2.first->GetShapeArea();
 	});
-	MergeData(informationAboutShape.GetShapes(), data);
+	MergeData(informationAboutShape, data);
 	data += "\n\n\n\n";
 
 	sort(repositoryAuxiliary.begin(), repositoryAuxiliary.end(), [](pair<shared_ptr<IShape>, shared_ptr<IShapeView>> const &shape1,
@@ -28,6 +28,6 @@ string GetSortedData(CShapesContainer &informationAboutShape)
 	{
 		return shape1.first->GetShapePerimeter() < shape2.first->GetShapePerimeter();
 	});
-	MergeData(informationAboutShape.GetShapes(), data);
+	MergeData(informationAboutShape, data);
 	return data;
 }

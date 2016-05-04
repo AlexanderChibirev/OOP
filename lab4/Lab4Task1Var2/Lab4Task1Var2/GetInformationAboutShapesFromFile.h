@@ -1,4 +1,5 @@
 #pragma once
 
+#include "CreateShape.h"
 
-string GetInformationAboutShapesFromFile(string & inputFileName, bool &wasError);
+vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> GetInformationAboutShapesFromFile(string & inputFileName, bool &wasError);

@@ -1,7 +1,7 @@
 #pragma once
 #include "IShape.h"
-#include "ShapesContainer.h"
+#include "IShapeView.h"
 
 
 void MergeData(vector<shared_ptr<IShape>> const &informationAboutShape, string &data);
-string GetSortedData(CShapesContainer &informationAboutShape);
+string GetSortedData(vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> &informationAboutShape);

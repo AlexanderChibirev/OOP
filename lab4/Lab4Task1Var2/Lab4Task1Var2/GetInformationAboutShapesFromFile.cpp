@@ -1,12 +1,13 @@
 #include "stdafx.h"
 #include "GetInformationAboutShapesFromFile.h"
 
-string GetInformationAboutShapesFromFile(string & inputFileName, bool &wasError)
+vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> GetInformationAboutShapesFromFile(string & inputFileName, bool &wasError)
 {
 	ifstream inputFile;
 	inputFile.open(inputFileName);
 	string line;
 	string result;
+	vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> shapes;
 	if (!inputFile.is_open())
 	{
 		wasError = true;
@@ -16,8 +17,10 @@ string GetInformationAboutShapesFromFile(string & inputFileName, bool &wasError)
 		while (!inputFile.eof())
 		{
 			getline(inputFile, line);
-			result += line + "\n";
+			auto shape = CreateShape(line);
+			shapes.push_back(move(shape));
 		}
+		
 	}
-	return result;
+	return shapes;
 }

@@ -13,7 +13,6 @@ point 12 51
 point 12 13
 point 14 51
 point 12 51
-
 lineSegment 1 2 10 11 #ff0000
 lineSegment 2 3 11 12 #ff0001
 lineSegment 21 2 410 211 #ff0002
@@ -24,7 +23,6 @@ lineSegment 1 12 102 11 #ff0006
 lineSegment 1 231 102.123 11.123 #ff0007
 lineSegment 1 2.1 10.231 11.21 #ff0008
 lineSegment 1 2.232 10.213 -11 #ff0009
-
 rectangle 20.213123 30 17 25231 #ff00000 #00ff00
 rectangle 220.1 340 17 245 #ff00100 #00ff00
 rectangle 230 30.34534 17 255 #ff00200 #00ff00
@@ -47,12 +45,10 @@ rectangle 20.456 3500.123123 17 25 #ff0000 #00f6f00
 rectangle 20 30 167.456 25 #ff0000 #008ff00
 rectangle 20 30.456 107 254 #ff0000 #00ff900
 rectangle 20 30 167 2512 #ff0000 #00f0f00
-
 triangle 1 4 4 5 8 1 #ff0000 #ff0400
 triangle 1 2 4 6 82 1 #ff0030 #ff0000
 triangle 1 3 4 5 8 1 #ff0040 #ff0000
 triangle 1 1 9 6 18 1 #ff0000 #ff0030
-
 circle 1 2 10 #ff0010 #ff0100
 circle 31 2 20 #ff0000 #ff0200
 circle 11 2 50 #ff0300 #ff0050

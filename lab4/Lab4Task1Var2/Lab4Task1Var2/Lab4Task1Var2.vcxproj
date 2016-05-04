@@ -167,7 +167,6 @@
     <ClInclude Include="IShapeView.h" />
     <ClInclude Include="LineSegment_view.h" />
     <ClInclude Include="Rectangle_view.h" />
-    <ClInclude Include="ShapesContainer.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Dot.h" />
     <ClInclude Include="GetInformationAboutShapesFromFile.h" />
@@ -188,7 +187,6 @@
     <ClCompile Include="DotView.cpp" />
     <ClCompile Include="LineSegment_view.cpp" />
     <ClCompile Include="Rectangle_view.cpp" />
-    <ClCompile Include="ShapesContainer.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Dot.cpp" />
     <ClCompile Include="GetInformationAboutShapesFromFile.cpp" />
