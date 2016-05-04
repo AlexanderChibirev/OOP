@@ -8,4 +8,4 @@
 #include "ShapesContainer.h"
 
 void HexToDecCodeColor(string const & colorHex, int &RR, int &GG, int &BB);
-CShapesContainer GetParametrsShapes(const string &dataShapes);
+CShapesContainer CreateShape(const string &dataShapes);

@@ -171,7 +171,7 @@
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Dot.h" />
     <ClInclude Include="GetInformationAboutShapesFromFile.h" />
-    <ClInclude Include="GetParametrsShapes.h" />
+    <ClInclude Include="CreateShape.h" />
     <ClInclude Include="GetProcessedData.h" />
     <ClInclude Include="IShape.h" />
     <ClInclude Include="ISolidShape.h" />
@@ -192,7 +192,7 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Dot.cpp" />
     <ClCompile Include="GetInformationAboutShapesFromFile.cpp" />
-    <ClCompile Include="GetParametrsShapes.cpp" />
+    <ClCompile Include="CreateShape.cpp" />
     <ClCompile Include="GetSortedData.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="LineSegment.cpp" />

@@ -1,15 +1,14 @@
 #include "stdafx.h"
-#include "GetParametrsShapes.h"
+#include "CreateShape.h"
 #include "ShapesContainer.h"
 
 
 
-CShapesContainer GetParametrsShapes(const string &dataShapes)
+CShapesContainer CreateShape(const string &dataShapes)
 {
 	CShapesContainer shapesContainer;
 	istringstream ss(dataShapes);
 	string nameShape;
-
 	while (ss)
 	{
 		ss >> nameShape;
@@ -23,7 +22,7 @@ CShapesContainer GetParametrsShapes(const string &dataShapes)
 			float y;
 			ss >> x;
 			ss >> y;
-			shapesContainer.AddShape(V2f(x, y));
+			shapesContainer.AddDot(V2f(x, y));
 		}
 		else if (nameShape == "lineSegment")
 		{
@@ -40,7 +39,7 @@ CShapesContainer GetParametrsShapes(const string &dataShapes)
 			ss >> x2;
 			ss >> y2;
 			ss >> lineColor;
-			shapesContainer.AddShape(V2f(x1, y1), V2f(x2, y2), lineColor);
+			shapesContainer.AddLineSegment(V2f(x1, y1), V2f(x2, y2), lineColor);
 		}
 		else if (nameShape == "triangle")
 		{
@@ -63,7 +62,7 @@ CShapesContainer GetParametrsShapes(const string &dataShapes)
 			ss >> lineColor;
 			string fillColor;
 			ss >> fillColor;
-			shapesContainer.AddShape(V2f(x1, y1), V2f(x2, y2), V2f(x3, y3), lineColor, fillColor);
+			shapesContainer.AddTriangle(V2f(x1, y1), V2f(x2, y2), V2f(x3, y3), lineColor, fillColor);
 		}
 		else if (nameShape == "circle")
 		{
@@ -77,7 +76,7 @@ CShapesContainer GetParametrsShapes(const string &dataShapes)
 			ss >> lineColor;
 			string fillColor;
 			ss >> fillColor;
-			shapesContainer.AddShape(V2f(x1, y1), radius, lineColor, fillColor);
+			shapesContainer.AddCircle(V2f(x1, y1), radius, lineColor, fillColor);
 		}
 		else if (nameShape == "rectangle")
 		{
@@ -93,7 +92,7 @@ CShapesContainer GetParametrsShapes(const string &dataShapes)
 			ss >> lineColor;
 			string fillColor;
 			ss >> fillColor;
-			shapesContainer.AddShape(V2f(x1, y1), wight, height, lineColor, fillColor);
+			shapesContainer.AddRectangle(V2f(x1, y1), wight, height, lineColor, fillColor);
 		}
 	}
 

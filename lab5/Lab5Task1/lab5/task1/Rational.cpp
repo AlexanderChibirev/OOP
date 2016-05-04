@@ -46,9 +46,9 @@ unsigned GCD(unsigned a, unsigned b)
 
 //////////////////////////////////////////////////////////////////////////
 // TODO: 1. Реализовать метод ToDouble() согласно заданию
-double CRational::ToDouble()
+double CRational::ToDouble() const
 {
-	return double(m_numerator) / double(m_denominator);
+	return double(m_numerator) / (m_denominator);
 }
 //////////////////////////////////////////////////////////////////////////
 
@@ -216,7 +216,9 @@ bool const operator >= (CRational const &rational1, CRational const &rational2)
 // TODO: 13. Реализовать оператор вывода рационального числа в выходной поток 
 std::istream & operator>>(std::istream & stream, CRational & rational)
 {
-	int numerator, denominator;
+	int numerator;
+	int denominator;
+
 	if ((stream >> numerator) && (stream.get() == '/') && (stream >> denominator))
 	{
 		rational = CRational(numerator, denominator);

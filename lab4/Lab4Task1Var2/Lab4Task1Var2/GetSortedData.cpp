@@ -3,11 +3,11 @@
 #include "IShape.h"
 
 
-void MergeData(vector<shared_ptr<IShape>> const &informationAboutShape, string &data) 
+void MergeData(vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> const &informationAboutShape, string &data)
 {
 	for (auto it : informationAboutShape)
 	{
-		data += it->ToString();
+		data += it.first->ToString();
 	}
 }
 
@@ -15,15 +15,18 @@ string GetSortedData(CShapesContainer &informationAboutShape)
 {
 	string data;
 	auto repositoryAuxiliary = informationAboutShape.GetShapes();
-	sort(repositoryAuxiliary.begin(), repositoryAuxiliary.end(), [](shared_ptr<IShape> const &shape1, shared_ptr<IShape> const &shape2)
+	sort(repositoryAuxiliary.begin(), repositoryAuxiliary.end(), [](pair<shared_ptr<IShape>, shared_ptr<IShapeView>> const &shape1,
+		pair<shared_ptr<IShape>, shared_ptr<IShapeView>> const &shape2)
 	{
-		return shape1->GetShapeArea() < shape2->GetShapeArea();
+		return shape1.first->GetShapeArea() < shape2.first->GetShapeArea();
 	});
 	MergeData(informationAboutShape.GetShapes(), data);
 	data += "\n\n\n\n";
-	sort(repositoryAuxiliary.begin(), repositoryAuxiliary.end(), [](shared_ptr<IShape> const &shape1, shared_ptr<IShape> const &shape2)
+
+	sort(repositoryAuxiliary.begin(), repositoryAuxiliary.end(), [](pair<shared_ptr<IShape>, shared_ptr<IShapeView>> const &shape1,
+		pair<shared_ptr<IShape>, shared_ptr<IShapeView>> const &shape2)
 	{
-		return shape1->GetShapePerimeter() > shape2->GetShapePerimeter();
+		return shape1.first->GetShapePerimeter() < shape2.first->GetShapePerimeter();
 	});
 	MergeData(informationAboutShape.GetShapes(), data);
 	return data;

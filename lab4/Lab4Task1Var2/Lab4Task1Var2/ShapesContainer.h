@@ -15,16 +15,14 @@
 class CShapesContainer
 {
 public:
-	void AddShape(V2f const &pos);
-	void  AddShape(const V2f &dot1, const V2f &dot2, const string &lineColor);
-	void  AddShape(const V2f &centerCircle, float &radius, std::string const & lineColor, std::string const & fillColor);
-	void  AddShape(const V2f &dotTopLeftCorner, float wight, float height, std::string const & lineColor, std::string const & fillColor);
-	void  AddShape(const V2f &point1, const V2f &point2, const V2f &point3, string const &lineColor, string const &fillColor);
-	vector<shared_ptr<IShape>> GetShapes()const;
-	vector<shared_ptr<IShapeView>> GetShapesView() const;
+	void AddDot(V2f const &pos);
+	void  AddLineSegment(const V2f &dot1, const V2f &dot2, const string &lineColor);
+	void  AddCircle(const V2f &centerCircle, float &radius, std::string const & lineColor, std::string const & fillColor);
+	void  AddRectangle(const V2f &dotTopLeftCorner, float wight, float height, std::string const & lineColor, std::string const & fillColor);
+	void  AddTriangle(const V2f &point1, const V2f &point2, const V2f &point3, string const &lineColor, string const &fillColor);
+	vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> GetShapes() const;
 private:
 	ShapeColor HexToDecCodeColor(string const & colorHex);
-	vector<shared_ptr<IShape>> m_shapes;
-	vector<shared_ptr<IShapeView>> m_shapesView;
+	vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> m_shapes;
 };
 

@@ -18,7 +18,7 @@ public:
 	int GetDenominator() const;
 
 	// TODO: 1. Реализовать метод ToDouble() согласно заданию
-	double ToDouble();
+	double ToDouble() const ;
 	//////////////////////////////////////////////////////////////////////////
 
 		

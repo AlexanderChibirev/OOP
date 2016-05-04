@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include "GetInformationAboutShapesFromFile.h"
-#include "GetParametrsShapes.h"
+#include "CreateShape.h"
 #include "WriteResultInOutputFile.h"
 #include "GetProcessedData.h"
 #include "ShapesContainer.h"
@@ -38,7 +38,7 @@ string GetInformationAboutShapesFromUser()
 	return result;
 }
 
-void drawingShapes(const CShapesContainer & informationAboutShape)
+void DrawShapes(const CShapesContainer & informationAboutShape)
 {
 	sf::View view;
 	sf::RenderWindow window(sf::VideoMode(800, 700), "SFML Shape");
@@ -63,10 +63,9 @@ void drawingShapes(const CShapesContainer & informationAboutShape)
 
 		window.setView(view);
 		window.clear(sf::Color::White);
-		for (auto &it : informationAboutShape.GetShapesView())
+		for (auto &it : informationAboutShape.GetShapes())
 		{
-
-			window.draw(*it);
+			window.draw(*it.second);
 		}
 		window.display();
 	}
@@ -91,16 +90,15 @@ int main(int argc, char** argv)
 		cout << "Failed to open input file for reading\n";
 		return 1;
 	}
-	CShapesContainer informationAboutShape = GetParametrsShapes(dataShapes);
+	CShapesContainer informationAboutShape = CreateShape(dataShapes);
 	string resultForWriteInFile = GetSortedData(informationAboutShape);
 	string outputFileName = argv[2];
 	if (!WriteResultInOutputFile(resultForWriteInFile, outputFileName))
 	{
-
 		cout << "Failed to open output file for reading\n";
 		return 1;
 	}
-	drawingShapes(informationAboutShape);
+	DrawShapes(informationAboutShape);
 	return 0;
 }
 

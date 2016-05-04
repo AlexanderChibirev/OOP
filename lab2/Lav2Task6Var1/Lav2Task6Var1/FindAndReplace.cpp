@@ -1,30 +1,18 @@
 #include "stdafx.h"
 
 #include "FindAndReplace.h"
-std::string FindAndReplace(const std::string & tpl, const std::string & searchString, const std::string & replaceString, std::vector<std::pair<int, int>> &positionUsedParams)
+std::string FindAndReplace( std::string tpl, const std::string & searchString, const std::string & replaceString, std::vector<std::pair<size_t, size_t>> &positionUsedParams)
 {
 	if (searchString.empty())
 	{
 		return tpl;
 	}
-	std::string newText = tpl;
 	size_t position = 0;
 	bool wasSet = false;
-	while ((position = newText.find(searchString, position)) != std::string::npos)
+	while ((position = tpl.find(searchString, position)) != std::string::npos)
 	{
-		std::string leftPart;
-		std::string rightPart;
-		
-		for (size_t i = 0; i < position; i++)
-		{
-			leftPart += newText[i];
-		}
-
-		for (size_t i = leftPart.size() + searchString.size(); i < newText.size(); ++i)
-		{
-			rightPart += newText[i];
-		}
-
+		std::string leftPart = tpl.substr(0, position);;
+		std::string rightPart = tpl.substr(leftPart.size() + searchString.size(), tpl.size());
 		for (auto &it : positionUsedParams)
 		{
 			if ((size_t(it.first) <= position) && (size_t(it.second) >= (position + searchString.length() - 1)))
@@ -38,11 +26,10 @@ std::string FindAndReplace(const std::string & tpl, const std::string & searchSt
 				it.second += replaceString.length() - 1;
 			}
 		}
-
 		if(!wasSet)
 		{
-			newText.clear();
-			newText.append(leftPart).append(replaceString).append(rightPart);
+			tpl.clear();
+			tpl.append(leftPart).append(replaceString).append(rightPart);
 			positionUsedParams.push_back(std::make_pair(position, position + replaceString.length() - 1));
 			position = position + replaceString.length();
 		}
@@ -52,5 +39,5 @@ std::string FindAndReplace(const std::string & tpl, const std::string & searchSt
 		}
 		wasSet = false;
 	}
-	return newText;
+	return tpl;
 }

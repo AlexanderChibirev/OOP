@@ -6,7 +6,7 @@
 std::string ExpandTemplate(std::string const& tpl, std::map< std::string, std::string> const& params)
 {
 	std::vector <std::string> paramsFirstKey;
-	std::vector<std::pair<int, int>> positionUsedParams;
+	std::vector<std::pair<size_t, size_t>> positionUsedParams;
 
 	for (auto it = params.begin(); it != params.end(); ++it)
 	{
