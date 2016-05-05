@@ -22,7 +22,6 @@ void PrintHelp()
 
 vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> GetInformationAboutShapesFromUser()
 {
-	PrintHelp();
 	string lineStr;
 	string result;
 	vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> shapes;
@@ -82,6 +81,7 @@ int main(int argc, char** argv)
 		cout << "Wrong amount of arguments was proposed\nEnter a correct arguments amount please, for example:\n' <input file> <output file>'";
 		return 1;
 	}
+	PrintHelp();
 	string inputFileName = argv[1];
 	bool wasError = false;
 	auto shapes = GetInformationAboutShapesFromFile(inputFileName, wasError);
