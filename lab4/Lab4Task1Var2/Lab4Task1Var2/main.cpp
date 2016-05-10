@@ -65,7 +65,7 @@ void DrawShapes(const vector<pair<shared_ptr<IShape>, shared_ptr<IShapeView>>> &
 		window.clear(sf::Color::White);
 		for (auto &it : informationAboutShape)
 		{
-			window.draw(*it.second);
+			window.draw(*it.second); 
 		}
 		window.display();
 	}

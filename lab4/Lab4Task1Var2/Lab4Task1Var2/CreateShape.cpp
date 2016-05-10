@@ -91,16 +91,16 @@ pair<shared_ptr<IShape>, shared_ptr<IShapeView>> CreateRectangle(istringstream &
 	ss >> x;
 	float y;
 	ss >> y;
-	float wight;
-	ss >> wight;
+	float width;
+	ss >> width;
 	float height;
 	ss >> height;
 	string lineColor;
 	ss >> lineColor;
 	string fillColor;
 	ss >> fillColor;
-	return make_pair(make_shared<CRectangle>(V2f(x, y), wight, height, lineColor, fillColor),
-		make_shared<CRectangleView>(V2f(x, y), wight, height, HexToDecCodeColor(lineColor), HexToDecCodeColor(fillColor)));
+	return make_pair(make_shared<CRectangle>(V2f(x, y), width, height, lineColor, fillColor),
+		make_shared<CRectangleView>(V2f(x, y), width, height, HexToDecCodeColor(lineColor), HexToDecCodeColor(fillColor)));
 }
 
 pair<shared_ptr<IShape>, shared_ptr<IShapeView>> CreateShape(const string &dataShapes)
