@@ -9,7 +9,8 @@ using namespace std;
 int main()
 {
 	string url = "https://github.com//OOP/";
-	CHttpUrl urls(url);
-    return 0;
+	//CHttpUrl urls(url);
+	CHttpUrl  urls("http", "github.com", 80, "OOP");
+	return 0;
 }
 

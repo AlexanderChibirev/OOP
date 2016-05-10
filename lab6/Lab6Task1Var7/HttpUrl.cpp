@@ -18,7 +18,7 @@ CHttpUrl::CHttpUrl(string const& url)
 		throw CUrlParsingError(incorrect_url);
 	}
 }
-CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protocol, unsigned short port)
+CHttpUrl::CHttpUrl(const string &protocol, const string & domain, unsigned short port, const string & document)
 {
 	SetProtocol(protocol);
 	SetPort(port);
@@ -48,7 +48,7 @@ unsigned short CHttpUrl::GetPort()const
 
 void CHttpUrl::SetDomain(const string & domain)
 {
-	boost::regex ex("/^([0-9a-z]([0-9a-z\-])*[0-9a-z]\.)+[0-9a-z\-]{1,8}$/i");
+	/*boost::regex ex("/^([0-9a-z]([0-9a-z\-])*[0-9a-z]\.)+[0-9a-z\-]{1,8}$/i");
 	boost::cmatch urlParts;
 	if (boost::regex_match(domain.c_str(), urlParts, ex))
 	{
@@ -57,7 +57,7 @@ void CHttpUrl::SetDomain(const string & domain)
 	else
 	{
 		throw CUrlParsingError(incorrect_url);
-	}
+	}*/
 	m_domain = domain;
 }
 void CHttpUrl::SetDocument(const string & document)
@@ -90,22 +90,6 @@ void CHttpUrl::SetProtocol(const string & protocol)
 	}
 }
 
-void  CHttpUrl::SetProtocol(const Protocol & protocol)
-{
-	if (protocol == HTTP) 
-	{
-		m_protocol = HTTP;
-	}
-	else if (protocol == HTTPS)
-	{
-		m_protocol = HTTPS;
-	}
-	else 
-	{
-		throw CUrlParsingError(incorrect_protocol);
-	}
-}
-
 void CHttpUrl::SetPort(const string & port)
 {
 	try
@@ -113,9 +97,20 @@ void CHttpUrl::SetPort(const string & port)
 		if (!port.empty())
 		{
 			unsigned short integerPort = boost::lexical_cast<unsigned short>(port);
-			if (integerPort >= 0)
+			if (integerPort > 0)
 			{
 				m_port = integerPort;
+			}
+		}
+		else
+		{
+			if (m_protocol == HTTP)
+			{
+				m_port = 80;
+			}
+			else 
+			{
+				m_port = 443;
 			}
 		}
 	}
@@ -124,7 +119,15 @@ void CHttpUrl::SetPort(const string & port)
 		throw CUrlParsingError(incorrect_port);
 	}
 }
+
 void CHttpUrl::SetPort(const unsigned int port)
 {
-	m_port = port;
+	if (port > 0)
+	{
+		m_port = port;
+	}
+	else 
+	{
+		throw CUrlParsingError(incorrect_port);
+	}
 }

@@ -14,12 +14,7 @@ class CHttpUrl
 {
 public:
 	CHttpUrl(string const& url);
-	CHttpUrl(	
-		string const& domain,
-		string const& document,
-		Protocol protocol,
-		unsigned short port);
-
+	CHttpUrl(const string &protocol, const string & domain, unsigned short port, const string & document);
 	string GetURL() const;
 	string GetDomain() const;
 	string GetDocument() const;
@@ -29,7 +24,6 @@ private:
 	void SetDomain(const string & domain);
 	void SetDocument(const string & document);
 	void SetProtocol(const string & protocol);
-	void SetProtocol(const Protocol & protocol);
 	void SetPort(const string & port);
 	void SetPort(const unsigned int port);
 private:

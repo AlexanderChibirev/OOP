@@ -16,5 +16,5 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/regex.hpp>
 #include <boost/lexical_cast.hpp>
-
+#include <cctype>
 // TODO: reference additional headers your program requires here
