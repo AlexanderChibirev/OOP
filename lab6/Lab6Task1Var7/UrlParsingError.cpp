@@ -5,5 +5,4 @@
 CUrlParsingError::CUrlParsingError(const string & errorMessage)
 	: invalid_argument(errorMessage)
 {
-
 }

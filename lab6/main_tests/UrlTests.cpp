@@ -2,44 +2,9 @@
 #include "../Lab6Task1Var7/HttpUrl.h"
 #include "../Lab6Task1Var7/UrlParsingError.h"
 #include <boost/test/unit_test.hpp>
-//
-//struct UrlFixture
-//{
-//	CHttpUrl url;
-//	UrlFixture()
-//		: url("")
-//	{};
-//
-//};
-class my_exception {};
 
-bool GGG()
-{
-	return 1;
-}
-//CHttpUrl("https://github.com//OOP/")
 BOOST_AUTO_TEST_SUITE(TestCHttpUrl)
 	BOOST_AUTO_TEST_SUITE(when_initialized_with_url_string)
-		BOOST_AUTO_TEST_CASE(throws_exception_on_incorrect_scheme1)
-		{
-			BOOST_REQUIRE_THROW(CHttpUrl("http://github.com:"), CUrlParsingError);
-		}
-		BOOST_AUTO_TEST_CASE(throws_exception_on_incorrect_scheme2)
-		{
-			BOOST_REQUIRE_NO_THROW(CHttpUrl("http://github.com//OOP"));
-		}
-		BOOST_AUTO_TEST_CASE(throws_exception_on_incorrect_scheme3)
-		{
-			BOOST_REQUIRE_NO_THROW(CHttpUrl("http://github.com//OOP/80"));
-		}
-		BOOST_AUTO_TEST_CASE(throws_exception_on_incorrect_scheme4)
-		{
-			BOOST_REQUIRE_THROW(CHttpUrl("http://github.com//OOP:"), CUrlParsingError);
-		}
-		BOOST_AUTO_TEST_CASE(throws_exception_on_incorrect_scheme5)
-		{
-			BOOST_REQUIRE_THROW(CHttpUrl("httpasds://github.com//OOP/"), CUrlParsingError);
-		}
 		BOOST_AUTO_TEST_CASE(dont_throws_exception_on_correct_scheme)
 		{
 			BOOST_REQUIRE_NO_THROW(CHttpUrl("https://github.com//OOP/"));
@@ -63,7 +28,6 @@ BOOST_AUTO_TEST_SUITE(TestCHttpUrl)
 	BOOST_AUTO_TEST_SUITE(when_initialized_with_url_components)
 		BOOST_AUTO_TEST_CASE(throws_exception_on_invalid_domain_name)
 		{
-			//	CHttpUrl(const string &protocol, const string & domain, unsigned short port, const string & document);
 			BOOST_REQUIRE_THROW(CHttpUrl url("https", "", 80, "//OOP/"), CUrlParsingError);
 		}
 		BOOST_AUTO_TEST_CASE(throws_exception_on_invalid_protocol)
