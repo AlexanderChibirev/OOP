@@ -145,6 +145,7 @@ BOOST_FIXTURE_TEST_SUITE(Calculator, CalculatorFixture)
 				{
 					functionList[iter->first] = calculator.GetFunctionsValue(iter->first).get();
 				}
+
 				BOOST_CHECK(functionList == functionListTest);
 			}
 		BOOST_AUTO_TEST_SUITE_END()

@@ -118,7 +118,11 @@ bool CCalculator::DefineFunction(const string &fnName, const string &identifier1
 	OperationsFunction info;
 	if ((!GetVariableValue(fnName)) && (!GetOperationsFunction(fnName)) && (!fnName.empty()))
 	{
-		if ((GetVariableValue(identifier1) || GetOperationsFunction(identifier1)) && (GetVariableValue(identifier2) || GetOperationsFunction(identifier2)))
+		auto IsValueAlreadyDefined = [this](const string &identifier) {
+			return (GetVariableValue(identifier) || GetOperationsFunction(identifier));
+		};
+
+		if (IsValueAlreadyDefined(identifier1) && IsValueAlreadyDefined(identifier2))
 		{
 			info.firstVal = identifier1;
 			info.operation = operation;
