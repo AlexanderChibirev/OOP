@@ -15,7 +15,7 @@ CHttpUrl::CHttpUrl(string const& url)
 	}
 	else
 	{
-		throw CUrlParsingError(incorrect_url);
+		throw CUrlParsingError("incorrect url");
 	}
 }
 CHttpUrl::CHttpUrl(const string &protocol, const string & domain, unsigned short port, const string & document)
@@ -54,7 +54,7 @@ void CHttpUrl::SetDomain(const string & domain)
 	}
 	else
 	{
-		throw CUrlParsingError(incorrect_domain);
+		throw CUrlParsingError("incorrect domain");
 	}
 }
 void CHttpUrl::SetDocument(const string & document)
@@ -80,7 +80,7 @@ void CHttpUrl::SetProtocol(const string & protocol)
 	}
 	else
 	{
-		throw CUrlParsingError(incorrect_protocol);
+		throw CUrlParsingError("incorrect protocol");
 	}
 }
 
@@ -110,7 +110,7 @@ void CHttpUrl::SetPort(const string & port)
 	}
 	catch (boost::bad_lexical_cast &)
 	{
-		throw CUrlParsingError(incorrect_port);
+		throw CUrlParsingError("Incorrect url");
 	}
 }
 
@@ -122,6 +122,6 @@ void CHttpUrl::SetPort(const unsigned int port)
 	}
 	else 
 	{
-		throw CUrlParsingError(incorrect_port);
+		throw CUrlParsingError("Incorrect port");
 	}
 }

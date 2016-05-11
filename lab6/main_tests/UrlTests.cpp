@@ -20,7 +20,23 @@ bool GGG()
 //CHttpUrl("https://github.com//OOP/")
 BOOST_AUTO_TEST_SUITE(TestCHttpUrl)
 	BOOST_AUTO_TEST_SUITE(when_initialized_with_url_string)
-		BOOST_AUTO_TEST_CASE(throws_exception_on_incorrect_scheme)
+		BOOST_AUTO_TEST_CASE(throws_exception_on_incorrect_scheme1)
+		{
+			BOOST_REQUIRE_THROW(CHttpUrl("http://github.com:"), CUrlParsingError);
+		}
+		BOOST_AUTO_TEST_CASE(throws_exception_on_incorrect_scheme2)
+		{
+			BOOST_REQUIRE_NO_THROW(CHttpUrl("http://github.com//OOP"));
+		}
+		BOOST_AUTO_TEST_CASE(throws_exception_on_incorrect_scheme3)
+		{
+			BOOST_REQUIRE_NO_THROW(CHttpUrl("http://github.com//OOP/80"));
+		}
+		BOOST_AUTO_TEST_CASE(throws_exception_on_incorrect_scheme4)
+		{
+			BOOST_REQUIRE_THROW(CHttpUrl("http://github.com//OOP:"), CUrlParsingError);
+		}
+		BOOST_AUTO_TEST_CASE(throws_exception_on_incorrect_scheme5)
 		{
 			BOOST_REQUIRE_THROW(CHttpUrl("httpasds://github.com//OOP/"), CUrlParsingError);
 		}
