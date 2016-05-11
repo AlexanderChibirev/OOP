@@ -48,30 +48,24 @@ unsigned short CHttpUrl::GetPort()const
 
 void CHttpUrl::SetDomain(const string & domain)
 {
-	/*boost::regex ex("/^([0-9a-z]([0-9a-z\-])*[0-9a-z]\.)+[0-9a-z\-]{1,8}$/i");
-	boost::cmatch urlParts;
-	if (boost::regex_match(domain.c_str(), urlParts, ex))
+	if (!domain.empty())
 	{
-		cout << urlParts[1];
+		m_domain = domain;
 	}
 	else
 	{
-		throw CUrlParsingError(incorrect_url);
-	}*/
-	m_domain = domain;
+		throw CUrlParsingError(incorrect_domain);
+	}
 }
 void CHttpUrl::SetDocument(const string & document)
 {
-	if (!document.empty())
+	if (document[0] != '/')
 	{
-		if (document[0] != '/')
-		{
-			m_document = '/' + document;
-		}
-		else 
-		{
-			m_document = document;
-		}
+		m_document = '/' + document;
+	}
+	else 
+	{
+		m_document = document;
 	}
 }
 void CHttpUrl::SetProtocol(const string & protocol)
