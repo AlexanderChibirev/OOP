@@ -26,8 +26,8 @@ private:
 	std::unique_ptr<char[]> m_chars;
 	size_t m_length;
 };
-CMyString operator +(CMyString & leftString, const CMyString & rightString);
-CMyString operator+(string const & leftString, CMyString const & rightString);
+CMyString operator +(const CMyString & leftString, const CMyString & rightString);
+CMyString operator+(const string  & leftString, CMyString const & rightString);
 CMyString operator+(const char * leftString, CMyString const & rightString);
 bool operator !=(const CMyString & leftString, const CMyString & rightString);
 bool operator ==(const CMyString & leftString, const CMyString & rightString);

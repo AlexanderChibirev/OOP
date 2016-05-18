@@ -21,9 +21,19 @@ CMyString::CMyString(const char * pString, size_t length)
 	memcpy(m_chars.get(), pString, length);
 }
 
+CMyString::CMyString(std::string const& stlString)
+	: m_chars(CreateString(stlString.length()))
+	, m_length(stlString.length())
+{
+	memcpy(m_chars.get(), stlString.c_str(), m_length);
+}
+
 CMyString::CMyString(CMyString const& other)
 {
-	*this = other;
+	auto len = other.GetLength();
+	m_chars = CreateString(len);
+	m_length = len;
+	memcpy(m_chars.get(), other.GetStringData(), m_length);
 }
 
 CMyString::CMyString(CMyString && other)
@@ -32,8 +42,6 @@ CMyString::CMyString(CMyString && other)
 	other.m_chars = nullptr;
 	other.m_length = 0;
 }
-
-// TODO: add STL string constructor
 
 size_t CMyString::GetLength()const
 {
@@ -62,20 +70,15 @@ CMyString  CMyString::SubString(size_t start, size_t length) const
 	return CMyString(m_chars.get() + start, length);
 }
 
-CMyString::CMyString(std::string const& stlString) 
-{
-	m_length = stlString.length();
-	m_chars = CreateString(m_length);
-	memcpy(m_chars.get(), stlString.c_str(), m_length);
-}
+
 
 CMyString& CMyString::operator=(const CMyString &other)
 {
 	if (this != &other)
 	{
-		m_length = other.GetLength();
-		m_chars = make_unique<char[]>(m_length + 1);
-		memcpy(m_chars.get(), other.GetStringData(), m_length + 1);
+		CMyString tmp(other);
+		swap(m_chars, tmp.m_chars);
+		swap(m_length, tmp.m_length);
 	}
 	return *this;
 }
@@ -86,6 +89,7 @@ CMyString& CMyString::operator=(CMyString &&other)
 	{
 		m_chars = move(other.m_chars);
 		m_length = other.m_length;
+		other.Clear();
 	}
 	return *this;
 }
@@ -113,8 +117,11 @@ CMyString& CMyString::operator+=(const CMyString &other)
 
 void CMyString::Clear()
 {
+	if (m_chars)
+	{
+		m_chars.reset();
+	}
 	m_length = 0;
-	m_chars = CreateString(0);
 }
 
 char& CMyString::operator[](size_t index)
@@ -123,7 +130,7 @@ char& CMyString::operator[](size_t index)
 	{
 		throw out_of_range("index out of range");
 	}
-	return m_chars.get()[index];
+	return m_chars[index];
 }
 
 const char& CMyString::operator[](size_t index) const
@@ -132,13 +139,15 @@ const char& CMyString::operator[](size_t index) const
 	{
 		throw out_of_range("index out of range");
 	}
-	return m_chars.get()[index];
+	return m_chars[index];
 }
 
 int CMyString::Compare(CMyString const & str) const
 {
-	int compare = strncmp(m_chars.get(), str.m_chars.get(), min(m_length, str.m_length));
-	return (compare != 0 ? compare : int(m_length - str.m_length));
+	auto cmp = (memcmp(m_chars.get(), str.GetStringData(), min(m_length, str.m_length)));
+	return cmp != 0 ? cmp : static_cast<int>(m_length - str.m_length);
+	//int compare = strncmp(m_chars.get(), str.m_chars.get(), min(m_length, str.m_length));
+	//return (compare != 0 ? compare : int(m_length - str.m_length));
 }
 
 bool operator ==(const CMyString &leftString, const CMyString &rightString)
@@ -151,11 +160,11 @@ bool operator !=(const CMyString &leftString, const CMyString &rightString)
 	return !(leftString == rightString);
 }
 
-CMyString operator +(CMyString &leftString, const CMyString &rightString)
+CMyString operator +(const CMyString &leftString, const CMyString &rightString)
 {
-	return leftString += rightString;
+	CMyString lhs(leftString);
+	return lhs += rightString;
 }
-
 
 CMyString operator+(const string & leftString, CMyString const & rightString)
 {
@@ -169,18 +178,18 @@ CMyString operator+(const char * leftString, CMyString const & rightString)
 	return lhs += rightString;
 }
 
-std::ostream & operator<<(std::ostream & strm, CMyString const & str)
+std::ostream & operator<<(std::ostream & ostrm, CMyString const & str)
 {
-	strm << str.GetStringData();
-	return strm;
+	ostrm << str.GetStringData();
+	return ostrm;
 }
 
-std::istream & operator>>(std::istream & ostrm, CMyString & str)
+std::istream & operator>>(std::istream & strm, CMyString & str)
 {
 	std::string tmp;
-	ostrm >> tmp;
-	str = tmp;
-	return ostrm;
+	strm >> tmp;
+	str = CMyString(tmp);
+	return strm;
 }
 
 bool operator <(const CMyString &leftString, const CMyString &rightString)
@@ -190,7 +199,7 @@ bool operator <(const CMyString &leftString, const CMyString &rightString)
 
 bool operator >(const CMyString &leftString, const CMyString &rightString)
 {
-	return !(leftString < rightString);
+	return leftString.Compare(rightString) > 0;
 }
 
 

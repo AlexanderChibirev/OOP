@@ -263,30 +263,46 @@ BOOST_AUTO_TEST_SUITE(comparison_operator)
 BOOST_AUTO_TEST_SUITE_END()
 
 
-BOOST_AUTO_TEST_SUITE(Compare_operators)
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+BOOST_AUTO_TEST_SUITE(less_operator)
+
+	BOOST_AUTO_TEST_CASE(str2_less_str1_by_alphabet)
+	{
+		BOOST_CHECK((CMyString("ab") < CMyString("abc", 3)));
+	}
 
 	BOOST_AUTO_TEST_CASE(str1_less_str2)
 	{
-		BOOST_CHECK((CMyString("x") < CMyString("xx")));
+		BOOST_CHECK(!(CMyString("abz") < CMyString("abcd", 3)));
 	}
 
-	BOOST_AUTO_TEST_CASE(str1_greater_str2)
+	BOOST_AUTO_TEST_CASE(str2_equal_str1)
 	{
-		BOOST_CHECK((CMyString("xx") > CMyString("x")));
-	}
-
-	BOOST_AUTO_TEST_CASE(str1_equal_str2)
-	{
-		BOOST_CHECK((CMyString("xx") == CMyString("xx")));
-	}
-
-	BOOST_AUTO_TEST_CASE(str1_not_equal_str2)
-	{
-		BOOST_CHECK((CMyString("xx") != CMyString("xy")));
+		BOOST_CHECK(!(CMyString("Test", 4u) < CMyString("Test")));
 	}
 
 BOOST_AUTO_TEST_SUITE_END()
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+BOOST_AUTO_TEST_SUITE(more_operator)
 
+	BOOST_AUTO_TEST_CASE(str2_more_str1_by_alphabet)
+	{
+		BOOST_CHECK(!(CMyString("ab") > CMyString("abc", 3)));
+	}
+
+	BOOST_AUTO_TEST_CASE(str1_more_str2)
+	{
+		BOOST_CHECK((CMyString("abz") > CMyString("abcd", 3)));
+	}
+	BOOST_AUTO_TEST_CASE(str1_equal_str2)
+	{
+		BOOST_CHECK(!(CMyString("Test", 4u) > CMyString("Test", 4u)));
+	}
+BOOST_AUTO_TEST_SUITE_END()
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 BOOST_AUTO_TEST_SUITE(less_or_equal_operator)
 
 	BOOST_AUTO_TEST_CASE(compare_them_in_alphabetical_order)
@@ -339,18 +355,36 @@ BOOST_AUTO_TEST_SUITE(indexed_access_operator)
 	}
 BOOST_AUTO_TEST_SUITE_END()
 
-BOOST_AUTO_TEST_SUITE(stream_operators)
-	BOOST_AUTO_TEST_CASE(istream_operator)
+BOOST_AUTO_TEST_SUITE(istream_operator)
+	BOOST_AUTO_TEST_CASE(string_with_null_char_in_middle)
 	{
-		std::ostringstream strm;
-		strm << CMyString("istream_operator");
-		BOOST_CHECK(strm.str() == "istream_operator");
-	}
-	BOOST_AUTO_TEST_CASE(ostream_operator)
-	{
-		CMyString myString;
-		std::istringstream strm("ostream_operator");
-		strm >> myString;
-		BOOST_CHECK_EQUAL(myString.GetStringData(), "ostream_operator");
+		std::istringstream strm("Some\0String");
+		CMyString myStr;
+		strm >> myStr;
+		BOOST_CHECK_EQUAL(myStr.GetStringData(), "Some\0String");
 	}
 BOOST_AUTO_TEST_SUITE_END()
+
+BOOST_AUTO_TEST_SUITE(ostream)
+	BOOST_AUTO_TEST_CASE(string_with_null_char_in_middle)
+	{
+		std::ostringstream strm;
+		strm << CMyString("ostream\0operator");
+		BOOST_CHECK_EQUAL(strm.str(), "ostream\0operator");
+	}
+BOOST_AUTO_TEST_SUITE_END()
+
+
+BOOST_AUTO_TEST_SUITE(then_we_used_str_cpy)
+	BOOST_AUTO_TEST_CASE(null_character_will_be_ignored)
+	{
+		BOOST_CHECK(!(CMyString("str_cpy") == CMyString("str_cpy\0", 5)));
+	}
+BOOST_AUTO_TEST_SUITE_END()
+
+//BOOST_AUTO_TEST_SUITE(then_we_used_mem_cpy)
+//BOOST_AUTO_TEST_CASE(null_character_will_be_ignored)
+//{
+//	BOOST_CHECK(!(CMyString("Test") == CMyString("Test\0", 5)));
+//}
+//BOOST_AUTO_TEST_SUITE_END()

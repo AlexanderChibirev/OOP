@@ -8,13 +8,11 @@
 int main()
 {
 	//CMyString s("StringWithValueAndLen");
-	string s = "abz";
-	string s1 = "abcd";
-	if (s <= s1)
-	{
-		cout << "1";
-	}
-	//CMyString s2("2");
+//	string s = "abz";
+	//string s1 = "abcd";
+
+	CMyString str("heyCopy");
+	CMyString str1(str);
 	//auto x = s.GetLength();
 	//auto n = s2.GetLength();
 	//if(s >= s2)
