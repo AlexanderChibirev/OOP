@@ -22,6 +22,7 @@ public:
 	int Compare(CMyString const & str) const;
 private:
 	std::unique_ptr<char[]> CreateString(size_t length);
+
 	std::unique_ptr<char[]> m_chars;
 	size_t m_length;
 };

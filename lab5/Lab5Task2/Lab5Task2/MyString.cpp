@@ -4,23 +4,20 @@
 #include <stdlib.h>
 
 CMyString::CMyString()
+	: m_chars(CreateString(0))
+	, m_length(0)
 {
-	m_chars = CreateString(0);
-	m_length = 0;
 }
 
 CMyString::CMyString(const char * pString)
+	: CMyString(pString, strlen(pString))
 {
-	auto length = strlen(pString);
-	m_chars = CreateString(length);
-	memcpy(m_chars.get(), pString, length + 1);
-	m_length = length;
 }
 
 CMyString::CMyString(const char * pString, size_t length)
+	: m_chars(CreateString(length))
+	, m_length(length)
 {
-	m_chars = CreateString(length);
-	m_length = length;
 	memcpy(m_chars.get(), pString, length);
 }
 
@@ -36,6 +33,8 @@ CMyString::CMyString(CMyString && other)
 	other.m_length = 0;
 }
 
+// TODO: add STL string constructor
+
 size_t CMyString::GetLength()const
 {
 	return m_length;
@@ -45,7 +44,7 @@ const char*  CMyString::GetStringData() const
 {
 	if (!m_chars.get())
 	{
-		return "\0";
+		return "";
 	}
 	return m_chars.get();
 }
@@ -120,7 +119,7 @@ void CMyString::Clear()
 
 char& CMyString::operator[](size_t index)
 {
-	if (index > m_length || index < 0)
+	if (index > m_length)
 	{
 		throw out_of_range("index out of range");
 	}
@@ -129,7 +128,7 @@ char& CMyString::operator[](size_t index)
 
 const char& CMyString::operator[](size_t index) const
 {
-	if (index > m_length || index < 0)
+	if (index > m_length)
 	{
 		throw out_of_range("index out of range");
 	}
