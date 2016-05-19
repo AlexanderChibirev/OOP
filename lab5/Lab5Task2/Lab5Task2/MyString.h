@@ -1,9 +1,25 @@
 #pragma once
+#include "СMyStringIterator.h"
+#include <memory>
 using namespace std;
 class CMyString
 {
 public:
-	
+	using iterator = СMyStringIterator<char> ;
+	using const_iterator = СMyStringIterator<const char> ;
+
+
+	iterator begin();
+	iterator end();
+
+	const_iterator begin() const;
+	const_iterator end() const;
+	iterator rbegin();
+	iterator rend();
+	const_iterator rbegin()const;
+	const_iterator rend()const;
+
+
 	CMyString(); // конструктор по умолчанию 
 	CMyString(const char * pString); // конструктор, инициализирующий строку данными строки. С завершающим нулевым символом
 	CMyString(const char * pString, size_t length);// конструктор, инициализирующий строку данными из символьного массива заданной длины
@@ -22,7 +38,6 @@ public:
 	int Compare(CMyString const & str) const;
 private:
 	std::unique_ptr<char[]> CreateString(size_t length);
-
 	std::unique_ptr<char[]> m_chars;
 	size_t m_length;
 };

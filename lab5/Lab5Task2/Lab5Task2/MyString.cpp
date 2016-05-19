@@ -212,3 +212,45 @@ bool operator >=(const CMyString &leftString, const CMyString &rightString)
 {
 	return leftString.Compare(rightString) >= 0;
 }
+
+
+/////////////////////////////////////////////////////////////////////////////////
+CMyString::iterator CMyString::begin()
+{
+	return iterator(m_chars.get());
+}
+
+CMyString::iterator CMyString::end()
+{
+	return iterator(m_chars.get() + m_length);
+}
+
+CMyString::const_iterator CMyString::begin() const
+{
+	return const_iterator(m_chars.get());
+}
+
+CMyString::const_iterator CMyString::end() const
+{
+	return const_iterator(m_chars.get() + m_length);
+}
+///////////////////////////////////////////////////////////////////////////////
+CMyString::iterator CMyString::rbegin()
+{
+	return iterator(m_chars.get());
+}
+
+CMyString::iterator CMyString::rend()
+{
+	return iterator(m_chars.get() + m_length);
+}
+
+CMyString::const_iterator CMyString::rbegin() const
+{
+	return const_iterator(m_chars.get());
+}
+
+CMyString::const_iterator CMyString::rend() const
+{
+	return const_iterator(m_chars.get() + m_length);
+}
