@@ -4,30 +4,30 @@
 #include "stdafx.h"
 #include "MyString.h"
 #include <iostream>
+#include <vector>
 
 int main()
 {
-	//CMyString s("StringWithValueAndLen");
-//	string s = "abz";
-	//string s1 = "abcd";
+	//CMyString str("x");
+	//str.Clear();
+	//str[0] = 'x';
+	
+	string str;
+	auto x = str[0];
+	str[0] = 'x';
 
-	CMyString str("heyCopy");
-	CMyString str1(str);
-	//auto x = s.GetLength();
-	//auto n = s2.GetLength();
-	//if(s >= s2)
-	//{
-	//	cout << "1";
-	//}
-	//CMyString d("FeEld", 5);
-	//CMyString b("F", 1);
-	//d += b;
-	////auto x  = d.GetStringData();
-	///*string str = "FeEld";
-	//str = str[7];
-	//auto x = str.substr(3,53);
-	//x = str.substr(1, 1);
-	//x = str.substr(2, 1);*/
+	vector<char> str2 = {'1'};
+	auto y = str2[0];
+	str2.clear();
+	y = str2[0];
+	str2[0] = 'y';
+	//str.clear();
+	//str[0] = 'x';
+//	CMyString myString("S");
+//	myString.Clear();
+//	auto x = myString[0];
+	//CMyString ss(myString.GetStringData());
+//	myString = myString + myString;
     return 0;
 }
 

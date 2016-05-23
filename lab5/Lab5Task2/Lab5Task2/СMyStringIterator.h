@@ -1,58 +1,63 @@
-#pragma once 
-
-template<typename ValueType>
-class ÑMyStringIterator : public std::iterator<std::input_iterator_tag, ValueType>
+template<typename T>
+class ÑMyStringIterator : public std::iterator<std::input_iterator_tag, T>
 {
-	friend class OwnContainer;
+	friend class CMyString;
 private:
-	
+	ÑMyStringIterator(T* p);
 public:
-	ÑMyStringIterator(ValueType* p);
 	ÑMyStringIterator(const ÑMyStringIterator &it);
 
 	bool operator!=(ÑMyStringIterator const& other) const;
 	bool operator==(ÑMyStringIterator const& other) const; //need for BOOST_FOREACH
 	typename ÑMyStringIterator::reference operator*() const;
 	ÑMyStringIterator& operator++();
+	ÑMyStringIterator& operator--();
 private:
-	ValueType* p;
+	T* p;
 };
 
-template<typename ValueType>
-ÑMyStringIterator<ValueType>::ÑMyStringIterator(ValueType *p) :
+template<typename T>
+ÑMyStringIterator<T>::ÑMyStringIterator(T *p) :
 	p(p)
 {
 
 }
 
-template<typename ValueType>
-ÑMyStringIterator<ValueType>::ÑMyStringIterator(const ÑMyStringIterator& it) :
+template<typename T>
+ÑMyStringIterator<T>::ÑMyStringIterator(const ÑMyStringIterator& it) :
 	p(it.p)
 {
 
 }
 
-template<typename ValueType>
-bool ÑMyStringIterator<ValueType>::operator!=(ÑMyStringIterator const& other) const
+template<typename T>
+bool ÑMyStringIterator<T>::operator!=(ÑMyStringIterator const& other) const
 {
 	return p != other.p;
 }
 
-template<typename ValueType>
-bool ÑMyStringIterator<ValueType>::operator==(ÑMyStringIterator const& other) const
+template<typename T>
+bool ÑMyStringIterator<T>::operator==(ÑMyStringIterator const& other) const
 {
 	return p == other.p;
 }
 
-template<typename ValueType>
-typename ÑMyStringIterator<ValueType>::reference ÑMyStringIterator<ValueType>::operator*() const
+template<typename T>
+typename ÑMyStringIterator<T>::reference ÑMyStringIterator<T>::operator*() const
 {
 	return *p;
 }
 
-template<typename ValueType>
-ÑMyStringIterator<ValueType> &ÑMyStringIterator<ValueType>::operator++()
+template<typename T>
+ÑMyStringIterator<T> &ÑMyStringIterator<T>::operator++()
 {
 	++p;
+	return *this;
+}
+
+template<typename T>
+ÑMyStringIterator<T> &ÑMyStringIterator<T>::operator--()
+{
+	--p;
 	return *this;
 }

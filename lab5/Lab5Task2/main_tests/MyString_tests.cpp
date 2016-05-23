@@ -88,7 +88,6 @@ BOOST_AUTO_TEST_SUITE(ConstructorMyStringInitializingWithValueAndLength)
 		CMyString myString("StringWithValueAndLen", 11);
 		BOOST_CHECK_EQUAL(myString.GetLength(), 11);
 	}
-
 	BOOST_AUTO_TEST_CASE(strings_is_equal_to_StringWithValueAndLen)
 	{
 		CMyString myString("StringWithValueAndLen", 21);
@@ -365,15 +364,17 @@ BOOST_AUTO_TEST_SUITE(istream_operator)
 	}
 BOOST_AUTO_TEST_SUITE_END()
 
+/////////////////////////////////////////////////////////////
 BOOST_AUTO_TEST_SUITE(ostream)
 	BOOST_AUTO_TEST_CASE(string_with_null_char_in_middle)
 	{
 		std::ostringstream strm;
-		strm << CMyString("ostream\0operator");
-		BOOST_CHECK_EQUAL(strm.str(), "ostream\0operator");
+		strm << CMyString("m\0o",3);
+		string stdStr("m\0o", 3);
+		BOOST_CHECK_EQUAL(strm.str(), stdStr);
 	}
 BOOST_AUTO_TEST_SUITE_END()
-
+/////////////////////////////////////////////////////////////
 
 BOOST_AUTO_TEST_SUITE(then_we_used_str_cpy)
 	BOOST_AUTO_TEST_CASE(null_character_will_be_ignored)
@@ -403,33 +404,33 @@ BOOST_FIXTURE_TEST_SUITE(before_declare_mystring_for_iterator_tests, declare_mys
 		BOOST_CHECK_EQUAL(*it, myStr[0]);
 	}
 
-	/*BOOST_AUTO_TEST_CASE(can_get_point_to_end_str)
+	BOOST_AUTO_TEST_CASE(can_get_point_to_end_str)
 	{
 		auto it = myStr.end();
 		--it;
 		BOOST_CHECK_EQUAL(*it, myStr[myStr.GetLength() - 1]);
 	}
-*/
-	/*BOOST_AUTO_TEST_CASE(can_iterate_over_constant_string_in_forward_direction)
+
+	BOOST_AUTO_TEST_CASE(can_iterate_over_constant_string_in_forward_direction)
 	{
 		size_t i = 0;
-		for (CMyString::constIterator it = constMyStr.begin(); it != constMyStr.end(); ++it)
+		for (CMyString::const_iterator it = constMyStr.begin(); it != constMyStr.end(); ++it)
 		{
 			BOOST_CHECK_EQUAL(*it, constMyStr[i]);
 			++i;
 		}
 	}
-
+	/*
 	BOOST_AUTO_TEST_CASE(can_iterate_over_constant_string_in_opposite_direction)
 	{
 		size_t i = constMyStr.GetLength() - 1;
-		for (CMyString::ConstIterator it = constMyStr.rbegin(); it != constMyStr.rend(); ++it)
+		for (CMyString::const_iterator it = constMyStr.rbegin(); it != constMyStr.rend(); ++it)
 		{
 			BOOST_CHECK_EQUAL(*it, constMyStr[i]);
 			--i;
 		}
 	}
-
+	
 	BOOST_AUTO_TEST_CASE(can_iterate_over_non_constant_string_in_forward_direction)
 	{
 		size_t i = 0;
@@ -485,4 +486,20 @@ BOOST_FIXTURE_TEST_SUITE(before_declare_mystring_for_iterator_tests, declare_mys
 		}
 	}
 */
+BOOST_AUTO_TEST_SUITE_END()
+
+
+BOOST_AUTO_TEST_SUITE(after_clear_string)
+	BOOST_AUTO_TEST_CASE(can_perform_all_operations)
+	{
+		CMyString myString("Clear", 5);
+		myString.Clear();
+		BOOST_CHECK_EQUAL(myString.GetLength(), 0);
+		BOOST_CHECK_EQUAL(myString.GetStringData(), "");
+		BOOST_CHECK_EQUAL(myString.SubString(0, 0), "");
+		//BOOST_CHECK_EQUAL(myString[0], '\0');
+		CMyString str1(myString.GetStringData()); // конструктор, инициализирующий строку данными строки. С завершающим нулевым символом
+		CMyString str2(myString.GetStringData(), myString.GetLength());// конструктор, инициализирующий строку данными из символьного массива заданной длины
+		CMyString str3(myString);// конструктор копирования
+	}
 BOOST_AUTO_TEST_SUITE_END()

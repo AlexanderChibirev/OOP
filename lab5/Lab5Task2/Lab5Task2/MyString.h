@@ -2,6 +2,7 @@
 #include "СMyStringIterator.h"
 #include <memory>
 using namespace std;
+
 class CMyString
 {
 public:
@@ -14,8 +15,10 @@ public:
 
 	const_iterator begin() const;
 	const_iterator end() const;
+
 	iterator rbegin();
 	iterator rend();
+
 	const_iterator rbegin()const;
 	const_iterator rend()const;
 
@@ -26,6 +29,7 @@ public:
 	CMyString(CMyString const& other);// конструктор копирования
 	CMyString(CMyString && other);// перемещающий конструктор (для компиляторов, совместимых с C++11) реализуется совместно с перемещающим оператором присваивания 
 	CMyString(string const& stlString);// конструктор, инициализирующий строку данными из строки стандартной библиотеки C++
+	CMyString(size_t size, const CMyString &leftString, const CMyString &rightString);
 	size_t GetLength() const;
 	const char* GetStringData() const;
 	CMyString SubString(size_t start, size_t length = SIZE_MAX) const;// возвращает подстроку с заданной позиции длиной не больше length символов
@@ -40,6 +44,7 @@ private:
 	std::unique_ptr<char[]> CreateString(size_t length);
 	std::unique_ptr<char[]> m_chars;
 	size_t m_length;
+	//std::unique_ptr<char[]> m_endOfLineSymbol =.ю....
 };
 CMyString operator +(const CMyString & leftString, const CMyString & rightString);
 CMyString operator+(const string  & leftString, CMyString const & rightString);

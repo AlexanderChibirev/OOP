@@ -9,6 +9,15 @@ CMyString::CMyString()
 {
 }
 
+CMyString::CMyString(size_t size, const CMyString &leftString, const CMyString &rightString)
+	: m_length(size)
+	, m_chars(CreateString(size))
+
+{
+	memcpy(m_chars.get(), leftString.GetStringData(), leftString.GetLength());
+	memcpy(m_chars.get() + leftString.GetLength(), rightString.GetStringData(), rightString.GetLength());
+}
+
 CMyString::CMyString(const char * pString)
 	: CMyString(pString, strlen(pString))
 {
@@ -104,7 +113,7 @@ unique_ptr<char[]> CMyString::CreateString(size_t length)
 
 CMyString& CMyString::operator+=(const CMyString &other)
 {
-	if (other.m_chars)
+	if (other.m_length > 0)
 	{
 		auto tempStr = make_unique<char[]>(other.GetLength() + m_length + 1);
 		memcpy(tempStr.get(), m_chars.get(), m_length);
@@ -130,7 +139,11 @@ char& CMyString::operator[](size_t index)
 	{
 		throw out_of_range("index out of range");
 	}
-	return m_chars[index];
+	else if (!m_chars) 
+	{
+		throw out_of_range("index out of range");
+	}
+	return m_chars.get()[index];
 }
 
 const char& CMyString::operator[](size_t index) const
@@ -139,15 +152,17 @@ const char& CMyString::operator[](size_t index) const
 	{
 		throw out_of_range("index out of range");
 	}
-	return m_chars[index];
+	else if (!m_chars)
+	{
+		throw out_of_range("index out of range");
+	}
+	return m_chars.get()[index];
 }
 
 int CMyString::Compare(CMyString const & str) const
 {
 	auto cmp = (memcmp(m_chars.get(), str.GetStringData(), min(m_length, str.m_length)));
 	return cmp != 0 ? cmp : static_cast<int>(m_length - str.m_length);
-	//int compare = strncmp(m_chars.get(), str.m_chars.get(), min(m_length, str.m_length));
-	//return (compare != 0 ? compare : int(m_length - str.m_length));
 }
 
 bool operator ==(const CMyString &leftString, const CMyString &rightString)
@@ -162,33 +177,39 @@ bool operator !=(const CMyString &leftString, const CMyString &rightString)
 
 CMyString operator +(const CMyString &leftString, const CMyString &rightString)
 {
-	CMyString lhs(leftString);
-	return lhs += rightString;
+	CMyString tmp(leftString.GetLength() + rightString.GetLength(), leftString, rightString);
+	return tmp;
 }
 
 CMyString operator+(const string & leftString, CMyString const & rightString)
 {
-	CMyString lhs(leftString);
-	return lhs += rightString;
+	CMyString tmp(leftString.size() + rightString.GetLength(), leftString, rightString);
+	return tmp;
 }
 
 CMyString operator+(const char * leftString, CMyString const & rightString)
 {
-	CMyString lhs(leftString);
-	return lhs += rightString;
+	CMyString tmp(strlen(leftString) + rightString.GetLength(), leftString, rightString);
+	return tmp;
 }
 
 std::ostream & operator<<(std::ostream & ostrm, CMyString const & str)
 {
-	ostrm << str.GetStringData();
+	auto string = str.GetStringData();
+	for (size_t i = 0; i < str.GetLength(); i++)
+	{
+		ostrm << string[i];
+	}
 	return ostrm;
 }
 
 std::istream & operator>>(std::istream & strm, CMyString & str)
 {
-	std::string tmp;
-	strm >> tmp;
-	str = CMyString(tmp);
+	std::string string;
+	if (strm >> string) 
+	{
+		str = string;
+	}
 	return strm;
 }
 
