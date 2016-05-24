@@ -260,20 +260,20 @@ CMyString::const_iterator CMyString::end() const
 
 CMyString::iterator CMyString::rbegin()
 {
-	return iterator(m_chars.get(), true);
+	return iterator( (m_chars.get() + m_length - 1), true);
 }
 
 CMyString::iterator CMyString::rend()
 {
-	return iterator( (m_chars.get() + m_length), true);
+	return iterator( (m_chars.get() - 1), true);
 }
 
 CMyString::const_iterator CMyString::rbegin() const
 {
-	return const_iterator(m_chars.get(), true);
+	return const_iterator( (m_chars.get() + m_length - 1), true);
 }
 
 CMyString::const_iterator CMyString::rend() const
 {
-	return const_iterator( (m_chars.get() + m_length), true);
+	return const_iterator( (m_chars.get() - 1), true);
 }

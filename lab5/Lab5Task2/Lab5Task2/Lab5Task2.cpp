@@ -16,12 +16,12 @@ int main()
 	//str.Clear();
 	//str[0] = 'x';
 	CMyString str("asd");
-	size_t i = 0;
+	size_t i = str.GetLength() - 1;
 	for (CMyString::iterator it = str.rbegin(); it != str.rend(); ++it)
 	{
 		auto x = str[i];
 		auto y = *it;
-		i++;
+		i--;
 	}
 //	vector<char> str2 = {'1'};
 //	auto y = str2[0];

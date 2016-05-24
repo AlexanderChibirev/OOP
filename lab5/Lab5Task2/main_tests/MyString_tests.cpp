@@ -163,7 +163,7 @@ BOOST_AUTO_TEST_SUITE(MovingConstructor)
 BOOST_AUTO_TEST_SUITE_END()
 
 
-BOOST_AUTO_TEST_SUITE(concatenation_operator)
+BOOST_AUTO_TEST_SUITE(concatenationOperator)
 	void VerifyString(CMyString const & str, size_t length, std::string const & reference)
 	{
 		BOOST_CHECK_EQUAL(str.GetLength(), length);
@@ -192,7 +192,7 @@ BOOST_AUTO_TEST_SUITE(concatenation_operator)
 	}
 BOOST_AUTO_TEST_SUITE_END()
 
-BOOST_AUTO_TEST_SUITE(unary_add_operator)
+BOOST_AUTO_TEST_SUITE(unaryAddOperator)
 	BOOST_AUTO_TEST_CASE(can_add_empty_string)
 	{
 		CMyString myString("x");
@@ -218,7 +218,7 @@ BOOST_AUTO_TEST_SUITE(unary_add_operator)
 BOOST_AUTO_TEST_SUITE_END()
 
 
-BOOST_AUTO_TEST_SUITE(assignment_operator)
+BOOST_AUTO_TEST_SUITE(assignmentOperator)
 
 
 	BOOST_AUTO_TEST_CASE(can_assign_itself_as_the_value_string)
@@ -247,7 +247,7 @@ BOOST_AUTO_TEST_SUITE(assignment_operator)
 
 BOOST_AUTO_TEST_SUITE_END()
 
-BOOST_AUTO_TEST_SUITE(comparison_operator)
+BOOST_AUTO_TEST_SUITE(comparisonOperator)
 
 	BOOST_AUTO_TEST_CASE(strings_are_equal)
 	{
@@ -264,7 +264,7 @@ BOOST_AUTO_TEST_SUITE_END()
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-BOOST_AUTO_TEST_SUITE(less_operator)
+BOOST_AUTO_TEST_SUITE(lessOperator)
 
 	BOOST_AUTO_TEST_CASE(str2_less_str1_by_alphabet)
 	{
@@ -284,7 +284,7 @@ BOOST_AUTO_TEST_SUITE(less_operator)
 BOOST_AUTO_TEST_SUITE_END()
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-BOOST_AUTO_TEST_SUITE(more_operator)
+BOOST_AUTO_TEST_SUITE(moreOperator)
 
 	BOOST_AUTO_TEST_CASE(str2_more_str1_by_alphabet)
 	{
@@ -302,7 +302,7 @@ BOOST_AUTO_TEST_SUITE(more_operator)
 BOOST_AUTO_TEST_SUITE_END()
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-BOOST_AUTO_TEST_SUITE(less_or_equal_operator)
+BOOST_AUTO_TEST_SUITE(lessOrEqualOperator)
 
 	BOOST_AUTO_TEST_CASE(compare_them_in_alphabetical_order)
 	{
@@ -319,7 +319,7 @@ BOOST_AUTO_TEST_SUITE(less_or_equal_operator)
 	}
 BOOST_AUTO_TEST_SUITE_END()
 
-BOOST_AUTO_TEST_SUITE(greater_or_equal_operator)
+BOOST_AUTO_TEST_SUITE(greaterOrEqualOperator)
 
 	BOOST_AUTO_TEST_CASE(compare_them_in_alphabetical_order)
 	{
@@ -339,7 +339,7 @@ BOOST_AUTO_TEST_SUITE(greater_or_equal_operator)
 BOOST_AUTO_TEST_SUITE_END()
 
 
-BOOST_AUTO_TEST_SUITE(indexed_access_operator)
+BOOST_AUTO_TEST_SUITE(indexedAccessOperator)
 
 	BOOST_AUTO_TEST_CASE(indexed_access_to_a_string_of_characters_by_integer_index_reading)
 	{
@@ -354,7 +354,7 @@ BOOST_AUTO_TEST_SUITE(indexed_access_operator)
 	}
 BOOST_AUTO_TEST_SUITE_END()
 
-BOOST_AUTO_TEST_SUITE(istream_operator)
+BOOST_AUTO_TEST_SUITE(istreamOperator)
 	BOOST_AUTO_TEST_CASE(string_with_null_char_in_middle)
 	{
 		std::istringstream strm("Some\0String");
@@ -365,7 +365,7 @@ BOOST_AUTO_TEST_SUITE(istream_operator)
 BOOST_AUTO_TEST_SUITE_END()
 
 /////////////////////////////////////////////////////////////
-BOOST_AUTO_TEST_SUITE(ostream)
+BOOST_AUTO_TEST_SUITE(Ostream)
 	BOOST_AUTO_TEST_CASE(string_with_null_char_in_middle)
 	{
 		std::ostringstream strm;
@@ -376,7 +376,7 @@ BOOST_AUTO_TEST_SUITE(ostream)
 BOOST_AUTO_TEST_SUITE_END()
 /////////////////////////////////////////////////////////////
 
-BOOST_AUTO_TEST_SUITE(then_we_used_str_cpy)
+BOOST_AUTO_TEST_SUITE(Then_we_used_str_cpy)
 	BOOST_AUTO_TEST_CASE(null_character_will_be_ignored)
 	{
 		BOOST_CHECK(!(CMyString("str_cpy") == CMyString("str_cpy\0", 5)));
@@ -385,20 +385,20 @@ BOOST_AUTO_TEST_SUITE_END()
 
 
 
-struct declare_mystring_for_iterator_tests_
+struct MyStringIterator
 {
-	declare_mystring_for_iterator_tests_()
-		: myStr("Iterator tests", 15)
-		, constMyStr("Iterator const tests", 21)
+	MyStringIterator()
+		: myStr("iterRevers", strlen("iterRevers"))
+		, constMyStr("iterReversConst", strlen("iterReversConst"))
 	{
 	}
 	CMyString myStr;
 	const CMyString constMyStr;
 };
 
-BOOST_FIXTURE_TEST_SUITE(before_declare_mystring_for_iterator_tests, declare_mystring_for_iterator_tests_)
+BOOST_FIXTURE_TEST_SUITE(testIterator, MyStringIterator)
 
-	BOOST_AUTO_TEST_CASE(can_just_call_the_iterator_and_get_point_to_start_str)
+	BOOST_AUTO_TEST_CASE(can_get_point_to_start_str)
 	{
 		auto it = myStr.begin();
 		BOOST_CHECK_EQUAL(*it, myStr[0]);
@@ -420,67 +420,57 @@ BOOST_FIXTURE_TEST_SUITE(before_declare_mystring_for_iterator_tests, declare_mys
 			++i;
 		}
 	}
-	
-	BOOST_AUTO_TEST_CASE(can_iterate_over_constant_string_in_opposite_direction)
-	{
-		//size_t i = constMyStr.GetLength();
-		//for (CMyString::const_iterator it = constMyStr.rbegin(); it != constMyStr.rend(); ++it)
-		//{
-		//	//BOOST_CHECK_EQUAL(*it, constMyStr[i]);
-		//	--i;
-		//}
-	}
-	
-	BOOST_AUTO_TEST_CASE(can_iterate_over_non_constant_string_in_forward_direction)
+
+	BOOST_AUTO_TEST_CASE(can_iterate_over_not_constant_string_in_forward_direction)
 	{
 		size_t i = 0;
 		for (CMyString::iterator it = myStr.begin(); it != myStr.end(); ++it)
 		{
-			//BOOST_CHECK_EQUAL(*it, myStr[i]);
+			BOOST_CHECK_EQUAL(*it, myStr[i]);
 			++i;
 		}
 	}
 
-	//BOOST_AUTO_TEST_CASE(can_iterate_over_non_constant_string_in_opposite_direction)
-	//{
-	//	size_t i = myStr.GetLength() - 1;
-	//	for (CMyString::iterator it = myStr.rbegin(); it != myStr.rend(); ++it)
-	//	{
-	//	//	BOOST_CHECK_EQUAL(*it, myStr[i]);
-	//		--i;
-	//	}
-	//}
-
-	BOOST_AUTO_TEST_CASE(can_get_distance_between_two_iterators_used_not_revers_iterator)
+	BOOST_AUTO_TEST_CASE(can_iterate_over_constant_string_in_reverse_direction)
 	{
-		BOOST_CHECK_EQUAL(myStr.end() - myStr.begin(), 15);
+
+		CMyString str("iterRevers");
+		size_t i = str.GetLength() - 1;
+		for (CMyString::iterator it = str.rbegin(); it != str.rend(); ++it)
+		{
+			auto element1 = str[i];
+			auto element2 = *it;
+			BOOST_CHECK_EQUAL(element1, element2);
+			i--;
+		}
 	}
 
-	BOOST_AUTO_TEST_CASE(can_get_distance_between_two_iterators_used_revers_iterator)
+	BOOST_AUTO_TEST_CASE(can_iterate_over_not_constant_string_in_reverse_direction)
 	{
-		//	BOOST_CHECK_EQUAL(std::distance(myStr.rbegin(), myStr.rend()), -15);
+		size_t i = myStr.GetLength() - 1;
+		for (CMyString::iterator it = myStr.rbegin(); it != myStr.rend(); ++it)
+		{
+			BOOST_CHECK_EQUAL(*it, myStr[i]);
+			--i;
+		}
 	}
 
-
+	BOOST_AUTO_TEST_CASE(can_get_distance_between_two_iterators)
+	{
+		BOOST_CHECK_EQUAL(myStr.end() - myStr.begin(), 10);
+	}
 	BOOST_AUTO_TEST_CASE(can_addition_iter_and_integer)
 	{
-		auto it = myStr.begin() + 3;
-		BOOST_CHECK_EQUAL(*it, 'r');
+		auto it = myStr.begin() + 9;
+		BOOST_CHECK_EQUAL(*it, 's');
 	}
 	
-	BOOST_AUTO_TEST_CASE(can_addition_integer_and_iter)
-	{
-		auto it = 3 + myStr.begin();
-		BOOST_CHECK_EQUAL(*it, 'r');
-	}
-	
-	
-	BOOST_AUTO_TEST_CASE(has_indexed_access_only_for_read_to_elements_of_const_line_relative_to_iterator)
+	BOOST_AUTO_TEST_CASE(access_to_the_elements_of_the_line_relative_to_the_iterator)
 	{
 		auto it = constMyStr.begin();
-		BOOST_CHECK_EQUAL(it[3], 'r');
+		BOOST_CHECK_EQUAL(it[0], 'i');
 	}
-	
+
 	BOOST_AUTO_TEST_CASE(supports_iteration_over_the_elements_by_means_of_range_based_for)
 	{
 		size_t i = 0;
@@ -490,9 +480,15 @@ BOOST_FIXTURE_TEST_SUITE(before_declare_mystring_for_iterator_tests, declare_mys
 			++i;
 		}
 	}
+
+	BOOST_AUTO_TEST_CASE(can_addition_integer_and_iter)
+	{
+		auto it = 9 + myStr.begin();
+		BOOST_CHECK_EQUAL(*it, 's');
+	}
 BOOST_AUTO_TEST_SUITE_END()
 
-BOOST_AUTO_TEST_SUITE(after_clear_string)
+BOOST_AUTO_TEST_SUITE(afterClearString)
 	BOOST_AUTO_TEST_CASE(can_perform_all_operations)
 	{
 		CMyString myString("Clear", 5);

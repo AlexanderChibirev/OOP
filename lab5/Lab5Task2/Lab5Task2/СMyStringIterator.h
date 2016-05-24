@@ -1,3 +1,6 @@
+#pragma once
+#include <iterator>
+
 template<typename T>
 class ÑMyStringIterator : public std::iterator<std::input_iterator_tag, T>
 {
