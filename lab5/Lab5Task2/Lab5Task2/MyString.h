@@ -44,7 +44,6 @@ private:
 	std::unique_ptr<char[]> CreateString(size_t length);
 	std::unique_ptr<char[]> m_chars;
 	size_t m_length;
-	//std::unique_ptr<char[]> m_endOfLineSymbol =.þ....
 };
 CMyString operator +(const CMyString & leftString, const CMyString & rightString);
 CMyString operator+(const string  & leftString, CMyString const & rightString);

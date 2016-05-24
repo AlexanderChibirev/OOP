@@ -8,19 +8,26 @@
 
 int main()
 {
+	CMyString myString("Clear", 5);
+	myString.Clear();
+	//CMyString str1(move(myString.GetStringData())); // конструктор, инициализирующий строку данными строки. — завершающим нулевым символом
+	
 	//CMyString str("x");
 	//str.Clear();
 	//str[0] = 'x';
-	
-	string str;
-	auto x = str[0];
-	str[0] = 'x';
-
-	vector<char> str2 = {'1'};
-	auto y = str2[0];
-	str2.clear();
-	y = str2[0];
-	str2[0] = 'y';
+	CMyString str("asd");
+	size_t i = 0;
+	for (CMyString::iterator it = str.rbegin(); it != str.rend(); ++it)
+	{
+		auto x = str[i];
+		auto y = *it;
+		i++;
+	}
+//	vector<char> str2 = {'1'};
+//	auto y = str2[0];
+	//str2.clear();
+	//y = str2[0];
+	//str2[0] = 'y';
 	//str.clear();
 	//str[0] = 'x';
 //	CMyString myString("S");

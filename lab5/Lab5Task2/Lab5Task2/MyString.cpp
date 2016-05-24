@@ -161,7 +161,7 @@ const char& CMyString::operator[](size_t index) const
 
 int CMyString::Compare(CMyString const & str) const
 {
-	auto cmp = (memcmp(m_chars.get(), str.GetStringData(), min(m_length, str.m_length)));
+	auto cmp = (memcmp(GetStringData(), str.GetStringData(), min(m_length, str.m_length)));
 	return cmp != 0 ? cmp : static_cast<int>(m_length - str.m_length);
 }
 
@@ -255,23 +255,25 @@ CMyString::const_iterator CMyString::end() const
 {
 	return const_iterator(m_chars.get() + m_length);
 }
+
 ///////////////////////////////////////////////////////////////////////////////
+
 CMyString::iterator CMyString::rbegin()
 {
-	return iterator(m_chars.get());
+	return iterator(m_chars.get(), true);
 }
 
 CMyString::iterator CMyString::rend()
 {
-	return iterator(m_chars.get() + m_length);
+	return iterator( (m_chars.get() + m_length), true);
 }
 
 CMyString::const_iterator CMyString::rbegin() const
 {
-	return const_iterator(m_chars.get());
+	return const_iterator(m_chars.get(), true);
 }
 
 CMyString::const_iterator CMyString::rend() const
 {
-	return const_iterator(m_chars.get() + m_length);
+	return const_iterator( (m_chars.get() + m_length), true);
 }
