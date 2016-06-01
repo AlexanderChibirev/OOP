@@ -24,10 +24,10 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StringList.h">
+    <ClInclude Include="..\Lab6-CMyList\ListIterators.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ListIterators.h">
+    <ClInclude Include="..\Lab6-CMyList\StringList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,13 +35,16 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Lab6-CMyList.cpp">
+    <ClCompile Include="mains_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StringList.cpp">
+    <ClCompile Include="StringLitsTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ListIterators.cpp">
+    <ClCompile Include="..\Lab6-CMyList\ListIterators.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lab6-CMyList\StringList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
