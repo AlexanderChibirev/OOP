@@ -2,7 +2,7 @@
 #include <iterator>
 
 template<typename T>
-class ÑMyStringIterator : public std::iterator<std::input_iterator_tag, T>
+class ÑMyStringIterator : public std::iterator<std::random_access_iterator_tag, T>
 {
 	friend class CMyString;
 private:
@@ -17,7 +17,7 @@ public:
 	ÑMyStringIterator& operator--();
 	ÑMyStringIterator& operator+=(size_t value);
 	ÑMyStringIterator& operator-=(size_t value);
-	T operator[](size_t index)const;
+	T operator[](size_t index)const;  
 private:
 	T* m_iterValue;
 	bool m_wasRevers = false;

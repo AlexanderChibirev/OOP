@@ -141,7 +141,7 @@ char& CMyString::operator[](size_t index)
 	}
 	else if (!m_chars) 
 	{
-		throw out_of_range("index out of range");
+		return *const_cast<char*>(GetStringData());
 	}
 	return m_chars.get()[index];
 }
@@ -154,7 +154,7 @@ const char& CMyString::operator[](size_t index) const
 	}
 	else if (!m_chars)
 	{
-		throw out_of_range("index out of range");
+		return *const_cast<char*>(GetStringData());
 	}
 	return m_chars.get()[index];
 }

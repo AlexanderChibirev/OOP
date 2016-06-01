@@ -471,7 +471,7 @@ BOOST_FIXTURE_TEST_SUITE(testIterator, MyStringIterator)
 		BOOST_CHECK_EQUAL(it[0], 'i');
 	}
 
-	BOOST_AUTO_TEST_CASE(supports_iteration_over_the_elements_by_means_of_range_based_for)
+	BOOST_AUTO_TEST_CASE(supports_iter_over_the_elements_by_std_method_range_based_for)
 	{
 		size_t i = 0;
 		for (auto it : myStr)
@@ -493,10 +493,12 @@ BOOST_AUTO_TEST_SUITE(afterClearString)
 	{
 		CMyString myString("Clear", 5);
 		myString.Clear();
+		auto strEmpty = myString[0];
+		BOOST_CHECK_EQUAL(strEmpty, '\0');
 		BOOST_CHECK_EQUAL(myString.GetLength(), 0);
 		BOOST_CHECK_EQUAL(myString.GetStringData(), "");
 		BOOST_CHECK_EQUAL(myString.SubString(0, 0), "");
-		BOOST_REQUIRE_THROW(myString[0], std::out_of_range);
+	//	BOOST_REQUIRE_THROW(myString[0], std::out_of_range);
 		CMyString str1(myString.GetStringData()); 
 		CMyString str2(myString.GetStringData(), myString.GetLength());
 		CMyString str3(myString);
